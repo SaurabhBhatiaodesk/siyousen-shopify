@@ -5,13 +5,16 @@
         <div class="product">
           <a href="{{ product.url }}">
             <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-           
-            <h3>{{ product.title }}</h3>
-            <p>{{ product.price | money }}</p>
-            <form method="post" action="/cart/add" class="add-cart">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-              <button type="submit">Add to Cart</button>
-            </form>
+           <div class="column-src">
+              <span class="prod-info">
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.price | money }}</p>
+              </span>
+              <form method="post" action="/cart/add" class="add-cart">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                <button type="submit">Add to Cart</button>
+              </form>
+          </div>
           </a>
         </div>
       {% endfor %}
@@ -71,6 +74,14 @@
       cursor: pointer;
       text-transform:uppercase;
     }
+    .recently-added-products .column-src {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+    }
+    .recently-added-products .column-src .prod-info,.recently-added-products .column-src .add-cart {
+      width: 50%;
+    }
     
     @media screen and (max-width:1600px) {
       #recently-added .product img {
@@ -113,7 +124,7 @@
         max-width: 100%;
       }
       .recently-added-products .add-cart button{
-        min-height: 40px;
+        min-height: 50px;
       }
     }
 
