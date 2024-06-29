@@ -477,9 +477,9 @@
   <div class="recently-added">
     <div class="page-width">
        {% render 'recently-added' %}
-
     </div>
   </div>
+ 
 
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   {%- if section.settings.image_zoom == 'hover' -%}
@@ -536,12 +536,6 @@
           "id": "text",
           "default": "t:sections.featured-product.blocks.text.settings.text.default",
           "label": "t:sections.featured-product.blocks.text.settings.text.label"
-        },
-        {
-          "type": "inline_richtext",
-          "id": "title",
-          "default": "t:sections.collection-list.settings.title.default",
-          "label": "t:sections.collection-list.settings.title.label"
         },
         {
           "type": "select",
