@@ -1,1 +1,141 @@
-{"sections":{"featured_product_Ey9xXm":{"type":"featured-product","blocks":{"title_8MyiwG":{"type":"title","settings":{"heading_size":"h1"}},"variant_picker_aGJiwU":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"price_Cmcag9":{"type":"price","settings":{}},"buy_buttons_tEMdHk":{"type":"buy_buttons","settings":{"show_dynamic_checkout":false,"show_gift_card_recipient":true}}},"block_order":["title_8MyiwG","variant_picker_aGJiwU","price_Cmcag9","buy_buttons_tEMdHk"],"custom_css":[],"settings":{"product":"cotton-candy-crop-top-reproduction","color_scheme":"scheme-4","secondary_background":false,"media_size":"medium","constrain_to_viewport":true,"media_fit":"contain","media_position":"left","image_zoom":"lightbox","hide_variants":true,"enable_video_looping":true,"padding_top":0,"padding_bottom":0}}},"order":["featured_product_Ey9xXm"]}
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "featured_product_Ey9xXm": {
+      "type": "featured-product",
+      "blocks": {
+        "title_8MyiwG": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "variant_picker_aGJiwU": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "price_Cmcag9": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "buy_buttons_tEMdHk": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        }
+      },
+      "block_order": [
+        "title_8MyiwG",
+        "variant_picker_aGJiwU",
+        "price_Cmcag9",
+        "buy_buttons_tEMdHk"
+      ],
+      "custom_css": [
+
+      ],
+      "settings": {
+        "product": "cotton-candy-crop-top-reproduction",
+        "color_scheme": "scheme-4",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_product_4aXjxQ": {
+      "type": "featured-product",
+      "blocks": {
+        "text_cyMqd7": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_JBNcAA": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_3gpXA4": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "variant_picker_A4LmFg": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_zAALUP": {
+          "type": "quantity_selector",
+          "settings": {
+          }
+        },
+        "buy_buttons_iKdRLL": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_mJTrLP": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_cyMqd7",
+        "title_JBNcAA",
+        "price_3gpXA4",
+        "variant_picker_A4LmFg",
+        "quantity_selector_zAALUP",
+        "buy_buttons_iKdRLL",
+        "share_mJTrLP"
+      ],
+      "settings": {
+        "product": "american-cheese-reversible-crop-top-reproduction",
+        "color_scheme": "scheme-4",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "featured_product_Ey9xXm",
+    "featured_product_4aXjxQ"
+  ]
+}
