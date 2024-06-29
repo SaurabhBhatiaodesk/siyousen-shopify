@@ -52,7 +52,7 @@ footer.footer {
     background: green;
     border-radius: 5px;
     border: 2px solid #4b914b;
-    min-height: 60px;
+    min-height: 60px; 
 }
 .product-form__buttons button.product-form__submit::after {
     box-shadow: none !important;
