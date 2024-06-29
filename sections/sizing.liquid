@@ -1,0 +1,299 @@
+<style>
+.slider .slick-prev:before, .slider-vertical .slick-next:before {
+	display: none;
+}
+  img{
+    max-width:100%;
+  }
+.slider .slick-prev, .slider .slick-next {
+    width: 28px;
+    height: 28px;
+    border-style: solid;
+    margin: 10px;
+    display: inline-block;
+    margin: auto;
+    left: 0;
+    right: 0;
+	top: 0;
+	bottom: 0;
+    z-index: 10;
+    cursor: pointer;
+}
+.slider .slick-prev:before, .slider .slick-next:before {
+	display: none;
+}
+.slider .slick-prev {
+    border-width: 14px 14px 14px 0px;
+    border-color: transparent #ffffff;
+    left: 0px;
+    right: auto;
+}
+.slider .slick-next {
+    border-width: 14px 0px 14px 14px;
+    border-color: transparent #ffffff;
+    right: 0px;
+    left: auto;
+}	
+.slider .slick-prev:hover, .slider .slick-next:hover {
+    border-color: transparent #ffd200;
+}
+.slider .slick-prev.slick-disabled, .slider .slick-next.slick-disabled, .slider .slick-prev.slick-disabled:hover, .slider .slick-next.slick-disabled:hover {
+	opacity: 0.1;
+	cursor: default;
+    border-color: transparent #000000;
+}
+.slider div {
+	height: auto;
+	background: #121212;
+	text-align: center;
+	color: #ffffff;
+}
+.slider-thumb div {
+	height: auto;
+	line-height: inherit;
+}
+.size-box {
+    background: #121212;
+    padding-bottom: 10rem;
+}
+.size-box .slick-slide img {
+    max-width: 260px;
+    max-height: 260px;
+    margin: 0 auto 1rem auto;
+}
+.size-box .slider-thumb img, .size-box .slider-thumb2 img {
+    max-width: 120px;
+    max-height: 120px;
+    object-fit: cover;
+    object-position: 0 0;
+    min-width: 120px;
+}
+.product-name p {
+    margin: 0 0 2rem 0;
+    padding: 0;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+}
+.size-box .slick-track {
+    margin-bottom: 6rem;
+}
+.slider-thumb .slick-slide p, .slider-thumb2 .slick-slide p {
+    font-size: 16px;
+    line-height: 24px;
+    color:green;
+    padding: 0;
+    margin: 0;
+}
+@media screen and (max-width:767px) {
+  .size-box .slider-thumb img, .size-box .slider-thumb2 img {
+    min-width: 80px;
+    max-height: 80px;  
+  }
+  .slider-thumb .slick-slide p, .slider-thumb2 .slick-slide p {
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .size-box .slick-track {
+    margin-bottom: 3rem;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .size-box .slider-thumb img, .size-box .slider-thumb2 img {
+    min-width: 60px;
+    max-height: 60px;  
+  }
+  .slider-thumb .slick-slide p, .slider-thumb2 .slick-slide p {
+    font-size: 12px;
+    line-height: 19px;
+  }
+}
+</style>
+
+<link href="https://kenwheeler.github.io/slick/slick/slick.css" rel="stylesheet">
+<link href="https://kenwheeler.github.io/slick/slick/slick-theme.css" rel="stylesheet">
+
+<div class="size-box">
+  <div class="page-width">
+       <div class="product-name">{% if section.settings.product-title != blank %}{{ section.settings.product-title }} {% endif %}</div>
+  	<div class="slider slider-content">
+        {% for block in section.blocks %}	
+           {% if block.settings.product-img != blank %} 
+            <div>
+            <img src="{{ block.settings.product-img | img_url: 'master' }}" /> 
+            </div>
+          {% endif %}
+        {% endfor %}
+  		
+  	</div>
+    	<div class="slider slider-thumb">
+       {% for block in section.blocks %}	
+          {% if block.settings.thumb-img != blank %}
+            <div>
+              <img src="{{ block.settings.thumb-img | img_url: 'master' }}" />
+              {% if block.settings.product-size != blank %}{{ block.settings.product-size }} {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+  	</div>
+  </div>
+</div>
+
+<div class="size-box">
+  <div class="page-width">
+      <div class="product-name">{% if section.settings.product-title2 != blank %}{{ section.settings.product-title2 }} {% endif %}</div>
+    	<div class="slider slider-content2">
+        {% for block in section.blocks %}	
+           {% if block.settings.product-img2 != blank %}
+              <div>
+                 <img src="{{ block.settings.product-img2 | img_url: 'master' }}" />   
+              </div>
+          {% endif %}
+        {% endfor %}
+  		
+  	</div>
+    	<div class="slider slider-thumb2">
+       {% for block in section.blocks %}	
+          {% if block.settings.thumb-img2 != blank %}
+            <div>
+              <img src="{{ block.settings.thumb-img2 | img_url: 'master' }}" />
+             {% if block.settings.product-size2 != blank %} {{ block.settings.product-size2 }} {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+  	</div>
+  </div>
+</div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://kenwheeler.github.io/slick/slick/slick.js"> </script>
+
+
+<script>
+$('.slider-content').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: true,
+  fade: false,
+	infinite: false,
+	speed: 1000,
+  asNavFor: '.slider-thumb',
+    arrows: true,
+    prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="Previous" tabindex="0" role="button">Previous</button>',
+    nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="Next" tabindex="0" role="button">Next</button>',
+});
+$('.slider-thumb').slick({
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  asNavFor: '.slider-content',
+  dots: false,
+  centerMode: false,
+  focusOnSelect: true
+});
+</script>
+
+<script>
+$('.slider-content2').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: true,
+  fade: false,
+	infinite: false,
+	speed: 1000,
+  asNavFor: '.slider-thumb2',
+    arrows: true,
+    prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="Previous" tabindex="0" role="button">Previous</button>',
+    nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="Next" tabindex="0" role="button">Next</button>',
+});
+$('.slider-thumb2').slick({
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  asNavFor: '.slider-content2',
+  dots: false,
+  centerMode: false,
+  focusOnSelect: true
+});
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Size-Guide",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Slideshow"
+  },
+  {
+     "type":"richtext",
+     "id": "product-title",
+     "label": "Product-Title"
+   },
+   {
+     "type":"richtext",
+     "id": "product-title2",
+     "label": "Product-Title2"
+   }
+  ],
+  "blocks": [
+     {
+       "name": "Size-Guide",
+       "type": "slide",
+       "settings": [
+     
+         {
+           "type": "image_picker",
+           "id": "product-img",
+           "label": "Product Image"
+         },
+         
+          {
+           "type": "image_picker",
+           "id": "thumb-img",
+           "label": "Thumb Image"
+         },
+         {
+           "type":"richtext",
+           "id": "product-size",
+           "label": "Product Size"
+         },
+         {
+           "type": "image_picker",
+           "id": "product-img2",
+           "label": "Product Image2"
+         },
+         
+          {
+           "type": "image_picker",
+           "id": "thumb-img2",
+           "label": "Thumb Image2"
+         },
+          {
+           "type":"richtext",
+           "id": "product-size2",
+           "label": "Product Size2"
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "Size-Guide",
+      "settings": {
+        "title": "Slideshow"
+      },
+      "blocks": [
+        {
+         "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

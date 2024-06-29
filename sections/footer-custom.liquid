@@ -1,0 +1,147 @@
+<style>
+#footer-section ul.order-list li {
+    list-style: none;
+}
+#footer-section ul.order-list {
+    flex-wrap: wrap;
+    gap: 0rem;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, 0);
+    background: #121212;
+    width: 100%;
+    justify-content: center;
+    margin: 0 auto;
+    padding:0;
+}
+#footer-section ul.order-list li {
+    list-style: none;
+    padding: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 100px;
+    justify-content: center;
+}
+#footer-section ul.order-list li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 0;
+    text-align: center;
+}
+#footer-section ul.order-list li svg {
+    fill: #fff;
+    width: 100%;
+    text-align: center;
+}
+div#footer-section {
+    background: #121212;
+    padding: 1rem 0;
+}
+  #footer-section ul.order-list li p {
+    margin: 0;
+}
+#footer-section ul.order-list li:hover {
+    background: #fff;
+}
+#footer-section ul.order-list li:hover p {
+    color: #121212;
+}
+#footer-section ul.order-list li:hover img{
+  filter:inherit;
+  -webkit-filter:inherit;
+  -moz-filter:inherit;
+  -ms-filter:inherit;
+}
+#footer-section ul.order-list li img {
+    filter: invert(1);
+    -webkit-filter: invert(1);
+    -moz-filter: invert(1);
+    -ms-filter: invert(1);
+}
+
+@media screen and (max-width:600px) {
+  #footer-section ul.order-list li {
+      min-width: 80px;
+  }
+  #footer-section ul.order-list li p {
+      font-size: 14px;
+      line-height: 20px;
+  }
+}
+
+
+@media screen and (max-width:480px) {
+  #footer-section ul.order-list li {
+    min-width:75px;
+  }
+}
+</style>
+
+<div id="footer-section">
+  <div class="page-width">
+      <ul class="order-list">
+         {% for block in section.blocks %}
+          <li>
+          <a href="{{ block.settings.footer-link }}">
+            {% if block.settings.footer-ico-img != blank %}<img src="{{ block.settings.footer-ico-img | img_url: 'master' }}"/> {% endif %}
+            {% if block.settings.ico-txt != blank %} <span>{{ block.settings.ico-txt }}</span> {% endif %}
+          </a>
+        </li>
+       {% endfor %}
+      </ul>
+      
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "footer-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Slideshow"
+    }
+  ],
+  "blocks": [
+     {
+       "name": "footer-column",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "url",
+           "id": "footer-link",
+           "label":"Footer-link"
+         },
+         {
+           "type": "image_picker",
+           "id": "footer-ico-img",
+           "label": "Image"
+         },
+          {
+            "type": "richtext",
+            "id": "ico-txt",
+            "label": "Footer Title"
+          }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "footer-section",
+      "settings": {
+        "title": "Slideshow"
+      },
+      "blocks": [
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

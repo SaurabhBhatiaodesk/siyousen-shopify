@@ -1,0 +1,173 @@
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('https://cdn.shopify.com/s/files/1/0887/9394/0244/files/CenturyGothic.ttf?v=1719231824') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+*{
+  font-family: 'Century Gothic' !important;
+  box-sizing:border-box;
+}
+header.header .header__icons,header.header .header__search,
+.my_products .featured-product .product__view-details{
+  display:none;
+}
+header.header header-drawer,variant-selects fieldset.js.product-form__input legend.form__label {
+    display: none;
+}
+
+.featured-product h2.product__title {
+    margin: 0;
+    padding: 0;
+}
+.my_products .featured-product {
+    padding: 4rem 0 !important;
+}
+header.header .header__menu-item span {
+    text-decoration: none;
+}
+.header__menu-item{
+  color:#fff;
+}
+.isolate .featured-product {
+    padding: 15px 0;
+}
+.recently-view {
+    background: #121212;
+    padding-bottom: 14rem;
+    padding-top: 3rem;
+}
+section.my_products {
+    background: #121212;
+}
+section#Recent h3.c-product__title a,section#Recent p.c-productPrice {
+    color: #fff;
+}
+footer.footer {
+    padding: 0;
+    margin: 0;
+}
+.product-form__buttons button.product-form__submit {
+    background: green;
+    border-radius: 5px;
+    border: 2px solid #4b914b;
+}
+.product-form__buttons button.product-form__submit::after {
+    box-shadow: none !important;
+}
+product-form__buttons button.product-form__submit:hover {
+    background: #69a569 !important;
+    border-radius: 5px;
+    border: 2px solid #69a569 !important;
+}
+.product-form__buttons button.product-form__submit span {     
+    text-transform: uppercase;
+    color: #fff;
+}
+section.shopify-section-group-footer-group {
+    background: #121212;
+}
+
+.isolate .rich-text__text p {
+    color: #fff;
+}
+.about-us .multicolumn-card{
+  background:transparent !important;
+}
+.about-us  .multicolumn-card .media {
+    max-width: 70px;
+    max-height: 70px;
+    height: auto;
+    width: auto;
+    position: static;
+    padding: 0 !important;
+    min-height: 50px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:end;
+}
+.about-us ul.multicolumn-list li.multicolumn-list__item {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.about-us ul.multicolumn-list li.multicolumn-list__item .multicolumn-card__info {
+    margin-top: 0px;
+}
+.about-us .multicolumn-card .media img {
+    object-fit: contain;
+    width: 100%;
+    max-width: 40px;
+    position: static;
+}
+.about-us ul.multicolumn-list li.multicolumn-list__item:nth-child(3) .media img {
+  filter: invert(1);
+  -webkit-filter: invert(1);
+  -moz-filter: invert(1);
+  -ms-filter: invert(1);
+}
+.about-us ul.multicolumn-list li.multicolumn-list__item .multicolumn-card__info .link {
+    margin-top: 0;
+    color:#fff;
+}
+.about-us ul.multicolumn-list li.multicolumn-list__item .multicolumn-card__info {
+    padding: 0;
+}
+.about-us ul.multicolumn-list li.multicolumn-list__item .multicolumn-card-spacing {
+    padding: 0;
+}
+.about-us .isolate {
+    padding-top: 0;
+}
+.about-us ul.multicolumn-list li.multicolumn-list__item span.icon-wrap {
+    display: none;
+}
+.blog .title-wrapper-with-link h2 {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 2.4rem;
+    line-height: 3rem;
+}
+.blog {
+    padding-bottom: 6rem;
+}
+.blog .blog__posts {
+    gap: 20px;
+    display:flex;
+    flex-wrap: wrap;
+}
+.blog .blog__posts .article-card .card__information {
+    padding: 2rem 0;
+}
+.blog .blog__posts .article-card .card__information h3.card__heading.h2 {
+    font-size: 20px;
+    line-height: 30px;
+}
+.blog .blog__posts li.blog__post {
+    max-width: 23%;
+}
+@media screen and (max-width:989px){
+  .about-us .multicolumn-list li {
+    max-width: 32%;
+  }
+  .blog .blog__posts li.blog__post {
+    max-width: 33%;
+  }
+}
+
+@media screen and (max-width:600px) { 
+  .about-us .multicolumn-card .media img {
+    max-width: 30px;
+  }
+  .about-us ul.multicolumn-list li.multicolumn-list__item .multicolumn-card__info a {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .blog .blog__posts li.blog__post {
+    max-width: 50%;
+  }
+}

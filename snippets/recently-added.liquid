@@ -1,0 +1,124 @@
+<section id="recently-added">
+    <div class="recently-added-products">
+    {% assign products = collections.all.products | sort: 'created_at' | reverse %}  
+      {% for product in products limit: 6 %}
+        <div class="product">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.price | money }}</p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  <style>
+    #recently-added {
+      padding: 20px 0; 
+    }
+    .recently-added{
+      background: #121212;
+    }
+    #recently-added .recently-added-products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    #recently-added .product h3 {
+        font-size: 1.5rem;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    #recently-added .product p {
+        font-size: 1em;
+        color: #fff;
+        margin: 0;
+        padding: 5px 0;
+    }
+    #recently-added .product img {
+        max-width: 100%;
+        height: auto;
+        min-height: 260px;
+        object-fit: cover;
+        min-width: 255px;
+    }
+    #recently-added .recently-added-products .product {
+        max-width: 23%;
+    }
+    #recently-added .recently-added-products .product a {
+      text-decoration: none;
+    }
+    .recently-added-products {
+      padding-bottom: 10rem;
+    }
+
+    
+    @media screen and (max-width:1600px) {
+      #recently-added .product img {
+        min-width: inherit;
+      }
+    }
+    
+    @media screen and (max-width:1100px) {
+      #recently-added .product img {
+        min-height: 180px;
+      }
+    }
+
+    @media screen and (max-width:991px) {
+      #recently-added .recently-added-products .product {
+          max-width: 22%;
+      }
+      .recently-added .page-width {
+          padding: 0 3rem;
+      }
+      #recently-added .recently-added-products .product {
+        max-width: 31%;
+      }
+       #recently-added .product img {
+        min-height: 240px;
+      }
+    }
+
+     @media screen and (max-width:767px) {
+      #recently-added .product img {
+        min-height: 200px;
+      }
+       .recently-added .page-width {
+        padding: 0 1rem;
+      }
+       #recently-added .recently-added-products .product {
+        max-width: 30%;
+      }
+    }
+
+    @media screen and (max-width:600px) {
+       #recently-added .product img {
+          min-height: 170px;
+        }
+    }
+    
+      @media screen and (max-width:480px) {
+         #recently-added .recently-added-products .product {
+          max-width: 47%;
+        }
+         #recently-added .product img {
+            min-height: 200px;
+          }
+      }
+
+     @media screen and (max-width:370px) {
+         #recently-added .recently-added-products .product {
+          max-width: 46%;
+        }
+        #recently-added .product img {
+          min-height: 150px;
+        }
+      }
+    
+  </style>
+</section>
+
+
+
+
