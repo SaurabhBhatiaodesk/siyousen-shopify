@@ -14,14 +14,6 @@
     "footer_custom_WAiMBE": {
       "type": "footer-custom",
       "blocks": {
-        "slide_Kd89RH": {
-          "type": "slide",
-          "settings": {
-            "footer-link": "shopify:\/\/collections",
-            "footer-ico-img": "shopify:\/\/shop_images\/cart.svg",
-            "ico-txt": "<p>SHOP<\/p>"
-          }
-        },
         "slide_EWBUmp": {
           "type": "slide",
           "settings": {
@@ -48,7 +40,6 @@
         }
       },
       "block_order": [
-        "slide_Kd89RH",
         "slide_EWBUmp",
         "slide_FGARcW",
         "slide_jpwbJ9"
