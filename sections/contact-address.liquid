@@ -3,6 +3,83 @@
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
+  p{
+    margin:0;
+    padding:0;
+  }
+  #address {
+    background: #121212;
+    padding-bottom: 12rem;
+  }
+  #address > div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #address .google-map, #address .contact-address {
+    max-width: 50%;
+    width:50%;
+  } 
+  #address .google-map iframe {
+    max-width: 100%;
+    width: 100%;
+    min-height: 450px;
+    border: none;
+  } 
+  #address .contact-address label p {
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom:1rem;
+    text-transform: uppercase;
+  }
+  #address .address-col img {
+    filter: invert(1);
+    -webkit-filter: invert(1);
+    -moz-filter: invert(1);
+    -ms-filter: invert(1);
+    max-width: 24px;
+  }
+  #address .address-col h4 {
+    margin: 0;
+    padding: 0 0 0.6rem 0;
+    color: #fff;
+    font-weight:bold;
+  }
+  #address .address-col p {
+    color: #fff;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .address-col {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    align-items: start;
+    margin-bottom: 2rem;
+  }
+  .contact-address {
+    padding: 0rem 4rem;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .address-col .address-caption {
+    max-width: 80%;
+  }
+
+  @media screen and (max-width:767px) {
+    #address .google-map, #address .contact-address {
+      max-width: 100%;
+      width:100%;
+    } 
+    #address .google-map iframe {
+      min-height: 300px;
+    }
+    .contact-address {
+      padding: 2rem 2rem;
+    }
+  }
 
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
@@ -13,12 +90,13 @@
 {%- endstyle -%}
 
 <section id="address" class="color-{{ section.settings.color_scheme }} gradient">
-    <div class="page-width section-{{ section.id }}-padding">
+    <div class="section-{{ section.id }}-padding">
         <div class="google-map">
             <iframe src="{{ section.settings.iframe-link }}"></iframe>
         </div>
         <div class="contact-address">
-            {% for block in section.blocks  %}
+          <div class="contact-caption">  
+          {% for block in section.blocks  %}
                 {% if block.settings.contact-label != blank %}
                 <label>
                     {{ block.settings.contact-label }}
@@ -30,13 +108,14 @@
                   <img src="{{ block.settings.icon-img | img_url: 'master' }}" />
                 {% endif %}
                {% if block.settings.contact-source != blank %}
-                    {{ block.settings.contact-source }}
+                    <div class="address-caption">{{ block.settings.contact-source }}</div>
                 {% endif %}
                </div>
              {% endfor %}
+            </div>
         </div>
     </div>   
-</section>
+</section> 
 
 {% schema %}
 {
