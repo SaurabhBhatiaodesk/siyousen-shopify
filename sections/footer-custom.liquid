@@ -85,12 +85,20 @@ div#footer-section {
   <div class="page-width">
       <ul class="order-list">
          {% for block in section.blocks %}
-          <li>
+          <li class="dropdown">
           <a href="{{ block.settings.footer-link }}">
             {% if block.settings.footer-ico-img != blank %}<img src="{{ block.settings.footer-ico-img | img_url: 'master' }}"/> {% endif %}
             {% if block.settings.ico-txt != blank %} <span>{{ block.settings.ico-txt }}</span> {% endif %}
           </a>
+         <div class="dropdown-content">
+        <ul>
+          {% for product in collections[link.collection_handle].products limit: 5 %}
+            <li><a href="{{ product.url }}">{{ product.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
         </li>
+       {% endfor %}
       </ul>
       
   </div>
