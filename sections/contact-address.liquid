@@ -1,5 +1,19 @@
-<section id="address">
-    <div class="page-width">
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="address" class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width section-{{ section.id }}-padding">
         <div class="google-map">
             <iframe src="{{ section.settings.iframe-link }}"></iframe>
         </div>
@@ -11,12 +25,16 @@
                 </label>
                 {% endif %}
 
-                {% if block.settings.contact-source != blank %}
-                    {{ block.settings.contact-source}}
+               <div class="address-col">
+                {% if block.settings.icon-img != blank %}
+                  <img src="{{ block.settings.icon-img | img_url: 'master' }}" />
                 {% endif %}
-            {% endfor %}
+               {% if block.settings.contact-source != blank %}
+                    {{ block.settings.contact-source }}
+                {% endif %}
+               </div>
+             {% endfor %}
         </div>
-
     </div>   
 </section>
 
@@ -25,21 +43,26 @@
   "name": "Contact Address",
   "settings": [
     {
-      "type": "richtext",
+      "type": "text",
       "id": "title",
-      "label": "Contact Address"
-    }
+      "label": "Slideshow"
+    },
+    {
+     "type": "url",
+     "id": "iframe-link",
+     "label": "Iframe Link"
+   }
   ],
 
   "blocks": [
      {
        "name": "Contact Address",
-       "type": "slide",
+       "type": "slide", 
        "settings": [
          {
-           "type": "url",
-           "id": "iframe-link",
-           "label": "Iframe Link"
+           "type": "image_picker",
+           "id": "icon-img",
+           "label": "Icon Image"
          },
          {
             "type": "richtext",
@@ -58,7 +81,7 @@
     {
       "name": "Contact Address",
       "settings": {
-        "title": "Slideshow"
+        "title": "Contact Address"
       },
       "blocks": [
         {
