@@ -78,7 +78,6 @@
         "column_JDLRTQ",
         "column_gUA9dB"
       ],
-      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -134,14 +133,12 @@
         "external_video_KWacPm",
         "external_video_XhU889"
       ],
-      "disabled": true,
       "settings": {
         "heading": "Blog & Interviews"
       }
     },
     "featured_blog_RgXQam": {
       "type": "featured-blog",
-      "disabled": true,
       "settings": {
         "heading": "Blog posts",
         "heading_size": "h1",
