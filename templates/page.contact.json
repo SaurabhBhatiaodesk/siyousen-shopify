@@ -52,6 +52,18 @@
     },
     "contact_address_PJRjRz": {
       "type": "contact-address",
+      "blocks": {
+        "slide_cPPwzJ": {
+          "type": "slide",
+          "settings": {
+            "contact-label": "<p>Address<\/p>",
+            "contact-source": "<h4>26985 Brighton Lane,Lake Forest, CA 92630<\/h4><p>Our office is open:<br\/>Mon to Fri from 9 a.m. to 5 p.m.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_cPPwzJ"
+      ],
       "settings": {
         "title": "Contact Address",
         "iframe-link": "https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d54891.38608500805!2d76.65609513643757!3d30.6983886747756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fee906da6f81f%3A0x512998f16ce508d8!2sSahibzada%20Ajit%20Singh%20Nagar%2C%20Punjab!5e0!3m2!1sen!2sin!4v1719818387372!5m2!1sen!2sin"
