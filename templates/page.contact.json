@@ -56,13 +56,23 @@
         "slide_cPPwzJ": {
           "type": "slide",
           "settings": {
+            "icon-img": "shopify:\/\/shop_images\/pin.png",
             "contact-label": "<p>Address<\/p>",
             "contact-source": "<h4>26985 Brighton Lane,Lake Forest, CA 92630<\/h4><p>Our office is open:<br\/>Mon to Fri from 9 a.m. to 5 p.m.<\/p>"
+          }
+        },
+        "slide_c93LwT": {
+          "type": "slide",
+          "settings": {
+            "icon-img": "shopify:\/\/shop_images\/telephone.png",
+            "contact-label": "<p>Phone:<\/p>",
+            "contact-source": "<p>+1 (288) 493-7050<\/p>"
           }
         }
       },
       "block_order": [
-        "slide_cPPwzJ"
+        "slide_cPPwzJ",
+        "slide_c93LwT"
       ],
       "settings": {
         "title": "Contact Address",
