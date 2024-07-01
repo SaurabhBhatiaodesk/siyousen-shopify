@@ -14,8 +14,8 @@
     margin: auto;
     left: 0;
     right: 0;
-	top: 0;
-	bottom: 0;
+	  top: 0;
+	  bottom: 0;
     z-index: 10;
     cursor: pointer;
 }
@@ -87,6 +87,17 @@
     padding: 0;
     margin: 0;
 }
+.size-box .slick-slider .slick-prev,.size-box .slick-slider .slick-next {
+  background-image: url("https://cdn.shopify.com/s/files/1/0522/7295/5550/files/left-arrow.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  border: none;
+}
+.size-box .slick-slider .slick-next {
+  background-image: url("https://cdn.shopify.com/s/files/1/0522/7295/5550/files/right-arrow.webp");
+}
+
 @media screen and (max-width:767px) {
   .size-box .slider-thumb img, .size-box .slider-thumb2 img {
     min-width: 80px;
@@ -109,6 +120,13 @@
   .slider-thumb .slick-slide p, .slider-thumb2 .slick-slide p {
     font-size: 12px;
     line-height: 19px;
+  }
+}
+
+@media screen and (max-width:370px) {
+  .slider-thumb .slick-slide p, .slider-thumb2 .slick-slide p {
+    font-size: 10px;
+    line-height: 17px;
   }
 }
 </style>
