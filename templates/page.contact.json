@@ -1,1 +1,98 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"padding_top":36,"padding_bottom":36}},"rich_text_YNBABF":{"type":"rich-text","blocks":{"heading_bEw3tC":{"type":"heading","settings":{"heading":"Contact Us","heading_size":"h1"}}},"block_order":["heading_bEw3tC"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-4","full_width":true,"padding_top":20,"padding_bottom":0}},"form":{"type":"contact-form","settings":{"heading":"","heading_size":"h1","color_scheme":"scheme-4","padding_top":36,"padding_bottom":40}}},"order":["main","rich_text_YNBABF","form"]}
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_YNBABF": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_bEw3tC": {
+          "type": "heading",
+          "settings": {
+            "heading": "Contact Us",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_bEw3tC"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 20,
+        "padding_bottom": 0
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "scheme-4",
+        "padding_top": 36,
+        "padding_bottom": 40
+      }
+    },
+    "contact_address_PJRjRz": {
+      "type": "contact-address",
+      "blocks": {
+        "slide_cPPwzJ": {
+          "type": "slide",
+          "settings": {
+            "icon-img": "shopify:\/\/shop_images\/pin.png",
+            "contact-label": "<p>Address<\/p>",
+            "contact-source": "<h4>26985 Brighton Lane,Lake Forest, CA 92630<\/h4><p>Our office is open:<br\/>Mon to Fri from 9 a.m. to 5 p.m.<\/p>"
+          }
+        },
+        "slide_c93LwT": {
+          "type": "slide",
+          "settings": {
+            "icon-img": "shopify:\/\/shop_images\/telephone.png",
+            "contact-label": "<p>Phone:<\/p>",
+            "contact-source": "<p>+1 (288) 493-7050<\/p>"
+          }
+        },
+        "slide_98GHEz": {
+          "type": "slide",
+          "settings": {
+            "icon-img": "shopify:\/\/shop_images\/envelope.png",
+            "contact-label": "<p>Email:<\/p>",
+            "contact-source": "<p>loremtest12@gmail.com<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_cPPwzJ",
+        "slide_c93LwT",
+        "slide_98GHEz"
+      ],
+      "settings": {
+        "title": "Contact Address",
+        "iframe-link": "https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d54891.38608500805!2d76.65609513643757!3d30.6983886747756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fee906da6f81f%3A0x512998f16ce508d8!2sSahibzada%20Ajit%20Singh%20Nagar%2C%20Punjab!5e0!3m2!1sen!2sin!4v1719818387372!5m2!1sen!2sin"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_YNBABF",
+    "form",
+    "contact_address_PJRjRz"
+  ]
+}
