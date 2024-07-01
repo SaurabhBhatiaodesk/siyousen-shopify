@@ -68,12 +68,12 @@ div#footer-section {
 #footer-section ul.order-list .dropdown {
   position: absolute;
   left: 50%;
-  transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-100%);
-  -moz-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-95%);
+  -webkit-transform: translate(-50%,-95%);
+  -moz-transform: translate(-50%,-95%);
+  -ms-transform: translate(-50%,-95%);
   top: 50%;
-  margin-top: -30px;
+  margin-top: 0px;
   text-align: center;
 }
 #footer-section ul.order-list .dropdown .dropbtn {
@@ -109,12 +109,37 @@ div#footer-section {
   margin-bottom: 2rem;
 }
 #footer-section ul.order-list .dropdown-content .dropdown-src span {
-  font-size: 12px;
+  font-size: 11px;
   line-height: 18px;
   padding: 0;
   text-transform: uppercase;
   font-weight: 600;
 }
+.collection-box .product-collection {
+  display: none;
+}
+.collection-box .dropdown-src:hover ~ .product-collection {
+  display: block;
+}
+.product-collection a.dropdown-product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.collection-box .product-collection .dropdown-product span {
+  font-size: 13px;
+  line-height: 20px;
+  padding: 0 10px;
+  font-weight: bold;
+}
+.product-collection a.dropdown-product img {
+  max-width: 100%;
+  min-width: 80px;
+  min-height: 80px;
+  object-fit: contain;
+}
+
+
 
 /* Works on Firefox */
 #footer-section ul.order-list .dropdown-content {
@@ -136,6 +161,10 @@ div#footer-section {
   border-radius: 1px;
   border: 0.2px solid #dddddd;
 }
+#footer-section ul.order-list .dropdown .dropdown-content .collection-box:hover + .product-collection {
+  display: block;
+}
+
 
 @media screen and (max-width:600px) {
   #footer-section ul.order-list li {
@@ -170,20 +199,32 @@ div#footer-section {
       <ul class="order-list">
         <li>
           <a href="{{ collection.url }}" class="dropdown-src">
-            {% if section.settings.footer-ico-img != blank %}<img src="{{ section.settings.footer-ico-img | img_url: 'master' }}"/> {% endif %}
-            {% if section.settings.ico-txt != blank %}<span>{{ section.settings.ico-txt }}</span> {% endif %}
-            <div class="dropdown">
-              <button class="dropbtn">SHOP</button>
-              <div class="dropdown-content">
-                {% for collection in collections %}
-                  <a href="{{ collection.url }}" class="dropdown-src">
-                    <img src="{{ collection | img_url: '30*30' }}" alt="{{ collection.image.alt }}" />
-                    <span>{{ collection.title }}</span>
-                  </a>
-                {% endfor %}
-              </div>
-            </div>
-          </a>
+              {% if section.settings.footer-ico-img != blank %}<img src="{{ section.settings.footer-ico-img | img_url: 'master' }}"/> {% endif %}
+              {% if section.settings.ico-txt != blank %}<span>{{ section.settings.ico-txt }}</span> {% endif %}
+              <div class="dropdown">
+                <button class="dropbtn">SHOP</button>
+                  <div class="dropdown-content">
+                    {% for collection in collections %}
+                      <div class="collection-box">
+                        <a href="{{ collection.url }}" class="dropdown-src">
+                          <img src="{{ collection | img_url: '30*30' }}" alt="{{ collection.image.alt }}" />
+                          <span>{{ collection.title }}</span>
+                        </a>
+                      
+                        <div class="product-collection">
+                        {% for product in collection.products %}
+                          <a href="{{ product.url }}" class="dropdown-product">
+                            <img src="{{ product.featured_image | img_url: '30x30' }}" alt="{{ product.featured_image.alt }}" />
+                            <span>{{ product.title }}</span>
+                          </a>
+                    
+                        {% endfor %}  
+                      </div>
+                  
+                        {% endfor %}
+                    </div>
+                </div>
+            </a>
         </li>
         {% for block in section.blocks %}
           <li>

@@ -1,0 +1,7 @@
+{% for product in collection.products %}
+    <a href="{{ product.url }}" class="dropdown-src">
+      <img src="{{ product.featured_image | img_url: '30x30' }}" alt="{{ product.featured_image.alt }}" />
+      <span>{{ product.title }}</span>
+    </a>
+  {% endfor %}
+  
