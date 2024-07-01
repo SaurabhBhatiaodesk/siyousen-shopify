@@ -84,24 +84,6 @@ div#footer-section {
 <div id="footer-section">
   <div class="page-width">
       <ul class="order-list">
-         {% for link in main_navigation.links %}
-    <li class="menu-item">
-      <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
-      
-      {% if link.title == 'Main Menu Item 1' %}
-        <div class="submenu">
-          <ul>
-            {% for collection in collections %}
-              <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-      
-    </li>
-  {% endfor %}
-
-        
          {% for block in section.blocks %}
           <li>
           <a href="{{ block.settings.footer-link }}">
