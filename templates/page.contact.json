@@ -52,19 +52,6 @@
     },
     "contact_address_PJRjRz": {
       "type": "contact-address",
-      "blocks": {
-        "slide_ybGRXT": {
-          "type": "slide",
-          "settings": {
-            "iframe-link": "",
-            "contact-label": "",
-            "contact-source": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_ybGRXT"
-      ],
       "settings": {
         "title": "Contact Address"
       }
