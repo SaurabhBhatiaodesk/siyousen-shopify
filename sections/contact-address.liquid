@@ -25,10 +25,15 @@
                 </label>
                 {% endif %}
 
-                {% if block.settings.contact-source != blank %}
+               <div class="address-col">
+                {% if block.settings.icon-img != blank %}
+                  <img src="{{ block.settings.icon-img | img_url: 'master' }}" />
+                {% endif %}
+               {% if block.settings.contact-source != blank %}
                     {{ block.settings.contact-source }}
                 {% endif %}
-            {% endfor %}
+               </div>
+             {% endfor %}
         </div>
     </div>   
 </section>
