@@ -45,7 +45,9 @@
         "slide_jpwbJ9"
       ],
       "settings": {
-        "title": "Slideshow"
+        "title": "Slideshow",
+        "footer-ico-img": "shopify:\/\/shop_images\/cart.svg",
+        "ico-txt": "<p>SHOP<\/p>"
       }
     },
     "footer": {
