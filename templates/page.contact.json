@@ -68,11 +68,20 @@
             "contact-label": "<p>Phone:<\/p>",
             "contact-source": "<p>+1 (288) 493-7050<\/p>"
           }
+        },
+        "slide_98GHEz": {
+          "type": "slide",
+          "settings": {
+            "icon-img": "shopify:\/\/shop_images\/envelope.png",
+            "contact-label": "<p>Email:<\/p>",
+            "contact-source": "<p>loremtest12@gmail.com<\/p>"
+          }
         }
       },
       "block_order": [
         "slide_cPPwzJ",
-        "slide_c93LwT"
+        "slide_c93LwT",
+        "slide_98GHEz"
       ],
       "settings": {
         "title": "Contact Address",
