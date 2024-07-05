@@ -125,12 +125,17 @@ div#footer-section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 2rem;
+  position: relative;
 }
 .collection-box .product-collection .dropdown-product span {
   font-size: 13px;
   line-height: 20px;
   padding: 0 10px;
   font-weight: bold;
+  position:absolute;
+  content:"";
+  top:0;
 }
 .product-collection a.dropdown-product img {
   max-width: 100%;
@@ -138,7 +143,11 @@ div#footer-section {
   min-height: 80px;
   object-fit: contain;
 }
-
+.collection-box .dropdown-src:hover ~ .product-collection .dropdown-product img {
+  min-width: 60px;
+  object-fit: cover;
+  min-height: 100px;
+}
 
 
 /* Works on Firefox */
@@ -214,7 +223,7 @@ div#footer-section {
                         <div class="product-collection">
                         {% for product in collection.products %}
                           <a href="{{ product.url }}" class="dropdown-product">
-                            <img src="{{ product.featured_image | img_url: '30x30' }}" alt="{{ product.featured_image.alt }}" />
+                            <img src="{{ product.featured_image | img_url: '50x50' }}" alt="{{ product.featured_image.alt }}" />
                             <span>{{ product.title }}</span>
                           </a>
                     
