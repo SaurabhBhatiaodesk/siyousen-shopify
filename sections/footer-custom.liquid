@@ -121,6 +121,11 @@ div#footer-section {
 .collection-box .dropdown-src:hover ~ .product-collection {
   display: block;
 }
+
+#footer-section ul.order-list li a.dropdown-src > .dropdown .dropdown-src .collection-box > .dropdown-src {
+  position: relative;
+}
+
 .product-collection a.dropdown-product {
   display: flex;
   flex-wrap: wrap;
@@ -180,7 +185,26 @@ div#footer-section {
 #footer-section ul.order-list .dropdown .dropdown-content .collection-box:hover + .product-collection {
   display: block;
 }
-
+#footer-section ul.order-list .dropdown-content .dropdown-src:hover {
+  position: relative;
+}
+#footer-section ul.order-list .dropdown-content .dropdown-src:hover + .product-collection {
+  position: absolute;
+  content: "";
+  display: flex;
+  max-width: 400px;
+  overflow: auto;
+  left: 100px;
+  margin-top: -137px;
+}
+#footer-section ul.order-list .product-collection .dropdown-product {
+  margin: 0;
+  min-width: 100px;
+}
+#footer-section .collection-box .product-collection {
+  gap: 2rem;
+  background: #fff;
+}
 
 @media screen and (max-width:600px) {
   #footer-section ul.order-list li {
@@ -215,7 +239,7 @@ div#footer-section {
               {% if section.settings.footer-ico-img != blank %}<img src="{{ section.settings.footer-ico-img | img_url: 'master' }}"/> {% endif %}
               {% if section.settings.ico-txt != blank %}<span>{{ section.settings.ico-txt }}</span> {% endif %}
               <div class="dropdown">
-                {% comment %} <button class="dropbtn">SHOP</button> {% endcomment %}
+                <button class="dropbtn">SHOP</button>
                   <div class="dropdown-content">
                     {% for collection in collections %}
                       <div class="collection-box">
