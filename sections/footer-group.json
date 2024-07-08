@@ -47,7 +47,7 @@
       "settings": {
         "title": "Slideshow",
         "footer-ico-img": "shopify:\/\/shop_images\/cart.svg",
-        "ico-txt": ""
+        "ico-txt": "<p>SHOP<\/p>"
       }
     },
     "footer": {
