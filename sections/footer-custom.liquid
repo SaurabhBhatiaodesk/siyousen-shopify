@@ -226,6 +226,9 @@ div#footer-section {
   gap: 2rem;
   background: #fff;
 }
+a{
+  cursor:pointer;
+}
 /* Works on Firefox */
 #footer-section ul.order-list .dropdown-content, #footer-section .product-collection {
   scrollbar-width: thin;
@@ -288,7 +291,7 @@ div#footer-section {
                       {% assign collections_limit = 6 %} <!-- Set the limit here -->
                       {% for collection in collections limit: collections_limit %}
                       <div class="collection-box">
-                          <a href="{{ collection.url }}" class="dropdown-src">
+                          <a class="dropdown-src">
                             <img src="{{ collection | img_url: '30*30' }}" alt="{{ collection.image.alt }}" />
                             {% comment %} <span>{{ collection.title }}</span> {% endcomment %}
                          
