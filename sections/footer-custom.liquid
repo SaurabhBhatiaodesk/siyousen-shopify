@@ -289,13 +289,13 @@ div#footer-section {
                       <div class="collection-box">
                           <a href="{{ collection.url }}" class="dropdown-src">
                             <img src="{{ collection | img_url: '30*30' }}" alt="{{ collection.image.alt }}" />
-                            <span>{{ collection.title }}</span>
+                            {% comment %} <span>{{ collection.title }}</span> {% endcomment %}
                          
                           <div class="product-collection">
                             {% for product in collection.products %}
                               <a href="{{ product.url }}" class="dropdown-product">
                                 <img src="{{ product.featured_image | img_url: '50x50' }}" alt="{{ product.featured_image.alt }}" />
-                                <span>{{ product.title }}</span>
+                                {% comment %} <span>{{ product.title }}</span> {% endcomment %}
                               </a>
                         
                             {% endfor %}  
