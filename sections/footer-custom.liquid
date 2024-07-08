@@ -122,7 +122,7 @@ div#footer-section {
 #footer-section ul.order-list .dropdown-content .dropdown-src span {
   font-size: 11px;
   line-height: 18px;
-  padding: 0;
+  padding: 0 5px;
   text-transform: uppercase;
   font-weight: 600;
   white-space: nowrap;
@@ -284,7 +284,8 @@ div#footer-section {
               <div class="dropdown">
                 <button class="dropbtn">SHOP</button>
                   <div class="dropdown-content">
-                    {% for collection in collections %}
+                      {% assign collections_limit = 6 %} <!-- Set the limit here -->
+                      {% for collection in collections limit: collections_limit %}
                       <div class="collection-box">
                           <a href="{{ collection.url }}" class="dropdown-src">
                             <img src="{{ collection | img_url: '30*30' }}" alt="{{ collection.image.alt }}" />

@@ -52,12 +52,13 @@
         padding: 5px 0;
     }
     #recently-added .product img {
-        max-width: 100%;
-        width:100%;
-        height: auto;
-        min-height: 260px;
-        object-fit: cover;
-        min-width: 255px;
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      min-height: 440px;
+      object-fit: cover;
+      min-width: 255px;
+      max-height: 440px;
     }
     #recently-added .recently-added-products .product {
       max-width: 100%;
@@ -80,7 +81,9 @@
       font-size: 16px;
       line-height: 20px;
       cursor: pointer;
-      text-transform:uppercase;
+      text-transform: uppercase;
+      max-width: 70%;
+      float: right;
     }
     .recently-added-products .column-src {
       display: flex;
@@ -89,6 +92,10 @@
     }
     .recently-added-products .column-src .prod-info,.recently-added-products .column-src .add-cart {
       width: 50%;
+    }
+    .recently-added-products .add-cart button:hover, .product-form__buttons button.product-form__submit:hover {
+      background: #4b914b;
+      border-color: #4b914b;
     }
     
     @media screen and (max-width:1600px) {
@@ -116,29 +123,30 @@
       #recently-added .recently-added-products .product {
         max-width: 100%;
       }
-       #recently-added .product img {
-        min-height: 240px;
+      #recently-added .product img {
+        min-height: 300px;
+        max-height: 300px;
       }
     }
 
      @media screen and (max-width:767px) {
-      #recently-added .product img {
-        min-height: 200px;
-      }
        .recently-added .page-width {
         padding: 0 1rem;
       }
        #recently-added .recently-added-products .product {
         max-width: 100%;
       }
-      .recently-added-products .add-cart button{
+      .recently-added-products .add-cart button {
         min-height: 50px;
+        max-width: 90%;
+        font-size: 13px;
       }
     }
 
     @media screen and (max-width:600px) {
        #recently-added .product img {
-          min-height: 170px;
+          min-height: 220px;
+          max-height:220px;
         }
         #recently-added .recently-added-products .product {
           width: 47%;
@@ -161,7 +169,8 @@
           max-width: 100%;
         }
         #recently-added .product img {
-          min-height: 150px;
+          min-height: inherit;
+          max-height:inherit;
         }
       }
     
