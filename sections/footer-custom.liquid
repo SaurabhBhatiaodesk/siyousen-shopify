@@ -127,8 +127,8 @@ div#footer-section {
 #footer-section ul.order-list .product-collection .dropdown-product img {
   width: 100%;
   object-fit: cover;
-  max-height: 100px;
-  padding: 10px 0;
+  max-height: 90px;
+  padding: 0px 0;
 }
 #footer-section ul.order-list li a.dropdown-src > .dropdown .dropdown-src .collection-box > .dropdown-src {
   position: relative;
@@ -241,7 +241,7 @@ div#footer-section {
 
 #footer-section .collection-box .product-collection {
   display: flex;
-  background: #000;
+  {% comment %} background: #000; {% endcomment %}
   white-space: nowrap;
   max-width: 300px;
   overflow: auto;
@@ -259,19 +259,19 @@ div#footer-section {
 #footer-section .collection-box:hover .product-collection {
   opacity: 1;
   visibility: visible;
-  transition:all 1s linear;
-  -webkit-transition:all 1s linear;
-  -moz-transition:all 1s linear;
-  -ms-transition:all 1s linear;
+  transition:all 0.5s linear;
+  -webkit-transition:all 0.5s linear;
+  -moz-transition:all 0.5s linear;
+  -ms-transition:all 0.5s linear;
 }
 
 #footer-section .collection-box:hover .product-collection .dropdown-product {
   opacity: 0;
   transform: translateX(-100%);
-  animation: slideIn 1s ease forwards;
-  -webkit-animation: slideIn 1s ease forwards;
-  -moz-animation: slideIn 1s ease forwards;
-  -ms-animation: slideIn 1s ease forwards;
+  animation: slideIn 0.5s ease forwards;
+  -webkit-animation: slideIn 0.5s ease forwards;
+  -moz-animation: slideIn 0.5s ease forwards;
+  -ms-animation: slideIn 0.5s ease forwards;
   /* Adjust these delays as needed */
 }
 
@@ -283,38 +283,38 @@ div#footer-section {
 }
 
 #footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(2) {
+  animation-delay: 0.2s;
+  -webkit-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  -ms-animation-delay: 0.2s;
+}
+
+#footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(3) {
   animation-delay: 0.3s;
   -webkit-animation-delay: 0.3s;
   -moz-animation-delay: 0.3s;
   -ms-animation-delay: 0.3s;
 }
 
-#footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(3) {
+#footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(4) {
+  animation-delay: 0.4s;
+  -webkit-animation-delay: 0.4s;
+  -moz-animation-delay: 0.4s;
+  -ms-animation-delay: 0.4s;
+}
+
+#footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(5) {
   animation-delay: 0.5s;
   -webkit-animation-delay: 0.5s;
   -moz-animation-delay: 0.5s;
   -ms-animation-delay: 0.5s;
 }
 
-#footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(4) {
+#footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(6) {
   animation-delay: 0.7s;
-  -webkit-animation-delay: 0.7s;
+  -webkit-animation-delay:0.7s;
   -moz-animation-delay: 0.7s;
   -ms-animation-delay: 0.7s;
-}
-
-#footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(5) {
-  animation-delay: 1s;
-  -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  -ms-animation-delay: 1s;
-}
-
-#footer-section .collection-box:hover .product-collection .dropdown-product:nth-child(6) {
-  animation-delay: 1.2s;
-  -webkit-animation-delay:1.2s;
-  -moz-animation-delay: 1.2s;
-  -ms-animation-delay: 1.2s;
 }
 
 @keyframes slideIn {
