@@ -171,6 +171,7 @@
       });
     });
   </script> {% endcomment %}
+
   <script>
     // Function to update the total price
     function updateTotalPrice() {
@@ -182,17 +183,43 @@
             })
             .catch(error => console.error('Error fetching cart data:', error));
     }
-    
+   
     // Attach event listener to "Add to Cart" buttons
     document.querySelectorAll('.product-form__submit').forEach(button => {
         button.addEventListener('click', () => {
             setTimeout(updateTotalPrice, 1000); // Delay to allow the cart to update
         });
     });
-    
+
     // Initial update when the page loads
-    document.addEventListener('DOMContentLoaded', updateTotalPrice);
-    </script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updateTotalPrice();
+
+        // Event listener for the checkout button using jQuery
+        $('#custom-checkout-button').click(function(e){
+            e.preventDefault();
+            
+            // Disable the button to prevent multiple clicks
+            $(this).prop('disabled', true);
+            
+            // AJAX call to get the checkout URL
+            $.ajax({
+                type: 'POST',
+                url: '/cart.js',
+                dataType: 'json',
+                success: function(cart) {
+                    window.location.href = '/checkout';
+                },
+                error: function(XMLHttpRequest, textStatus) {
+                    alert('Error: ' + textStatus);
+                    // Re-enable the button in case of error
+                    $('#custom-checkout-button').prop('disabled', false);
+                }
+            });
+        });
+    });
+</script>
+
   <style>
     #custom-checkout-button {
       background: #fd7d00;
