@@ -128,14 +128,24 @@
   </button>    
 
   
-<script>
-  $(document).ready(function(){
-    $(".product-form__submit").click(function(){
-      $(".checkout-btn").addClass("add-checkout");
+  <script>
+    $(document).ready(function(){
+      $(".product-form__submit").click(function(event){
+        event.stopPropagation();
+        $(".checkout-btn").addClass("add-checkout");
+      });
+  
+      $(document).click(function(){
+        $(".checkout-btn").removeClass("add-checkout");
+      });
+  
+      // Optional: Prevent class removal when clicking on the checkout button itself
+      $(".checkout-btn").click(function(event){
+        event.stopPropagation();
+      });
     });
-  });
+  </script>
 
-</script>
   <script type="text/javascript">
     $(document).ready(function(){
       $('#custom-checkout-button').click(function(e){
