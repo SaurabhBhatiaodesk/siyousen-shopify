@@ -124,7 +124,7 @@
 
   <button href="/checkout" id="custom-checkout-button" class="btn checkout-btn">
     <img src="//siyousen.myshopify.com/cdn/shop/files/cart.svg?v=1719585583" class="checkout-icon" alt=""/>
-    <span>CHECKOUT</span> <span id="total-price">{{cart.total_price | money_with_currency }}</span>
+    <span>CHECKOUT</span> <span id="total-price">{{ cart.total_price | money }}</span>
   </button>    
 
   
@@ -136,57 +136,31 @@
   });
 
 </script>
-  
-<script type="text/javascript">
-  $(document).ready(function() {
-    // Function to update the checkout button with the total price
-    function updateCheckoutButton() {
-      $.ajax({
-        type: 'GET',
-        url: '/cart.js',
-        dataType: 'json',
-        success: function(cart) {
-          var totalPrice = (cart.total_price / 100).toFixed(2); // Convert to dollars
-          $('#custom-checkout-button').text('Checkout ($' + totalPrice + ')');
-        },
-        error: function(XMLHttpRequest, textStatus) {
-          alert('Error fetching cart: ' + textStatus);
-        }
-      });
-    }
-
-    // Initial call to update the checkout button when the page loads
-    updateCheckoutButton();
-
-    $('#custom-checkout-button').click(function(e) {
-      e.preventDefault();
-      
-      // Disable the button to prevent multiple clicks
-      $(this).prop('disabled', true);
-      
-      // AJAX call to get the checkout URL
-      $.ajax({
-        type: 'POST',
-        url: '/cart.js',
-        dataType: 'json',
-        success: function(cart) {
-          window.location.href = '/checkout';
-        },
-        error: function(XMLHttpRequest, textStatus) {
-          alert('Error: ' + textStatus);
-          // Re-enable the button in case of error
-          $('#custom-checkout-button').prop('disabled', false);
-        }
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#custom-checkout-button').click(function(e){
+        e.preventDefault();
+        
+        // Disable the button to prevent multiple clicks
+        $(this).prop('disabled', true);
+        
+        // AJAX call to get the checkout URL
+        $.ajax({
+          type: 'POST',
+          url: '/cart.js',
+          dataType: 'json',
+          success: function(cart) {
+            window.location.href = '/checkout';
+          },
+          error: function(XMLHttpRequest, textStatus) {
+            alert('Error: ' + textStatus);
+            // Re-enable the button in case of error
+            $('#custom-checkout-button').prop('disabled', false);
+          }
+        });
       });
     });
-
-    // Event listener for adding items to the cart to update the checkout button
-    $(document).on('click', '.add-to-cart-button', function() {
-      updateCheckoutButton();
-    });
-  });
-</script>
-
+  </script>
 
   <style>
     #custom-checkout-button {
@@ -198,6 +172,11 @@
       flex-wrap:wrap;
       align-items:center;
       cursor:pointer;
+    }
+    #custom-checkout-button .checkout-icon {
+      width: 40px;
+      margin: 0;
+      padding: 0;
     }
     #custom-checkout-button #total-price {
       color: #fbae00;
@@ -217,6 +196,10 @@
     .add-checkout{
       display:flex !important;
     }
+    #cart-notification {
+      display: none;
+    }
+    
     @media screen and (max-width:767px) {
       #custom-checkout-button #total-price {
         font-size: 26px !important;
