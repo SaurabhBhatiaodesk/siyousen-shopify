@@ -168,10 +168,17 @@
       border: 5px solid #fca700;
       min-height: 90px;
       border-radius: 5px;
-      display:none;
-      flex-wrap:wrap;
-      align-items:center;
-      cursor:pointer;
+      visibility: hidden;
+      flex-wrap: wrap;
+      align-items: center;
+      cursor: pointer;
+      right: -100%;
+      position: absolute;
+      top: 0;
+      transition:all 0.4s linear;
+      -webkit-transition:all 0.4s linear;
+      -moz-transition:all 0.4s linear;
+      -ms-transition:all 0.4s linear;
     }
     #custom-checkout-button .checkout-icon {
       width: 40px;
@@ -194,12 +201,14 @@
       align-content: center;
     }
     .add-checkout{
-      display:flex !important;
+      visibility: visible !important;
+      right:0 !important;
+      z-index:11;
     }
     #cart-notification {
       display: none;
     }
-    
+
     @media screen and (max-width:767px) {
       #custom-checkout-button #total-price {
         font-size: 26px !important;
