@@ -49,9 +49,9 @@
   </script>
   
   <script>
-    let checkButtons = document.querySelectorAll('.add-checkout[data-variant-id]');
+    let checking = document.querySelectorAll('.add-checkout[data-variant-id]');
 
-    checkButtons.forEach(button => {
+    checking.forEach(button => {
       let variantId = button.getAttribute('data-variant-id');
       let data = {
         "id": variantId,
