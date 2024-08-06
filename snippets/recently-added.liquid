@@ -33,48 +33,50 @@
 
   
   <script>
-    $(document).ready(function(){
-      $(".add-cart button.add-to-cart").click(function(event){
+    $(document).ready(function() {
+      // Handle add-to-cart button click
+      $(".add-cart button.add-to-cart").click(function(event) {
         event.preventDefault();
         event.stopPropagation();
         
         var productId = $(this).data('product-id');
-          $("#custom-checkout-button-" + productId).addClass("add-checkout");
+        $("#custom-checkout-button-" + productId).addClass("add-checkout");
       });
     
-      $(document).click(function(){
-        $(".checkout-btns").removeClass("add-checkout");
-      });
-    });
-  </script>
-  
-  <script>
-    let chkt = document.querySelectorAll('.add-checkout[data-variant-id]');
-
-    chkt.forEach(button => {
-      let variantId = button.getAttribute('data-variant-id');
-      let data = {
-        "id": variantId,
-        "quantity": 1
-      };
-    
-      jQuery.ajax({
-        type: 'POST',
-        url: '/cart/add.js',
-        data: data,
-        dataType: 'json',
-        success: function() { 
-          // Redirect to the checkout page
-          window.location.href = '/checkout'; 
-        },
-        error: function() {
-          // Handle errors if needed
-          console.error('Error adding item to cart');
+      // Handle document click to remove 'add-checkout' class
+      $(document).click(function(event) {
+        // Make sure the click is not on the checkout buttons
+        if (!$(event.target).closest('.checkout-btns').length) {
+          $(".checkout-btns").removeClass("add-checkout");
         }
       });
-    });
     
-  </script>
+      // Handle checkout button click to add item to cart and redirect to checkout
+      $(document).on('click', '.add-checkout', function() {
+        let variantId = $(this).data('variant-id');
+        let data = {
+          "id": variantId,
+          "quantity": 1
+        };
+        
+        jQuery.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          data: data,
+          dataType: 'json',
+          success: function() { 
+            // Redirect to the checkout page
+            window.location.href = '/checkout'; 
+          },
+          error: function() {
+            // Handle errors if needed
+            console.error('Error adding item to cart');
+          }
+        });
+      });
+    });
+    </script>
+    
     
       
 
