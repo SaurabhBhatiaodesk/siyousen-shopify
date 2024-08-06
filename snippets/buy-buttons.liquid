@@ -146,32 +146,6 @@
     });
   </script>
 
-  {% comment %} <script type="text/javascript">
-    $(document).ready(function(){
-      $('#custom-checkout-button').click(function(e){
-        e.preventDefault();
-        
-        // Disable the button to prevent multiple clicks
-        $(this).prop('disabled', true);
-        
-        // AJAX call to get the checkout URL
-        $.ajax({
-          type: 'POST',
-          url: '/cart.js',
-          dataType: 'json',
-          success: function(cart) {
-            window.location.href = '/checkout';
-          },
-          error: function(XMLHttpRequest, textStatus) {
-            alert('Error: ' + textStatus);
-            // Re-enable the button in case of error
-            $('#custom-checkout-button').prop('disabled', false);
-          }
-        });
-      });
-    });
-  </script> {% endcomment %}
-
   <script>
     // Function to update the total price
     function updateTotalPrice() {
@@ -221,6 +195,9 @@
 </script>
 
   <style>
+    body{
+      overflow-x:hidden;
+    }
     #custom-checkout-button {
       background: #fd7d00;
       border: 5px solid #fca700;

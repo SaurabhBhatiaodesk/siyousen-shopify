@@ -1,34 +1,163 @@
 <section id="recently-added">
-    <div class="recently-added-products">
-    {% assign products = collections.all.products | sort: 'created_at' | reverse %}  
-      {% for product in products limit: 100 %}
-        <div class="product">
-          <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-           <div class="column-src">
-              <span class="prod-info">
-                <h3>{{ product.title }}</h3>
-                <p>{{ product.price | money }}</p>
-                {% if product.options.size > 1 %}
-                  <select name="id" id="product-select">
-                    {% for variant in product.variants %}
-                      <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
-                    {% endfor %}
-                  </select>
-                {% endif %}
-                
-              </span>
-              <form method="post" action="/cart/add" class="add-cart">
-                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-                <button type="submit">Add to Cart</button>
-              </form>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
+  <div class="recently-added-products">
+    {% assign products = collections.all.products | sort: 'created_at' | reverse %}
+    {% for product in products limit: 100 %}
+      <div class="product" id="product-{{ forloop.index }}">
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+          <div class="column-src">
+            <span class="prod-info">
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.price | money }}</p>
+              {% if product.options.size > 1 %}
+                <select name="id" id="product-select-{{ forloop.index }}">
+                  {% for variant in product.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+            </span>
+            <form method="post" action="/cart/add" class="add-cart" id="add-cart-form-{{ forloop.index }}">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}">Add to Cart</button>
+            </form>
+            <button id="custom-checkout-button-{{ forloop.index }}" class="btn checkout-btns" data-product-id="{{ forloop.index }}">
+              <img src="//siyousen.myshopify.com/cdn/shop/files/cart.svg?v=1719585583" class="checkout-icon" alt=""/>
+              <span>CHECKOUT</span> <span id="total-price">{{ cart.total_price | money }}</span>
+            </button>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
 
-   
+
+  <script>
+    $(document).ready(function() {
+      $(".add-to-cart").click(function(event) {
+        event.preventDefault(); // Prevent form submission
+        event.stopPropagation(); // Stop click event from bubbling up
+  
+        // Get the product ID from the clicked button
+        var productId = $(this).data("product-id");
+        var form = $("#add-cart-form-" + productId);
+        var checkoutButton = $("#custom-checkout-button-" + productId);
+        
+        // Submit the form to add the product to the cart
+        $.ajax({
+          type: 'POST',
+          url: form.attr('action'),
+          data: form.serialize(),
+          success: function(data) {
+            // Hide all checkout buttons first
+            $(".checkout-btns").removeClass("add-checkout");
+  
+            // Show the checkout button for the specific product
+            checkoutButton.addClass("add-checkout");
+  
+            // Fetch updated cart total price
+            $.getJSON('/cart.js', function(cart) {
+              console.log('Cart data:', cart); // Debugging: Check the cart data
+              checkoutButton.find("#total-price").text(Shopify.formatMoney(cart.total_price));
+              console.log('Updated price:', Shopify.formatMoney(cart.total_price)); // Debugging: Check the updated price
+            }).fail(function() {
+              console.error('Error fetching cart data');
+            });
+          },
+          error: function(xhr, status, error) {
+            console.error('Error adding to cart:', error);
+          }
+        });
+      });
+  
+      $(document).click(function() {
+        $(".checkout-btns").removeClass("add-checkout");
+      });
+  
+      // Prevent hiding of checkout button when clicking inside the button
+      $(".checkout-btns").click(function(event) {
+        event.stopPropagation();
+      });
+    });
+  </script>
+  
+
+  
+    
+      
+
+  <style>
+    body{
+      overflow-x:hidden;
+    }
+    .recently-added-products .column-src {
+      position: relative;
+    }
+    .column-src form.add-cart #custom-checkout-button {
+      position: absolute;
+      content: "";
+      top: 0;
+      z-index:222;
+    }
+    #recently-added .product .checkout-btns img.checkout-icon {
+      max-width: 40px;
+      min-height: 40px;
+      min-width: 40px;
+    }
+    .checkout-btns {
+      background: #fd7d00;
+      border: 5px solid #fca700;
+      min-height: 90px;
+      border-radius: 5px;
+      visibility: hidden;
+      flex-wrap: wrap;
+      align-items: center;
+      cursor: pointer;
+      right: -100%;
+      position: absolute;
+      top: 0;
+      transition:all 0.4s linear;
+      -webkit-transition:all 0.4s linear;
+      -moz-transition:all 0.4s linear;
+      -ms-transition:all 0.4s linear;
+    }
+    .checkout-btns .checkout-icon {
+      width: 40px;
+      margin: 0;
+      padding: 0;
+    }
+    .checkout-btns #total-price {
+      color: #fbae00;
+      font-size: 42px !important;
+      line-height: 52px;
+      font-weight: 600;
+    }
+    .checkout-btns span {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      padding: 0 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content:center;
+      align-content: center;
+    }
+    .add-checkout{
+      visibility: visible !important;
+      right:0 !important;
+      z-index:11;
+    }
+    #cart-notification {
+      display: none;
+    }
+
+    @media screen and (max-width:767px) {
+      .checkout-btns #total-price {
+        font-size: 26px !important;
+        line-height: 36px;
+      }
+    }
+  </style>
 
   <style>
     #recently-added {
@@ -178,8 +307,8 @@
       }
     
   </style>
+
+
+
 </section>
-
-
-
 
