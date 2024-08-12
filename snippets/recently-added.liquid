@@ -25,7 +25,7 @@
             </form>
             <a href="/checkout"><button id="custom-checkout-button-{{ forloop.index }}" class="btn checkout-btns" data-variant-id="{{ product.variants.first.id }}">
               <img src="//siyousen.myshopify.com/cdn/shop/files/cart.svg?v=1719585583" class="checkout-icon" alt="" />
-              <span>CHECKOUT</span> <span id="total-price-{{ forloop.index }}">{{ cart.total_price | money_with_currency }}</span>
+              <span>CHECKOUT</span><span id="total-price-{{ forloop.index }}">${{ cart.total_price | money }}</span> 
             </button>
             </a> 
           </div>
@@ -67,8 +67,9 @@
             .then(response => response.json())
             .then(cartData => {
               // Update total price
-              checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency;
-  
+              {% comment %} checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency; {% endcomment %}
+              checkoutButton.querySelector('#total-price-' + productIndex).innerText = 
+              '$' + (cartData.total_price / 100).toFixed(2);
               // No automatic redirection here
             })
             .catch(error => console.error('Error updating cart:', error));
