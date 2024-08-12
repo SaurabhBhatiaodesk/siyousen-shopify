@@ -23,10 +23,11 @@
               <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
               <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
             </form>
-            <button id="custom-checkout-button-{{ forloop.index }}" class="btn checkout-btns" data-variant-id="{{ product.variants.first.id }}">
+            <a href="/checkout"><button id="custom-checkout-button-{{ forloop.index }}" class="btn checkout-btns" data-variant-id="{{ product.variants.first.id }}">
               <img src="//siyousen.myshopify.com/cdn/shop/files/cart.svg?v=1719585583" class="checkout-icon" alt="" />
-              <span>CHECKOUT</span> <span id="total-price-{{ forloop.index }}">{{ cart.total_price | money }}</span>
-            </button> 
+              <span>CHECKOUT</span> <span id="total-price-{{ forloop.index }}">{{ cart.total_price | money_with_currency }}</span>
+            </button>
+            </a> 
           </div>
         </a>
       </div>
@@ -34,18 +35,20 @@
   </div>
 </section>
 
+
+ 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Attach event listener to each add-to-cart button
     document.querySelectorAll('.add-to-cart').forEach(function(button) {
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
-
+  
         // Get variant ID from the hidden input or selected option
         var productIndex = button.getAttribute('data-product-id');
         var variantId = document.querySelector('#variant-id-' + productIndex).value;
-
-        // Add item to cart and redirect to checkout
+  
+        // Add item to cart
         fetch('/cart/add.js', {
           method: 'POST',
           headers: {
@@ -55,13 +58,39 @@
         })
         .then(response => response.json())
         .then(data => {
-          window.location.href = '/checkout'; // Redirect to checkout
+          // Update the total price on the checkout button
+          var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
+          checkoutButton.classList.add('add-checkout');
+          
+          // Fetch the updated cart total price
+          fetch('/cart.js')
+            .then(response => response.json())
+            .then(cartData => {
+              // Update total price
+              checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency;
+  
+              // No automatic redirection here
+            })
+            .catch(error => console.error('Error updating cart:', error));
         })
         .catch(error => console.error('Error adding to cart:', error));
       });
     });
+  
+    // Attach event listener to each custom checkout button
+    document.querySelectorAll('.add-checkout').forEach(function(checkoutButton) {
+      checkoutButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevents the default behavior
+        window.location.href = '/checkout'; // Replace with your desired page URL
+      });
+    });
   });
-</script>
+  </script>
+  
+  
+    
+
+
 
   
 <style>
@@ -71,6 +100,11 @@
   .recently-added-products .product-form__buttons {
     bottom: -15px;
     top:unset;
+  }
+  .recently-added-products .product .button-column {
+    position: absolute;
+    right: 6px;
+    bottom: 5px;
   }
   .recently-added-products .product .checkout-btns span + span {
     color: #fbae00;
@@ -82,6 +116,9 @@
     flex-wrap: wrap;
     justify-content: space-between;
     padding:0 10px;
+  }
+  .recently-added-products .product .button-column .add-cart {
+    width: 100%;
   }
     .column-src {
       width: 50%;
@@ -193,6 +230,7 @@
     #recently-added .recently-added-products .product {
       margin-bottom: 2rem;
       width: 50%;
+      position:relative;
     }
     #recently-added .recently-added-products .product a {
       text-decoration: none;
