@@ -144,7 +144,8 @@
         event.stopPropagation();
       });
     });
-  </script>
+  </script> 
+  
 
   <script>
     // Function to update the total price
@@ -196,7 +197,7 @@
 
   <style>
  
-    #custom-checkout-button {
+    .product__info-container #custom-checkout-button {
       background: #fd7d00;
       border: 5px solid #fca700;
       min-height: 90px;
@@ -204,6 +205,7 @@
       visibility: hidden;
       flex-wrap: wrap;
       align-items: center;
+      overflow:hidden;
       cursor: pointer;
       right: -100%;
       position: absolute;
@@ -213,18 +215,18 @@
       -moz-transition:all 0.4s linear;
       -ms-transition:all 0.4s linear;
     }
-    #custom-checkout-button .checkout-icon {
+    .product__info-container #custom-checkout-button .checkout-icon {
       width: 40px;
       margin: 0;
       padding: 0;
     }
-    #custom-checkout-button #total-price {
+    .product__info-container #custom-checkout-button #total-price {
       color: #fbae00;
       font-size: 42px !important;
       line-height: 52px;
       font-weight: 600;
     }
-    #custom-checkout-button span {
+    .product__info-container #custom-checkout-button span {
       font-size: 16px;
       line-height: 24px;
       font-weight: 600;
@@ -234,17 +236,17 @@
       justify-content:center;
       align-content: center;
     }
-    .add-checkout{
+    .product__info-container .add-checkout{
       visibility: visible !important;
       right:0 !important;
       z-index:11;
     }
-    #cart-notification {
+     #cart-notification {
       display: none;
     }
 
     @media screen and (max-width:767px) {
-      #custom-checkout-button #total-price {
+      .product__info-container #custom-checkout-button #total-price {
         font-size: 26px !important;
         line-height: 36px;
       }

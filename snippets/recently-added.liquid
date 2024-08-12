@@ -17,89 +17,93 @@
                 </select>
               {% endif %}
             </span>
+          </div>
+          <div class="button-column">  
             <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-              <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}">Add to Cart</button>
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
+              <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
             </form>
-            <button id="custom-checkout-button-{{ forloop.index }}" class="btn checkout-btns" data-variant-id="{{product.variants.first.id}}">
+            <button id="custom-checkout-button-{{ forloop.index }}" class="btn checkout-btns" data-variant-id="{{ product.variants.first.id }}">
               <img src="//siyousen.myshopify.com/cdn/shop/files/cart.svg?v=1719585583" class="checkout-icon" alt="" />
-              <span>CHECKOUT</span> <span id="total-price">{{ cart.total_price | money }}</span>
-            </button>
+              <span>CHECKOUT</span> <span id="total-price-{{ forloop.index }}">{{ cart.total_price | money }}</span>
+            </button> 
           </div>
         </a>
       </div>
     {% endfor %}
   </div>
+</section>
 
-  
-  <script>
-    $(document).ready(function() {
-      // Handle add-to-cart button click
-      $(".add-cart button.add-to-cart").click(function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        var productId = $(this).data('product-id');
-        $("#custom-checkout-button-" + productId).addClass("add-checkout");
-      });
-    
-      // Handle document click to remove 'add-checkout' class
-      $(document).click(function(event) {
-        // Make sure the click is not on the checkout buttons
-        if (!$(event.target).closest('.checkout-btns').length) {
-          $(".checkout-btns").removeClass("add-checkout");
-        }
-      });
-    
-      // Handle checkout button click to add item to cart and redirect to checkout
-      $(document).on('click', '.add-checkout', function() {
-        let variantId = $(this).data('variant-id');
-        let data = {
-          "id": variantId,
-          "quantity": 1
-        };
-        
-        jQuery.ajax({
-          type: 'POST',
-          url: '/cart/add.js',
-          data: data,
-          dataType: 'json',
-          success: function() { 
-            // Redirect to the checkout page
-            window.location.href = '/checkout'; 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Attach event listener to each add-to-cart button
+    document.querySelectorAll('.add-to-cart').forEach(function(button) {
+      button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get variant ID from the hidden input or selected option
+        var productIndex = button.getAttribute('data-product-id');
+        var variantId = document.querySelector('#variant-id-' + productIndex).value;
+
+        // Add item to cart and redirect to checkout
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
           },
-          error: function() {
-            // Handle errors if needed
-            console.error('Error adding item to cart');
-          }
-        });
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        })
+        .then(response => response.json())
+        .then(data => {
+          window.location.href = '/checkout'; // Redirect to checkout
+        })
+        .catch(error => console.error('Error adding to cart:', error));
       });
     });
-    </script>
-    
-    
-      
+  });
+</script>
 
-  <style>
-
-    .product {
+  
+<style>
+  .recently-added-products .product .button-column {
+    position: relative;
+  }
+  .recently-added-products .product-form__buttons {
+    bottom: -15px;
+    top:unset;
+  }
+  .recently-added-products .product .checkout-btns span + span {
+    color: #fbae00;
+    font-size: 32px !important;
+    line-height: 42px !important;
+  }
+  .product {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:0 10px;
+  }
+    .column-src {
+      width: 50%;
+      float: left;
+    }
+    .recently-added-products .product .column-src {
       position: relative;
     }
-    .recently-added-products .column-src {
-      position: relative;
-    }
-    .column-src form.add-cart #custom-checkout-button {
+    .column-src + form.add-cart #custom-checkout-button {
       position: absolute;
       content: "";
       top: 0;
       z-index:222;
     }
-    #recently-added .product .checkout-btns img.checkout-icon {
-      max-width: 40px;
-      min-height: 40px;
-      min-width: 40px;
+    .recently-added-products .product .checkout-btns .checkout-icon {
+      max-width: 40px !important;
+      min-height: 40px !important;
     }
-    .checkout-btns {
+    .product .button-column {
+      width: 50%;
+    }
+    .product .checkout-btns {
       background: #fd7d00;
       border: 5px solid #fca700;
       min-height: 90px;
@@ -116,18 +120,18 @@
       -moz-transition:all 0.4s linear;
       -ms-transition:all 0.4s linear;
     }
-    .checkout-btns .checkout-icon {
+    .product .checkout-btns .checkout-icon {
       width: 40px;
       margin: 0;
       padding: 0;
     }
-    .checkout-btns #total-price {
+    .product .checkout-btns #total-price {
       color: #fbae00;
       font-size: 42px !important;
       line-height: 52px;
       font-weight: 600;
     }
-    .checkout-btns span {
+    .product .checkout-btns span {
       font-size: 16px;
       line-height: 24px;
       font-weight: 600;
@@ -137,17 +141,17 @@
       justify-content:center;
       align-content: center;
     }
-    .add-checkout{
+    .product .add-checkout{
       visibility: visible !important;
       right:0 !important;
       z-index:11;
     }
     #cart-notification {
-      display: none;
+      display: none; 
     }
 
     @media screen and (max-width:767px) {
-      .checkout-btns #total-price {
+      .product .checkout-btns #total-price {
         font-size: 26px !important;
         line-height: 36px;
       }
@@ -164,7 +168,6 @@
     #recently-added .recently-added-products {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
     }
     #recently-added .product h3 {
         font-size: 1.5rem;
@@ -188,12 +191,12 @@
       max-height: 440px;
     }
     #recently-added .recently-added-products .product {
-      max-width: 100%;
       margin-bottom: 2rem;
-      width: 49%;
+      width: 50%;
     }
     #recently-added .recently-added-products .product a {
       text-decoration: none;
+      width: 100%;
     }
     .recently-added-products {
       padding-bottom: 10rem;
@@ -212,10 +215,12 @@
       max-width: 70%;
       float: right;
     }
-    .recently-added-products .column-src {
+    .recently-added-products .product a {
       display: flex;
       flex-wrap: wrap;
       align-content: center;
+      justify-content: space-between;
+      row-gap: 1.5rem;
     }
     .recently-added-products .column-src .prod-info,.recently-added-products .column-src .add-cart {
       width: 50%;
@@ -242,13 +247,11 @@
 
     @media screen and (max-width:991px) {
       #recently-added .recently-added-products .product {
-          max-width: 100%;
+        max-width: 50%;
+        padding: 0 20px;
       }
       .recently-added .page-width {
           padding: 0 3rem;
-      }
-      #recently-added .recently-added-products .product {
-        max-width: 100%;
       }
       #recently-added .product img {
         min-height: 300px;
@@ -260,23 +263,22 @@
        .recently-added .page-width {
         padding: 0 1rem;
       }
-       #recently-added .recently-added-products .product {
-        max-width: 100%;
-      }
       .recently-added-products .add-cart button {
         min-height: 50px;
         max-width: 90%;
         font-size: 13px;
       }
+      #recently-added .recently-added-products .product {
+        max-width: 100%;
+        width: 100%;
+        padding: 0 7px;
+      } 
     }
 
     @media screen and (max-width:600px) {
        #recently-added .product img {
           min-height: 220px;
           max-height:220px;
-        }
-        #recently-added .recently-added-products .product {
-          width: 47%;
         }
     }
     
@@ -302,8 +304,4 @@
       }
     
   </style>
-
-
-
 </section>
-
