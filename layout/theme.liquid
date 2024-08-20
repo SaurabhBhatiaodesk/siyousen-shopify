@@ -381,6 +381,22 @@
        <span>CHECKOUT</span> <span id="total-price-{{ forloop.index }}">{{ cart.total_price | money }}</span> 
       </button>
     <style>
+      .content {
+      height: 1500px; /* Large height to create scrollable space */
+      padding: 20px;
+      }
+      
+      .scrollBtn {
+      display: block;
+      margin: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      }
     #blinkingButton {
     position: fixed;
     bottom: 20px;
