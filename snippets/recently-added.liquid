@@ -61,6 +61,11 @@
               blinkingButton.classList.remove('active');
             }, 3000); // Adjust time as needed
           }, 2000);
+          window.addEventListener('scroll', () => {
+          if (blinkingButton.classList.contains('active')) {
+          blinkingButton.classList.remove('active');
+          }
+          });
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
