@@ -52,11 +52,14 @@
         })
         .then(response => response.json())
         .then(data => {
-          blinkingButton.classList.add('blink');
+        blinkingButton.classList.add('blink');
           
           setTimeout(() => {
-           blinkingButton.classList.add('active');
-            // blinkingButton.classList.remove('active');
+            blinkingButton.classList.add('active');
+            // Optional: Remove the active class after some time
+            setTimeout(() => {
+              blinkingButton.classList.remove('active');
+            }, 3000); // Adjust time as needed
           }, 2000);
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
