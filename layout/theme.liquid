@@ -403,19 +403,16 @@
           cursor:pointer;
       }
     
-    .blink {
-        animation: blinker 1s ease-in-out infinite;
-        height: 50px; /* Normal height */
-        overflow: hidden; /* Ensure content stays inside the button */
-        padding: 10px 20px; /* Optional: adjust padding */
-        font-size: 16px; /* Optional: adjust font size */
-    }
-    
-    @keyframes blinker {
-        50% {
-            height: 70px; /* Adjust to a taller height at the midpoint */
-        }
-    }
+      .blink {
+          height: 50px; /* Initial height */
+          padding: 10px 20px; /* Optional: adjust padding */
+          font-size: 16px; /* Optional: adjust font size */
+          transition: height 1s ease-in-out; /* Smooth transition */
+      }
+      
+      .blink:hover {
+          height: 70px; /* Increased height on hover */
+      }
     </style>
     <!-- <script>
 
