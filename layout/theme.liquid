@@ -358,7 +358,7 @@
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-      <a href="/checkout"><button id="custom-checkout-button-{{ template }}" class="btn checkout-btns" data-variant-id="{{ product.variants.first.id }}">
+      <a href="/checkout"><button id="custom-checkout-button-fixed" class="btn checkout-btns" data-variant-id="{{ product.variants.first.id }}">
       <img src="//siyousen.myshopify.com/cdn/shop/files/cart.svg?v=1719585583" class="checkout-icon" alt="" />
       <span>CHECKOUT</span><span id="total-price-{{ forloop.index }}">${{ cart.total_price | money }}</span> 
       </button>
