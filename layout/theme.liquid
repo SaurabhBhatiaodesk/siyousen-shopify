@@ -366,7 +366,7 @@
       </a> 
       <button id="blinkingButton"> 
       <img src="//siyousen.myshopify.com/cdn/shop/files/cart.svg?v=1719585583" class="checkout-icon" alt="" />
-       <span>CHECKOUT</span><span id="total-price-{{ forloop.index }}">${{ cart.total_price | money }}</span> 
+       <span>CHECKOUT</span><span id="total-price-{{ forloop.index }}">{{ cart.total_price | money }}</span> 
       </button>
     <style>
     #blinkingButton {
