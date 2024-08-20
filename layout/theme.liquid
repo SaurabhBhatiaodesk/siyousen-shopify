@@ -406,18 +406,22 @@
     }
     }
     </style>
-    <script>
+    <!-- <script>
 
-// const scrollButtons = document.querySelectorAll('.scrollBtn');
-// const blinkingButton = document.getElementById('blinkingButton');
-// scrollButtons.forEach(button => {
-//     button.addEventListener('click', function() {
-//         blinkingButton.scrollIntoView({
-//             behavior: 'smooth'
-//         });
-//     });
-// });
+const scrollButtons = document.querySelectorAll('.scrollBtn');
+const blinkingButton = document.getElementById('blinkingButton');
+scrollButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        blinkingButton.scrollIntoView({
+            behavior: 'smooth'
+        });
+        blinkingButton.classList.add('blink');
+        setTimeout(() => {
+            blinkingButton.classList.remove('blink');
+        }, 5000);
+    });
+});
 
-  </script>
+  </script> -->
   </body>
 </html>
