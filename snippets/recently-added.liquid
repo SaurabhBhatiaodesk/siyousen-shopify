@@ -38,7 +38,7 @@
     document.querySelectorAll('.add-to-cart').forEach(function(button) {
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
-  
+        alert();
         // Get variant ID from the hidden input or selected option
         var productIndex = button.getAttribute('data-product-id');
         var variantId = document.querySelector('#variant-id-' + productIndex).value;
@@ -56,7 +56,7 @@
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
-          
+ 
           // Fetch the updated cart total price
           fetch('/cart.js')
             .then(response => response.json())
