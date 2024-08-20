@@ -404,13 +404,20 @@
       }
     
     .blink {
-    animation: blinker 1s linear infinite;
+        animation: blinker 1s ease-in-out infinite;
+        height: 50px; /* Normal height */
+        overflow: hidden; /* Ensure content stays inside the button */
+        padding: 10px 20px; /* Optional: adjust padding */
+        font-size: 16px; /* Optional: adjust font size */
     }
     
     @keyframes blinker {
-    50% {
-    opacity: 0;
-    }
+        0%, 100% {
+            height: 50px; /* Start and end with normal height */
+        }
+        50% {
+            height: 70px; /* Adjust to a taller height at the midpoint */
+        }
     }
     </style>
     <!-- <script>
