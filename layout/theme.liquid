@@ -402,17 +402,17 @@
           gap: 5px;
           cursor:pointer;
       }
-    
-      #blinkingButton {
-          height: 50px; /* Initial height */
-          padding: 10px 20px; /* Optional: adjust padding */
-          font-size: 16px; /* Optional: adjust font size */
-          transition: height 1s ease-in-out; /* Smooth transition */
-      }
-      
-      .blink {
-          height: 70px; /* Increased height on hover */
-      }
+        .blink {
+            height: 50px; /* Initial height */
+            padding: 10px 20px; /* Optional: adjust padding */
+            font-size: 16px; /* Optional: adjust font size */
+            transition: height 1s ease-in-out; /* Smooth transition */
+        }
+        
+        .blink:hover,
+        .blink.active {
+            height: 70px; /* Increased height on hover or when active class is added */
+        }
     </style>
     <!-- <script>
 
