@@ -35,14 +35,13 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Attach event listener to each add-to-cart button
-    const blinkingButton = document.getElementById('blinkingButton');
     document.querySelectorAll('.add-to-cart').forEach(function(button) {
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
         // Get variant ID from the hidden input or selected option
         var productIndex = button.getAttribute('data-product-id');
         var variantId = document.querySelector('#variant-id-' + productIndex).value;
-  
+         const blinkingButton = document.getElementById('blinkingButton');
         // Add item to cart
         fetch('/cart/add.js', {
           method: 'POST',
@@ -53,7 +52,10 @@
         })
         .then(response => response.json())
         .then(data => {
-          alert("pp");
+          blinkingButton.classList.add('blink');
+          setTimeout(() => {
+          blinkingButton.classList.remove('blink');
+          }, 5000);
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
