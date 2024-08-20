@@ -53,6 +53,7 @@
         })
         .then(response => response.json())
         .then(data => {
+          alert();
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
@@ -61,11 +62,12 @@
           fetch('/cart.js')
             .then(response => response.json())
             .then(cartData => {
+              alert();
               // Update total price
               {% comment %} checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency; {% endcomment %}
               checkoutButton.querySelector('#total-price-' + productIndex).innerText = 
               '$' + (cartData.total_price / 100).toFixed(2);
-               alert();
+               
             })
             .catch(error => console.error('Error updating cart:', error));
         })
