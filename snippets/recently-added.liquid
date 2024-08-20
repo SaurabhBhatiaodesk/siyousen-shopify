@@ -53,7 +53,7 @@
         })
         .then(response => response.json())
         .then(data => {
-          alert();
+          alert("pp");
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
@@ -62,7 +62,7 @@
           fetch('/cart.js')
             .then(response => response.json())
             .then(cartData => {
-              alert();
+              alert("aa");
               // Update total price
               {% comment %} checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency; {% endcomment %}
               checkoutButton.querySelector('#total-price-' + productIndex).innerText = 
