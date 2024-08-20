@@ -56,7 +56,7 @@
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
-          alert();
+        
           // Fetch the updated cart total price
           fetch('/cart.js')
             .then(response => response.json())
@@ -65,7 +65,7 @@
               {% comment %} checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency; {% endcomment %}
               checkoutButton.querySelector('#total-price-' + productIndex).innerText = 
               '$' + (cartData.total_price / 100).toFixed(2);
-              // No automatic redirection here
+               alert();
             })
             .catch(error => console.error('Error updating cart:', error));
         })
