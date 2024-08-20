@@ -53,10 +53,7 @@
         .then(response => response.json())
         .then(data => {
         blinkingButton.classList.add('blink');
-          
-          setTimeout(() => {
             blinkingButton.classList.add('active');
-          }, 100);
           window.addEventListener('scroll', () => {
           if (blinkingButton.classList.contains('active')) {
           blinkingButton.classList.remove('active');
