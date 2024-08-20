@@ -56,11 +56,7 @@
           
           setTimeout(() => {
             blinkingButton.classList.add('active');
-            // Optional: Remove the active class after some time
-            setTimeout(() => {
-              blinkingButton.classList.remove('active');
-            }, 2000); // Adjust time as needed
-          }, 1000);
+          }, 100);
           window.addEventListener('scroll', () => {
           if (blinkingButton.classList.contains('active')) {
           blinkingButton.classList.remove('active');
