@@ -369,49 +369,47 @@
        <span>CHECKOUT</span></span> 
       </button>
   </a>
-    <style>
-      .content {
-      height: 1500px; /* Large height to create scrollable space */
-      padding: 20px;
-      }
-      
-      .scrollBtn {
-      display: block;
-      margin: 20px;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      }
-      .blinkingButton {
-          position: fixed;
-          bottom: 100px;
-          right: 20px;
-          padding: 10px 20px;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          font-size: 16px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 5px;
-          cursor:pointer;
-          transition: height 1s ease;
-          padding: 10px 20px; /* Optional: adjust padding */
-          font-size: 16px; /* Optional: adjust font size */
-          transition: height 1s ease;
-      }
-        
-        .blinkingButton:hover,
-        .blinkingButton.active {
-            height: 70px; /* Increased height on hover or when active class is added */
-        }
-    </style>
+<style>
+  .content {
+    height: 1500px; /* Large height to create scrollable space */
+    padding: 20px;
+  }
+  
+  .scrollBtn {
+    display: block;
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .blinkingButton {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    height: 50px; /* Initial height */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: height 1s ease; /* Smooth transition for height */
+  }
+  
+  .blinkingButton:hover,
+  .blinkingButton.active {
+    height: 70px; /* Increased height */
+  }
     <!-- <script>
 
 const scrollButtons = document.querySelectorAll('.scrollBtn');
