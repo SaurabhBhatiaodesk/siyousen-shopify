@@ -10,6 +10,24 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
+<style>
+  product-form.product-form .button-column {
+  width: 100%;
+  }
+  product-form.product-form button.add-to-cart {
+      background: green;
+      border-radius: 5px;
+      border: 2px solid #4b914b;
+      min-height: 50px;
+      width: 100%;
+      color: #fff;
+      font-size: 16px;
+      line-height: 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      max-width: 100%;
+  }
+  </style>
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
     {%- liquid
