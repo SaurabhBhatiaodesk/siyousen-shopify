@@ -27,6 +27,11 @@
       text-transform: uppercase;
       max-width: 100%;
   }
+  @media (max-width:567px){
+    body product-form.product-form .button-column {
+    width: 50%;
+    }
+  }
   </style>
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
