@@ -419,7 +419,11 @@
 .blinkingButton:hover, .blinkingButton.active {
     padding: 120px 90px;
 }
-
+@media screen and (max-width:600px) {
+  .blinkingButton {
+    bottom: 70px;
+  }
+}
     <!-- <script>
 
 const scrollButtons = document.querySelectorAll('.scrollBtn');
