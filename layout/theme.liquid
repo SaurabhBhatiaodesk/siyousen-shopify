@@ -389,9 +389,6 @@
 .blinkingButton span{
   color:black;
 }
-.blinkingButton.active {
-    transform: translateY(-100px);
-}
 .blinkingButton {
   position: fixed;
   bottom: 0px;
@@ -412,8 +409,13 @@
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  transition: padding 1s ease; /* Smooth transition for padding */
+  transition: transform 0.5s ease, padding 1s ease; /* Combine both transitions */
 }
+
+.blinkingButton.active {
+    transform: translateY(-100px);
+}
+
 
 .blinkingButton:hover,
 .blinkingButton.active {
