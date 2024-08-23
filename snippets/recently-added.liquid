@@ -30,14 +30,13 @@
     {% if product.variants.size > 1 %}
                 {% for option in product.options %}
                   <div class="product-option">
-                    <p>{{ option }}</p>
                     <div class="variant-choices">
                       {% assign option_index = forloop.index | minus: 1 %}
                       {% assign option_values = product.variants | map: "option" | uniq %}
               
                       {% for variant in product.variants %}
                         {% assign variant_value = variant.options[option_index] %}
-                        <input type="radio" 
+                        <input type="checkbox" 
                                id="variant-{{ variant.id }}" 
                                name="variant_id" 
                                value="{{ variant.id }}" 
