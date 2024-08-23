@@ -36,7 +36,7 @@
         
                 {% for variant in product.variants %}
                   {% assign variant_value = variant.options[option_index] %}
-                  <span class="var-opt"><input type="radio" 
+                  <span class="var-opt"><input type="checkbox" 
                          id="variant-{{ variant.id }}" 
                          name="variant_id" 
                          value="{{ variant.id }}" 
