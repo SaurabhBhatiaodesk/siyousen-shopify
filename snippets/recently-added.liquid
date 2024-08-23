@@ -129,7 +129,7 @@
   .product-option .variant-choices {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
   }
   .product-option span.var-opt {
     position: relative;
@@ -161,6 +161,10 @@
     top: 0;
     color: #fff; 
   }
+   .product-option .variant-choices .var-opt input[type="radio"]:checked + label {
+    color: #fff;
+  }
+    
   /*----variants----*/
   .recently-added-products .product .button-column {
     position: relative;
