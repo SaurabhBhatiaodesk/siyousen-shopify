@@ -24,9 +24,12 @@
               <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
               <!-- <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button> -->
 
-              <button id="variant-button" type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
-              <button id="no-variant-button" type="submit" class="add-to-cart1" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}" style="display:none;">Add to Cart</button>
-
+              {% if variants != blank  %}
+                  <button  type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
+              {% else %}
+                  <button type="submit" class="add-to-cart1" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
+              {% endif %}
+              
             </form>
           </div>
         </a>
@@ -60,24 +63,6 @@
      {% endfor %}
   </div>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var hasVariants = {{ product.variants.length }} > 0; // Replace this with your logic to check for variants
-
-    var variantButton = document.getElementById('variant-button');
-    var noVariantButton = document.getElementById('no-variant-button');
-
-    if (hasVariants) {
-        variantButton.style.display = 'inline-block'; // Or 'block' depending on your layout
-        noVariantButton.style.display = 'none';
-    } else {
-        variantButton.style.display = 'none';
-        noVariantButton.style.display = 'inline-block'; // Or 'block' depending on your layout
-    }
-});
-
-</script>
  
  <script>
   document.addEventListener("DOMContentLoaded", function() {
