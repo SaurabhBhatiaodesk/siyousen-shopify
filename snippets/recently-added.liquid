@@ -26,29 +26,7 @@
           </div>
         </a>
         
-       {% if product.variants.size > 1 %}
-          {% for option in product.options %}
-            <div class="product-option">
-              <div class="variant-choices">
-                {% assign option_index = forloop.index | minus: 1 %}
-                {% assign option_values = product.variants | map: "option" | uniq %}
-        
-                {% for variant in product.variants %}
-                  {% assign variant_value = variant.options[option_index] %}
-                  <span class="var-opt"><input type="checkbox" 
-                         id="variant-{{ variant.id }}" 
-                         name="variant_id" 
-                         value="{{ variant.id }}" 
-                         class="single-option-selector"
-                         data-option="{{ option }}">
-                  <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-          {% endfor %}
-        {% endif %}
-
+      
       </div>
     {% endfor %}
   </div>
