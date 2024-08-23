@@ -61,7 +61,23 @@
   </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var hasVariants = {{ product.variants.length }} > 0; // Replace this with your logic to check for variants
 
+    var variantButton = document.getElementById('variant-button');
+    var noVariantButton = document.getElementById('no-variant-button');
+
+    if (hasVariants) {
+        variantButton.style.display = 'inline-block'; // Or 'block' depending on your layout
+        noVariantButton.style.display = 'none';
+    } else {
+        variantButton.style.display = 'none';
+        noVariantButton.style.display = 'inline-block'; // Or 'block' depending on your layout
+    }
+});
+
+</script>
  
  <script>
   document.addEventListener("DOMContentLoaded", function() {
