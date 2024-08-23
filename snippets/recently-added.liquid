@@ -1,7 +1,7 @@
 <section id="recently-added">
   <div class="recently-added-products">
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
-    {% for product in products limit: 100 %}
+    {% for product in products limit: 300 %}
       <div class="product" id="product-{{ forloop.index }}">
         <a href="{{ product.url }}">
           <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
