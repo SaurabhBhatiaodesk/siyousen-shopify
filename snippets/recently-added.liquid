@@ -27,17 +27,25 @@
         </a>
         
         {% if product.variants.size > 1 %}
-          {% for option in product.options %}
-            <label for="SingleOptionSelector-{{forloop.index0}}"> {{ option }} </label>
-            <select id="SingleOptionSelector-{{forloop.index0}}" class="single-option-selector single-option-selector-product-template product-form__input" data-index="option{{forloop.index}}" name="id">
-                {% capture option_index %}option{{ forloop.index }}{% endcapture %} 
-                {% assign option_values = product.variants | map: option_index | uniq %}
-                  {% for choice in option_values %}
-                    <option value="{{ choice }}"> {{ choice }} </option>
-                    {% endfor %}
-            </select>
-          {% endfor %}
-          {% endif %}
+        {% for option in product.options %}
+          <div class="product-option">
+            <p>{{ option }}</p>
+            <div class="variant-choices">
+              {% capture option_index %}option{{ forloop.index }}{% endcapture %}
+              {% assign option_values = product.variants | map: option_index | uniq %}
+              {% for choice in option_values %}
+                <input type="radio" 
+                       id="option-{{ forloop.parentloop.index }}-{{ forloop.index }}" 
+                       name="option-{{ forloop.parentloop.index }}" 
+                       value="{{ choice }}" 
+                       class="single-option-selector">
+                <label for="option-{{ forloop.parentloop.index }}-{{ forloop.index }}">{{ choice }}</label>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+
       </div>
     {% endfor %}
   </div>
