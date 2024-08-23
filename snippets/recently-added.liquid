@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       var selectedVariant = document.querySelector('input[name="variant_id"]:checked');
       var variantId, variantPrice, productTitle;
-      
+
       if (selectedVariant) {
         // Variant is selected
         variantId = selectedVariant.value;
@@ -134,8 +134,8 @@ document.addEventListener("DOMContentLoaded", function() {
         productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
       } else {
         // No variant selected, assume single variant product
-        variantId = productId; // Defined in Liquid code
-        variantPrice = productPrice; // Defined in Liquid code
+        variantId = document.querySelector('meta[name="product-id"]').getAttribute('content'); // Assuming you have the product ID in a meta tag
+        variantPrice = document.querySelector('meta[name="product-price"]').getAttribute('content'); // Assuming you have the product price in a meta tag
         productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
       }
 
