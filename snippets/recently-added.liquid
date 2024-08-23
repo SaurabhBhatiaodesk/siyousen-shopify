@@ -57,65 +57,9 @@
   </div>
 </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get all the radio buttons
-    const variantRadios = document.querySelectorAll('.single-option-selector');
-
-    // Add event listener to each radio button
-    variantRadios.forEach(radio => {
-      radio.addEventListener('change', function() {
-        // Get the selected variant ID
-        const selectedVariantId = document.querySelector('input[name="variant_id"]:checked').value;
-
-        // Fetch variant details using Storefront API
-        fetch(`/products/${selectedVariantId}.json`)
-          .then(response => response.json())
-          .then(data => {
-            const variant = data.product.variants.find(v => v.id == selectedVariantId);
-            const variantPrice = variant.price;
-
-            // Store the selected variant ID and price
-            sessionStorage.setItem('selectedVariantId', selectedVariantId);
-            sessionStorage.setItem('variantPrice', variantPrice);
-          })
-          .catch(error => console.error('Error fetching variant details:', error));
-      });
-    });
-
-    const checkoutButton = document.getElementById('checkout-button');
-    
-    checkoutButton.addEventListener('click', function() {
-      const selectedVariantId = sessionStorage.getItem('selectedVariantId');
-      
-      if (selectedVariantId) {
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            items: [
-              {
-                id: selectedVariantId,
-                quantity: 1
-              }
-            ]
-          })
-        })
-        .then(response => response.json())
-        .then(data => {
-          window.location.href = '/checkout';
-        })
-        .catch(error => console.error('Error adding item to cart:', error));
-      }
-    });
-  });
-</script>
 
  
-<script>
+<!-- <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Attach event listener to each add-to-cart button
     document.querySelectorAll('.add-to-cart').forEach(function(button) {
@@ -171,10 +115,64 @@
       });
     });
   });
-  </script>
+  </script> -->
   
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Attach event listener to each add-to-cart button
+  document.querySelectorAll('.add-to-cart').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default form submission
 
- 
+      var selectedVariant = document.querySelector('input[name="variant_id"]:checked');
+      var variantId, variantPrice, productTitle;
+      
+      if (selectedVariant) {
+        // Variant is selected
+        variantId = selectedVariant.value;
+        variantPrice = selectedVariant.getAttribute('data-price');
+        productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
+      } else {
+        // No variant selected, assume single variant product
+        variantId = productId; // Defined in Liquid code
+        variantPrice = productPrice; // Defined in Liquid code
+        productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
+      }
+
+      const blinkingButton = document.getElementById('blinkingButton');
+
+      // Add item to cart
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      })
+      .then(response => response.json())
+      .then(data => {
+        blinkingButton.classList.add('blink');
+        blinkingButton.classList.add('active');
+        window.addEventListener('scroll', () => {
+          if (blinkingButton.classList.contains('active')) {
+            blinkingButton.classList.remove('active');
+          }
+        });
+
+        // Update the total price on the checkout button
+        var checkoutButton = document.querySelector('#custom-checkout-button');
+        checkoutButton.classList.add('add-checkout');
+        checkoutButton.querySelector('#total-price').innerText = '$' + (data.total_price / 100).toFixed(2);
+
+        // Redirect to checkout page
+        window.location.href = '/checkout';
+      })
+      .catch(error => console.error('Error adding to cart:', error));
+    });
+  });
+});
+
+  </script>
 
 
 
