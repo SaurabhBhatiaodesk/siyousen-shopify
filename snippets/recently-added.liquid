@@ -7,14 +7,39 @@
           <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
           <div class="column-src">
             <span class="prod-info">
+              <span class="columns">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
-              {% if product.options.size > 1 %}
+              </span>
+              {% comment %}{% if product.options.size > 1 %}
                 <select name="id" id="product-select-{{ forloop.index }}">
                   {% for variant in product.variants %}
                     <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
                   {% endfor %}
                 </select>
+              {% endif %}
+              {% endcomment %}
+              {% if product.variants.size > 1 %}
+                {% for option in product.options %}
+                  <div class="product-option">
+                    <p>{{ option }}</p>
+                    <div class="variant-choices">
+                      {% assign option_index = forloop.index | minus: 1 %}
+                      {% assign option_values = product.variants | map: "option" | uniq %}
+              
+                      {% for variant in product.variants %}
+                        {% assign variant_value = variant.options[option_index] %}
+                        <input type="radio" 
+                               id="variant-{{ variant.id }}" 
+                               name="variant_id" 
+                               value="{{ variant.id }}" 
+                               class="single-option-selector"
+                               data-option="{{ option }}">
+                        <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endfor %}
               {% endif %}
             </span>
           </div>
