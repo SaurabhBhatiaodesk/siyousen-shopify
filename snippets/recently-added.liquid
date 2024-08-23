@@ -1,7 +1,7 @@
 <section id="recently-added">
   <div class="recently-added-products">
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
-    {% for product in products limit: 300 %}
+    {% for product in products limit: 100 %}
       <div class="product" id="product-{{ forloop.index }}">
         <a href="{{ product.url }}">
           <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
@@ -9,28 +9,28 @@
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
-             {% comment %} {% if product.options.size > 1 %}
+              {% if product.options.size > 1 %}
                 <select name="id" id="product-select-{{ forloop.index }}">
                   {% for variant in product.variants %}
                     <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
                   {% endfor %}
                 </select>
-              {% endif %} {% endcomment %}
+              {% endif %}
             </span>
           </div>
           <div class="button-column">  
             <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
-              <input type="hidden" name="id" value="{{ product.variants.id }}" id="variant-id-{{ forloop.index }}">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
               <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
             </form>
           </div>
         </a>
-        
-      
       </div>
     {% endfor %}
   </div>
 </section>
+
+
  
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -97,42 +97,6 @@
 
   
 <style>
-  /*---variants-----*/
-  .product-option .variant-choices {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .product-option span.var-opt {
-    position: relative;
-  }
-  .product-option .variant-choices label {
-    color: #000;
-    position: absolute;
-    left: 10px;
-    top: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-  }
-  .product-option .variant-choices input {
-      width: 30px;
-      height: 30px;
-      line-height:30px;
-  }
-  .product-option {
-      margin: 1rem 0 0 0;
-  }
-  .product-option .variant-choices .var-opt :hover {
-    width: 30px;
-    height: 30px;
-    line-height:30px;
-    background: green;
-    left: 0;
-    top: 0;
-    color: #fff; 
-  }
-  /*----variants----*/
-  
   .recently-added-products .product .button-column {
     position: relative;
   }
@@ -286,7 +250,7 @@
       min-height: 50px;
       width: 100%;
       color: #fff;
-      font-size: 14px;
+      font-size: 16px;
       line-height: 20px;
       cursor: pointer;
       text-transform: uppercase;
@@ -304,11 +268,8 @@
       justify-content: space-between;
       row-gap: 1.5rem;
     }
-    .recently-added-products .column-src .prod-info, .recently-added-products .column-src .add-cart {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 2rem;
+    .recently-added-products .column-src .prod-info,.recently-added-products .column-src .add-cart {
+      width: 50%;
     }
     .recently-added-products .add-cart button:hover, .product-form__buttons button.product-form__submit:hover {
       background: #0e6f0bbf;
@@ -413,3 +374,4 @@
       }
     
   </style>
+</section>
