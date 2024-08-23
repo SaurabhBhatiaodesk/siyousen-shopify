@@ -57,6 +57,62 @@
   </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all the radio buttons
+    const variantRadios = document.querySelectorAll('.single-option-selector');
+
+    // Add event listener to each radio button
+    variantRadios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        // Get the selected variant ID
+        const selectedVariantId = document.querySelector('input[name="variant_id"]:checked').value;
+
+        // Fetch variant details using Storefront API
+        fetch(`/products/${selectedVariantId}.json`)
+          .then(response => response.json())
+          .then(data => {
+            const variant = data.product.variants.find(v => v.id == selectedVariantId);
+            const variantPrice = variant.price;
+
+            // Store the selected variant ID and price
+            sessionStorage.setItem('selectedVariantId', selectedVariantId);
+            sessionStorage.setItem('variantPrice', variantPrice);
+          })
+          .catch(error => console.error('Error fetching variant details:', error));
+      });
+    });
+
+    const checkoutButton = document.getElementById('checkout-button');
+    
+    checkoutButton.addEventListener('click', function() {
+      const selectedVariantId = sessionStorage.getItem('selectedVariantId');
+      
+      if (selectedVariantId) {
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            items: [
+              {
+                id: selectedVariantId,
+                quantity: 1
+              }
+            ]
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          window.location.href = '/checkout';
+        })
+        .catch(error => console.error('Error adding item to cart:', error));
+      }
+    });
+  });
+</script>
 
  
 <script>
@@ -117,62 +173,8 @@
   });
   </script>
   
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get all the radio buttons
-    const variantRadios = document.querySelectorAll('.single-option-selector');
 
-    // Add event listener to each radio button
-    variantRadios.forEach(radio => {
-      radio.addEventListener('change', function() {
-        // Get the selected variant ID
-        const selectedVariantId = document.querySelector('input[name="variant_id"]:checked').value;
-
-        // Fetch variant details
-        fetch(`/admin/api/2024-07/variants/${selectedVariantId}.json`)
-          .then(response => response.json())
-          .then(data => {
-            const variant = data.variant;
-            const variantPrice = variant.price;
-
-            // Store the selected variant ID and price
-            sessionStorage.setItem('selectedVariantId', selectedVariantId);
-            sessionStorage.setItem('variantPrice', variantPrice);
-          })
-          .catch(error => console.error('Error fetching variant details:', error));
-      });
-    });
-
-    const checkoutButton = document.getElementById('checkout-button');
-    
-    checkoutButton.addEventListener('click', function() {
-      const selectedVariantId = sessionStorage.getItem('selectedVariantId');
-      
-      if (selectedVariantId) {
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            items: [
-              {
-                id: selectedVariantId,
-                quantity: 1
-              }
-            ]
-          })
-        })
-        .then(response => response.json())
-        .then(data => {
-          window.location.href = '/checkout';
-        })
-        .catch(error => console.error('Error adding item to cart:', error));
-      }
-    });
-  });
-</script>
+ 
 
 
 
