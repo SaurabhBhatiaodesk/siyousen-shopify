@@ -9,39 +9,42 @@
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
-             {% comment %} {% if product.options.size > 1 %}
+              {% comment %} 
+              {% if product.options.size > 1 %}
                 <select name="id" id="product-select-{{ forloop.index }}">
                   {% for variant in product.variants %}
                     <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
                   {% endfor %}
                 </select>
-              {% endif %} {% endcomment %}
+              {% endif %}
+              {% endcomment %}
             </span>
           </div>
           <div class="button-column">  
             <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
-              <input type="hidden" name="id" value="{{ product.variants.id }}" id="variant-id-{{ forloop.index }}">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
               <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
             </form>
           </div>
         </a>
-        
-       {% if product.variants.size > 1 %}
+
+        {% if product.variants.size > 1 %}
           {% for option in product.options %}
             <div class="product-option">
               <p>{{ option }}</p>
               <div class="variant-choices">
                 {% assign option_index = forloop.index | minus: 1 %}
                 {% assign option_values = product.variants | map: "option" | uniq %}
-        
+
                 {% for variant in product.variants %}
                   {% assign variant_value = variant.options[option_index] %}
                   <input type="radio" 
                          id="variant-{{ variant.id }}" 
-                         name="variant_id" 
+                         name="variant_id_{{ forloop.index }}" 
                          value="{{ variant.id }}" 
                          class="single-option-selector"
-                         data-option="{{ option }}">
+                         data-option="{{ option }}"
+                         data-product-index="{{ forloop.parentloop.index }}">
                   <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
                 {% endfor %}
               </div>
@@ -53,17 +56,28 @@
     {% endfor %}
   </div>
 </section>
- 
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    // Attach event listener to each radio button to update the hidden variant ID
+    document.querySelectorAll('.single-option-selector').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        var productIndex = radio.getAttribute('data-product-index');
+        var variantId = radio.value;
+        document.querySelector('#variant-id-' + productIndex).value = variantId;
+      });
+    });
+
     // Attach event listener to each add-to-cart button
     document.querySelectorAll('.add-to-cart').forEach(function(button) {
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
-        // Get variant ID from the hidden input or selected option
+        
+        // Get the product index and variant ID
         var productIndex = button.getAttribute('data-product-id');
         var variantId = document.querySelector('#variant-id-' + productIndex).value;
-         const blinkingButton = document.getElementById('blinkingButton');
+        const blinkingButton = document.getElementById('blinkingButton');
+        
         // Add item to cart
         fetch('/cart/add.js', {
           method: 'POST',
@@ -74,13 +88,14 @@
         })
         .then(response => response.json())
         .then(data => {
-        blinkingButton.classList.add('blink');
-            blinkingButton.classList.add('active');
+          blinkingButton.classList.add('blink');
+          blinkingButton.classList.add('active');
           window.addEventListener('scroll', () => {
-          if (blinkingButton.classList.contains('active')) {
-          blinkingButton.classList.remove('active');
-          }
+            if (blinkingButton.classList.contains('active')) {
+              blinkingButton.classList.remove('active');
+            }
           });
+
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
@@ -89,19 +104,15 @@
           fetch('/cart.js')
             .then(response => response.json())
             .then(cartData => {
-              alert("aa");
-              // Update total price
-              {% comment %} checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency; {% endcomment %}
               checkoutButton.querySelector('#total-price-' + productIndex).innerText = 
               '$' + (cartData.total_price / 100).toFixed(2);
-               
             })
             .catch(error => console.error('Error updating cart:', error));
         })
         .catch(error => console.error('Error adding to cart:', error));
       });
     });
-  
+
     // Attach event listener to each custom checkout button
     document.querySelectorAll('.add-checkout').forEach(function(checkoutButton) {
       checkoutButton.addEventListener('click', function(event) {
@@ -110,8 +121,8 @@
       });
     });
   });
-  </script>
-  
+</script>
+
   
     
 
