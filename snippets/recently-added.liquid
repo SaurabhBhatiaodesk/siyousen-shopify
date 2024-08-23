@@ -22,7 +22,11 @@
           <div class="button-column">  
             <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
               <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
-              <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
+              <!-- <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button> -->
+
+              <button id="variant-button" type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
+              <button id="no-variant-button" type="submit" class="add-to-cart1" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}" style="display:none;">Add to Cart</button>
+
             </form>
           </div>
         </a>
@@ -59,10 +63,10 @@
 
 
  
-<!-- <script>
+ <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Attach event listener to each add-to-cart button
-    document.querySelectorAll('.add-to-cart').forEach(function(button) {
+    document.querySelectorAll('.add-to-cart1').forEach(function(button) {
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
         // Get variant ID from the hidden input or selected option
@@ -115,7 +119,7 @@
       });
     });
   });
-  </script> -->
+  </script>
   
   <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -126,9 +130,9 @@ document.addEventListener("DOMContentLoaded", function() {
       
       // Get selected variant ID
       var selectedVariant = document.querySelector('input[name="variant_id"]:checked');
-      if (!selectedVariant) {
-        alert("Please select a variant.");
-        return;
+      // if (!selectedVariant) {
+      //   alert("Please select a variant.");
+      //   return;
       }
 
       var variantId = selectedVariant.value;
