@@ -27,8 +27,7 @@
           </div>
         </a>
       </div>
-    {% endfor %}
-
+   
     {% if product.variants.size > 1 %}
                 {% for option in product.options %}
                   <div class="product-option">
@@ -51,6 +50,7 @@
                   </div>
                 {% endfor %}
               {% endif %}
+     {% endfor %}
   </div>
 </section>
 
