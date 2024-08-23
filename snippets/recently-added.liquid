@@ -24,11 +24,12 @@
               <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
               <!-- <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button> -->
 
-              {% if variants != blank  %}
-                  <button  type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
+             {% if product.variants.size > 0 %}
+                <button type="submit" class="add-to-cart" data-product-id="{{ product.id }}" data-product-price="{{ product.price }}">Add to Cart</button>
               {% else %}
-                  <button type="submit" class="add-to-cart1" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
+                <button type="submit" class="add-to-cart1" data-product-id="{{ product.id }}" data-product-price="{{ product.price }}">Add to Cart</button>
               {% endif %}
+
               
             </form>
           </div>
