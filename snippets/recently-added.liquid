@@ -9,13 +9,27 @@
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
-              {% if product.options.size > 1 %}
+             {% comment %} {% if product.options.size > 1 %}
                 <select name="id" id="product-select-{{ forloop.index }}">
                   {% for variant in product.variants %}
                     <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
                   {% endfor %}
                 </select>
-              {% endif %}
+              {% endif %} {% endcomment %}
+
+
+                    {% if product.variants.size > 1 %}
+            {% for option in product.options %}
+            	<label for="SingleOptionSelector-{{forloop.index0}}"> {{ option }} </label>
+            	<select id="SingleOptionSelector-{{forloop.index0}}" class="single-option-selector single-option-selector-product-template product-form__input" data-index="option{{forloop.index}}" name="id">
+    				{% capture option_index %}option{{ forloop.index }}{% endcapture %} 
+    				{% assign option_values = product.variants | map: option_index | uniq %}
+                    {% for choice in option_values %}
+                 		<option value="{{ choice }}"> {{ choice }} </option>
+                  	{% endfor %}
+            	</select>
+            {% endfor %}
+            {% endif %}
             </span>
           </div>
           <div class="button-column">  
