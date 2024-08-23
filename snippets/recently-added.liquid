@@ -38,7 +38,7 @@
                         {% assign variant_value = variant.options[option_index] %}
                         <span class="var-opt">
                         <input type="radio" 
-                               id="variant-{{ product.selected_or_first_available_variant }}" 
+                               id="{{ product.selected_or_first_available_variant }}" 
                                name="variant_id" 
                                value="{{ product.selected_or_first_available_variant }}" 
                                class="single-option-selector"
