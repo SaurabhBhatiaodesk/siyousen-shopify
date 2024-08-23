@@ -53,26 +53,6 @@
     {% endfor %}
   </div>
 </section>
-
-<script> 
-
-// Select all the radio inputs within the .variant-choices container
-const variantChoices = document.querySelectorAll('.variant-choices input[type="radio"]');
-
-  // Add an event listener for the click event on each radio input
-  variantChoices.forEach(function(input) {
-    input.addEventListener('click', function() {
-      // Loop through each radio input and get its variant ID
-      variantChoices.forEach(function(input) {
-      // Alternatively, you can log only the selected variant ID
-      if (input.checked) {
-        const selectedId = input.value;
-        console.log('Selected Variant ID:', selectedId);
-      }
-    });
-  });
-});
-</script> 
  
 <script>
   document.addEventListener("DOMContentLoaded", function() {
