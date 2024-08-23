@@ -123,22 +123,16 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll('.add-to-cart').forEach(function(button) {
     button.addEventListener('click', function(event) {
       event.preventDefault(); // Prevent default form submission
-
+      
+      // Get selected variant ID
       var selectedVariant = document.querySelector('input[name="variant_id"]:checked');
-      var variantId, variantPrice, productTitle;
-
-      if (selectedVariant) {
-        // Variant is selected
-        variantId = selectedVariant.value;
-        variantPrice = selectedVariant.getAttribute('data-price');
-        productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
-      } else {
-        // No variant selected, assume single variant product
-        variantId = document.querySelector('meta[name="product-id"]').getAttribute('content'); // Assuming you have the product ID in a meta tag
-        variantPrice = document.querySelector('meta[name="product-price"]').getAttribute('content'); // Assuming you have the product price in a meta tag
-        productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
+      if (!selectedVariant) {
+        alert("Please select a variant.");
+        return;
       }
 
+      var variantId = selectedVariant.value;
+      var variantPrice = selectedVariant.getAttribute('data-price');
       const blinkingButton = document.getElementById('blinkingButton');
 
       // Add item to cart
