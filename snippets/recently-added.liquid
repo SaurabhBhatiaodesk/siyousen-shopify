@@ -34,7 +34,7 @@
               {% assign option_values = product.variants | map: option_index | uniq %}
               {% for choice in option_values %}
                 <span class="var-opt"><input type="checkbox" 
-                       id="option-{{ forloop.parentloop.index }}-{{ forloop.index }}" 
+                       id="{{ variant.id }}" 
                        name="option-{{ forloop.parentloop.index }}" 
                        value="{{ choice }}" 
                        class="single-option-selector">
