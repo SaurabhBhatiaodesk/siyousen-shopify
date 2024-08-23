@@ -26,8 +26,7 @@
             </form>
           </div>
         </a>
-      </div>
-   
+    
     {% if product.variants.size > 1 %}
                 {% for option in product.options %}
                   <div class="product-option">
@@ -50,6 +49,9 @@
                   </div>
                 {% endfor %}
               {% endif %}
+
+        
+          </div>
      {% endfor %}
   </div>
 </section>
