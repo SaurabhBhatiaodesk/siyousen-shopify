@@ -69,6 +69,19 @@ const variantChoices = document.querySelectorAll('.variant-choices input[type="r
         const selectedId = input.value;
         console.log('Selected Variant ID:', selectedId);
       }
+          data = {
+          "id": selectedId,
+          "quantity": 1
+        }
+        jQuery.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          data: data,
+          dataType: 'json',
+          success: function() { 
+            window.location.href = '/cart'; 
+          }
+        });
     });
   });
 });
