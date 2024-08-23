@@ -9,42 +9,39 @@
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
-              {% comment %} 
-              {% if product.options.size > 1 %}
+             {% comment %} {% if product.options.size > 1 %}
                 <select name="id" id="product-select-{{ forloop.index }}">
                   {% for variant in product.variants %}
                     <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
                   {% endfor %}
                 </select>
-              {% endif %}
-              {% endcomment %}
+              {% endif %} {% endcomment %}
             </span>
           </div>
           <div class="button-column">  
             <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
+              <input type="hidden" name="id" value="{{ product.variants.id }}" id="variant-id-{{ forloop.index }}">
               <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
             </form>
           </div>
         </a>
-
-        {% if product.variants.size > 1 %}
+        
+       {% if product.variants.size > 1 %}
           {% for option in product.options %}
             <div class="product-option">
               <p>{{ option }}</p>
               <div class="variant-choices">
                 {% assign option_index = forloop.index | minus: 1 %}
                 {% assign option_values = product.variants | map: "option" | uniq %}
-
+        
                 {% for variant in product.variants %}
                   {% assign variant_value = variant.options[option_index] %}
                   <input type="radio" 
                          id="variant-{{ variant.id }}" 
-                         name="variant_id_{{ forloop.index }}" 
+                         name="variant_id" 
                          value="{{ variant.id }}" 
                          class="single-option-selector"
-                         data-option="{{ option }}"
-                         data-product-index="{{ forloop.parentloop.index }}">
+                         data-option="{{ option }}">
                   <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
                 {% endfor %}
               </div>
@@ -56,28 +53,17 @@
     {% endfor %}
   </div>
 </section>
-
+ 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // Attach event listener to each radio button to update the hidden variant ID
-    document.querySelectorAll('.single-option-selector').forEach(function(radio) {
-      radio.addEventListener('change', function() {
-        var productIndex = radio.getAttribute('data-product-index');
-        var variantId = radio.value;
-        document.querySelector('#variant-id-' + productIndex).value = variantId;
-      });
-    });
-
     // Attach event listener to each add-to-cart button
     document.querySelectorAll('.add-to-cart').forEach(function(button) {
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
-        
-        // Get the product index and variant ID
+        // Get variant ID from the hidden input or selected option
         var productIndex = button.getAttribute('data-product-id');
         var variantId = document.querySelector('#variant-id-' + productIndex).value;
-        const blinkingButton = document.getElementById('blinkingButton');
-        
+         const blinkingButton = document.getElementById('blinkingButton');
         // Add item to cart
         fetch('/cart/add.js', {
           method: 'POST',
@@ -88,14 +74,13 @@
         })
         .then(response => response.json())
         .then(data => {
-          blinkingButton.classList.add('blink');
-          blinkingButton.classList.add('active');
+        blinkingButton.classList.add('blink');
+            blinkingButton.classList.add('active');
           window.addEventListener('scroll', () => {
-            if (blinkingButton.classList.contains('active')) {
-              blinkingButton.classList.remove('active');
-            }
+          if (blinkingButton.classList.contains('active')) {
+          blinkingButton.classList.remove('active');
+          }
           });
-
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
@@ -104,15 +89,19 @@
           fetch('/cart.js')
             .then(response => response.json())
             .then(cartData => {
+              alert("aa");
+              // Update total price
+              {% comment %} checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency; {% endcomment %}
               checkoutButton.querySelector('#total-price-' + productIndex).innerText = 
               '$' + (cartData.total_price / 100).toFixed(2);
+               
             })
             .catch(error => console.error('Error updating cart:', error));
         })
         .catch(error => console.error('Error adding to cart:', error));
       });
     });
-
+  
     // Attach event listener to each custom checkout button
     document.querySelectorAll('.add-checkout').forEach(function(checkoutButton) {
       checkoutButton.addEventListener('click', function(event) {
@@ -121,4 +110,328 @@
       });
     });
   });
-</script>
+  </script>
+  
+  
+    
+
+
+
+  
+<style>
+  /*---variants-----*/
+  .product-option .variant-choices {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .product-option span.var-opt {
+    position: relative;
+  }
+  .product-option .variant-choices label {
+    color: #000;
+    position: absolute;
+    left: 10px;
+    top: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .product-option .variant-choices input {
+      width: 30px;
+      height: 30px;
+      line-height:30px;
+  }
+  .product-option {
+      margin: 1rem 0 0 0;
+  }
+  .product-option .variant-choices .var-opt :hover {
+    width: 30px;
+    height: 30px;
+    line-height:30px;
+    background: green;
+    left: 0;
+    top: 0;
+    color: #fff; 
+  }
+  /*----variants----*/
+  
+  .recently-added-products .product .button-column {
+    position: relative;
+  }
+  .recently-added-products .product-form__buttons {
+    bottom: -15px;
+    top:unset;
+  }
+  .recently-added-products .product .button-column {
+    position: absolute;
+    right: 6px;
+    bottom: -5px;
+  }
+  .recently-added-products .product .checkout-btns span + span {
+    color: #fbae00;
+    font-size: 32px !important;
+    line-height: 42px !important;
+  }
+  .product {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:0 10px;
+  }
+  .recently-added-products .product .button-column .add-cart {
+    width: 100%;
+  }
+    .column-src {
+      width: 50%;
+      float: left;
+    }
+    .recently-added-products .product .column-src {
+      position: relative;
+    }
+    .column-src + form.add-cart #custom-checkout-button {
+      position: absolute;
+      content: "";
+      top: 0;
+      z-index:222;
+    }
+    .recently-added-products .product .checkout-btns .checkout-icon {
+      max-width: 40px !important;
+      min-height: 40px !important;
+    }
+    .product .button-column {
+      width: 50%;
+    }
+    .product .checkout-btns {
+      background: #fd7d00;
+      border: 5px solid #fca700;
+      min-height: 90px;
+      border-radius: 5px;
+      visibility: hidden;
+      flex-wrap: wrap;
+      align-items: center;
+      cursor: pointer;
+      right: 0%;
+      position: absolute;
+      top: 0;
+      transition:all 0.4s linear;
+      -webkit-transition:all 0.4s linear;
+      -moz-transition:all 0.4s linear;
+      -ms-transition:all 0.4s linear;
+    }
+    .product .checkout-btns .checkout-icon {
+      width: 40px;
+      margin: 0;
+      padding: 0;
+    }
+    .product .checkout-btns #total-price {
+      color: #fbae00;
+      font-size: 42px !important;
+      line-height: 52px;
+      font-weight: 600;
+    }
+    .product .checkout-btns span {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      padding: 0 10px;
+      display: flex;
+      flex-wrap: wrap;
+      color:#000;
+      justify-content:center;
+      align-content: center;
+    }
+    .product .add-checkout{
+      visibility: visible !important;
+      right:0 !important;
+      z-index:11;
+    }
+    #cart-notification {
+      display: none; 
+    }
+
+    @media screen and (max-width:767px) {
+      .product .checkout-btns #total-price {
+        font-size: 26px !important;
+        line-height: 36px;
+      }
+    }
+  </style>
+
+  <style>
+    #recently-added {
+      padding: 20px 0; 
+    }
+    .recently-added{
+      background: #121212;
+    }
+    #recently-added .recently-added-products {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    #recently-added .product h3 {
+        font-size: 1.5rem;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    #recently-added .product p {
+        font-size: 1em;
+        color: #fff;
+        margin: 0;
+        padding: 5px 0;
+    }
+    #recently-added .product img {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      min-height: 440px;
+      object-fit: cover;
+      min-width: 255px;
+      max-height: 440px;
+    }
+    #recently-added .recently-added-products .product {
+      margin-bottom: 2rem;
+      width: 50%;
+      position:relative;
+    }
+    #recently-added .recently-added-products .product a {
+      text-decoration: none;
+      width: 100%;
+    }
+    .recently-added-products {
+      padding-bottom: 10rem;
+    }
+    .recently-added-products .add-cart button {
+      background: green;
+      border-radius: 5px;
+      border: 2px solid #4b914b;
+      min-height: 50px;
+      width: 100%;
+      color: #fff;
+      font-size: 14px;
+      line-height: 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      max-width: 70%;
+      float: right;
+    }
+    .recently-added-products .product .column-src .prod-info p {
+      color: green !important;
+      font-weight: 600;
+    }
+    .recently-added-products .product a {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: space-between;
+      row-gap: 1.5rem;
+    }
+    .recently-added-products .column-src .prod-info, .recently-added-products .column-src .add-cart {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+    .recently-added-products .add-cart button:hover, .product-form__buttons button.product-form__submit:hover {
+      background: #0e6f0bbf;
+      border-color: #4b914b;
+    }
+    
+    @media screen and (max-width:1600px) {
+      #recently-added .product img {
+        min-width: inherit;
+      }
+    }
+    
+    @media screen and (max-width:1100px) {
+      #recently-added .product img {
+        min-height: 180px;
+      }
+      #recently-added .recently-added-products .product {
+        width: 48%;
+      }
+    }
+
+    @media screen and (max-width:991px) {
+      #recently-added .recently-added-products .product {
+        max-width: 50%;
+        padding: 0 10px;
+      }
+      .recently-added .page-width {
+          padding: 0 3rem;
+      }
+      #recently-added .product img {
+        min-height: 300px;
+        max-height: 300px;
+      }
+    }
+
+     @media screen and (max-width:767px) {
+       .recently-added .page-width {
+        padding: 0 1rem;
+      }
+      .recently-added-products .add-cart button {
+        min-height: 50px;
+        max-width: 90%;
+        font-size: 13px;
+      }
+      #recently-added .recently-added-products .product {
+        max-width: 100%;
+        width: 100%;
+        padding: 0 7px;
+      } 
+    }
+
+    @media screen and (max-width:600px) {
+       #recently-added .product img {
+          min-height: 220px;
+          max-height:220px;
+        }
+        .recently-added-products .product .button-column {
+          max-width: 130px;
+        }
+        .recently-added-products .product .column-src .prod-info p {
+          width:auto;
+        }
+        .recently-added-products .product .column-src .prod-info h3 {
+          float: left;
+          width: 140px;
+        }
+        #recently-added .product p {
+            top: -8px;
+            position: relative;
+          left:0;
+        }
+    }
+    
+      @media screen and (max-width:480px) {
+        #recently-added .recently-added-products .product {
+          max-width: 100%;
+          width: 100%;
+        }
+         #recently-added .product img {
+            min-height: inherit;
+            width:100%;
+          }
+          .recently-added-products .product .column-src .prod-info h3 {
+            width: 65%;
+          }
+          .recently-added-products .product .column-src {
+            width: 62%;
+          }
+          .recently-added-products .product .column-src .prod-info p {
+            left: 80px;
+          }
+      }
+
+     @media screen and (max-width:370px) {
+         #recently-added .recently-added-products .product {
+          max-width: 100%;
+        }
+        #recently-added .product img {
+          min-height: inherit;
+          max-height:inherit;
+        }
+      }
+    
+  </style>
