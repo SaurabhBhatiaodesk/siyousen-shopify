@@ -29,7 +29,6 @@
        {% if product.variants.size > 1 %}
           {% for option in product.options %}
             <div class="product-option">
-              <p>{{ option }}</p>
               <div class="variant-choices">
                 {% assign option_index = forloop.index | minus: 1 %}
                 {% assign option_values = product.variants | map: "option" | uniq %}
