@@ -36,6 +36,7 @@
               
                       {% for variant in product.variants %}
                         {% assign variant_value = variant.options[option_index] %}
+                        <span class="var-opt">
                         <input type="radio" 
                                id="variant-{{ variant.id }}" 
                                name="variant_id" 
@@ -43,7 +44,8 @@
                                class="single-option-selector"
                                data-option="{{ option }}">
                         <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
-                      {% endfor %}
+                        </span>
+                        {% endfor %}
                     </div>
                   </div>
                 {% endfor %}
