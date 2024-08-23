@@ -123,16 +123,22 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll('.add-to-cart').forEach(function(button) {
     button.addEventListener('click', function(event) {
       event.preventDefault(); // Prevent default form submission
-      
-      // Get selected variant ID
+
       var selectedVariant = document.querySelector('input[name="variant_id"]:checked');
-      if (!selectedVariant) {
-        alert("Please select a variant.");
-        return;
+      var variantId, variantPrice, productTitle;
+      
+      if (selectedVariant) {
+        // Variant is selected
+        variantId = selectedVariant.value;
+        variantPrice = selectedVariant.getAttribute('data-price');
+        productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
+      } else {
+        // No variant selected, assume single variant product
+        variantId = productId; // Defined in Liquid code
+        variantPrice = productPrice; // Defined in Liquid code
+        productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
       }
 
-      var variantId = selectedVariant.value;
-      var variantPrice = selectedVariant.getAttribute('data-price');
       const blinkingButton = document.getElementById('blinkingButton');
 
       // Add item to cart
