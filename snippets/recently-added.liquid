@@ -27,34 +27,34 @@
         </a>
         
        {% if product.variants.size > 1 %}
-  {% for option in product.options %}
-    <div class="product-option">
-      <p>{{ option }}</p>
-      <div class="variant-choices">
-        {% assign option_index = forloop.index | minus: 1 %}
-        {% assign option_values = product.variants | map: "option" | uniq %}
-
-        {% for variant in product.variants %}
-          {% assign variant_value = variant.options[option_index] %}
-          <input type="radio" 
-                 id="variant-{{ variant.id }}" 
-                 name="variant_id" 
-                 value="{{ variant.id }}" 
-                 class="single-option-selector"
-                 data-option="{{ option }}">
-          <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
-        {% endfor %}
-      </div>
-    </div>
-  {% endfor %}
-{% endif %}
+          {% for option in product.options %}
+            <div class="product-option">
+              <p>{{ option }}</p>
+              <div class="variant-choices">
+                {% assign option_index = forloop.index | minus: 1 %}
+                {% assign option_values = product.variants | map: "option" | uniq %}
+        
+                {% for variant in product.variants %}
+                  {% assign variant_value = variant.options[option_index] %}
+                  <input type="radio" 
+                         id="variant-{{ variant.id }}" 
+                         name="variant_id" 
+                         value="{{ variant.id }}" 
+                         class="single-option-selector"
+                         data-option="{{ option }}">
+                  <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
 
       </div>
     {% endfor %}
   </div>
 </section>
 
-<!-- <script> 
+<script> 
 
 // Select all the radio inputs within the .variant-choices container
 const variantChoices = document.querySelectorAll('.variant-choices input[type="radio"]');
@@ -130,84 +130,9 @@ const variantChoices = document.querySelectorAll('.variant-choices input[type="r
       });
     });
   });
-  </script> -->
+  </script>
   
-  <script>
-// Function to handle variant selection
-function handleVariantSelection() {
-  const variantChoices = document.querySelectorAll('.variant-choices input[type="radio"]');
-  variantChoices.forEach(function(input) {
-    input.addEventListener('click', function() {
-      variantChoices.forEach(function(input) {
-        if (input.checked) {
-          const selectedId = input.value;
-          console.log('Selected Variant ID:', selectedId);
-        }
-      });
-    });
-  });
-}
-
-// Function to handle the add-to-cart and custom checkout actions
-function handleCartActions() {
-  document.querySelectorAll('.add-to-cart').forEach(function(button) {
-    button.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent default form submission
-
-      var productIndex = button.getAttribute('data-product-id');
-      var variantId = document.querySelector('#variant-id-' + productIndex).value;
-      const blinkingButton = document.getElementById('blinkingButton');
-
-      // Add item to cart
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: variantId, quantity: 1 })
-      })
-      .then(response => response.json())
-      .then(data => {
-        blinkingButton.classList.add('blink', 'active');
-        window.addEventListener('scroll', () => {
-          if (blinkingButton.classList.contains('active')) {
-            blinkingButton.classList.remove('active');
-          }
-        });
-
-        // Update the total price on the checkout button
-        var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
-        checkoutButton.classList.add('add-checkout');
-
-        // Fetch the updated cart total price
-        fetch('/cart.js')
-          .then(response => response.json())
-          .then(cartData => {
-            checkoutButton.querySelector('#total-price-' + productIndex).innerText = 
-              '$' + (cartData.total_price / 100).toFixed(2);
-          })
-          .catch(error => console.error('Error updating cart:', error));
-      })
-      .catch(error => console.error('Error adding to cart:', error));
-    });
-  });
-
-  // Attach event listener to each custom checkout button
-  document.querySelectorAll('.add-checkout').forEach(function(checkoutButton) {
-    checkoutButton.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevents the default behavior
-      window.location.href = '/checkout'; // Replace with your desired page URL
-    });
-  });
-}
-
-// Initialize all event listeners after DOM content is loaded
-document.addEventListener("DOMContentLoaded", function() {
-  handleVariantSelection();
-  handleCartActions();
-});
-</script>
-
+  
     
 
 
