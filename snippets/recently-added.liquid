@@ -33,12 +33,13 @@
               {% capture option_index %}option{{ forloop.index }}{% endcapture %}
               {% assign option_values = product.variants | map: option_index | uniq %}
               {% for choice in option_values %}
-                <input type="checkbox" 
+                <span class="var-opt"><input type="checkbox" 
                        id="option-{{ forloop.parentloop.index }}-{{ forloop.index }}" 
                        name="option-{{ forloop.parentloop.index }}" 
                        value="{{ choice }}" 
                        class="single-option-selector">
                 <label for="option-{{ forloop.parentloop.index }}-{{ forloop.index }}">{{ choice }}</label>
+                </span>
               {% endfor %}
             </div>
           </div>
