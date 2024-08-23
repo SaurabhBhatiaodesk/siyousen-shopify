@@ -59,7 +59,7 @@
 
 
  
-<!-- <script>
+<script>
   document.addEventListener("DOMContentLoaded", function() {
     // Attach event listener to each add-to-cart button
     document.querySelectorAll('.add-to-cart').forEach(function(button) {
@@ -115,64 +115,8 @@
       });
     });
   });
-  </script> -->
-  
-  <script>
-document.addEventListener("DOMContentLoaded", function() {
-  // Attach event listener to each add-to-cart button
-  document.querySelectorAll('.add-to-cart').forEach(function(button) {
-    button.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent default form submission
-
-      var selectedVariant = document.querySelector('input[name="variant_id"]:checked');
-      var variantId, variantPrice, productTitle;
-      
-      if (selectedVariant) {
-        // Variant is selected
-        variantId = selectedVariant.value;
-        variantPrice = selectedVariant.getAttribute('data-price');
-        productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
-      } else {
-        // No variant selected, assume single variant product
-        variantId = productId; // Defined in Liquid code
-        variantPrice = productPrice; // Defined in Liquid code
-        productTitle = document.querySelector('meta[property="og:title"]').getAttribute('content');
-      }
-
-      const blinkingButton = document.getElementById('blinkingButton');
-
-      // Add item to cart
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: variantId, quantity: 1 })
-      })
-      .then(response => response.json())
-      .then(data => {
-        blinkingButton.classList.add('blink');
-        blinkingButton.classList.add('active');
-        window.addEventListener('scroll', () => {
-          if (blinkingButton.classList.contains('active')) {
-            blinkingButton.classList.remove('active');
-          }
-        });
-
-        // Update the total price on the checkout button
-        var checkoutButton = document.querySelector('#custom-checkout-button');
-        checkoutButton.classList.add('add-checkout');
-        checkoutButton.querySelector('#total-price').innerText = '$' + (data.total_price / 100).toFixed(2);
-
-        // Redirect to checkout page
-        window.location.href = '/checkout';
-      })
-      .catch(error => console.error('Error adding to cart:', error));
-    });
-  });
-});
-
   </script>
+  
 
 
 
