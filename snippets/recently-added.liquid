@@ -77,8 +77,8 @@
 
 <!-- Popup Structure -->
 <div id="collection-popup" class="listing-popup hidden">
+  <span class="close-popup">&times;</span>
   <div class="popup-content">
-    <span class="close-popup">&times;</span>
     <div class="popup-products">
       {% assign pdp_tagged_products = collection.products | where: "tags", "pdp-tag" %}
         <div class="pdp-title">{{ product.title }}</div>
