@@ -93,6 +93,9 @@ $(document).ready(function(){
   $(".view-collection").click(function(){
       $(".listing-popup").toggleClass("popup-visible");
   });
+   $(".close-popup").click(function() {
+    $(".listing-popup").removeClass("popup-visible");
+  });
 });
 </script>
 
