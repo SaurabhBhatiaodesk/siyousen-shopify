@@ -9,27 +9,10 @@
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
-              {% comment %}{% if product.options.size > 1 %}
-                <select name="id" id="product-select-{{ forloop.index }}">
-                  {% for variant in product.variants %}
-                    <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
-                  {% endfor %}
-                </select>
-              {% endif %}
-              {% endcomment %}
             </span>
           </div>
-          <!-- <div class="button-column">  
-            <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
-              <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
-            </form>
-          </div> -->
-
-         
-
+    
           {% if product.metafields.custom.custom_collection != blank %}
-              
            {% assign collection_handle = product.metafields.custom.custom_collection %}
             {% if collection_handle %}
               {% assign collection = collections[collection_handle] %}
