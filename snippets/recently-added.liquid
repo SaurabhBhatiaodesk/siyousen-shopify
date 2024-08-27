@@ -287,11 +287,6 @@ document.addEventListener("DOMContentLoaded", function() {
     padding: 20px;
     width: 800px;
 }
-
-.popup-content {
-  position: relative;
-}
-
 .close-popup {
   position: absolute;
   top: 10px;
@@ -301,10 +296,14 @@ document.addEventListener("DOMContentLoaded", function() {
 #collection-popup.popup-visible {
     display: block !important;
 }
-  .product-img img {
+#collection-popup .product-img img {
     max-width: 100%;
 }
-
+#collection-popup .popup-content {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
   
   /*---variants-----*/
   .product-option .variant-choices {
