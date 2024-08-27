@@ -37,6 +37,23 @@
           {% else %}
             <p>No collection handle provided in metafields.</p>
           {% endif %}
+
+          {% if product.metafields.custom.custom_collection contains "pdp-tag" %}
+            <div class="button-column">  
+              <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
+                <button type="submit" class="add-to-cart view-collection" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}" data-product-tags="{{ product.tags }}">
+                  <a href="">View Collection</a></button>
+              </form>
+            </div>
+          {% else %}
+            <div class="button-column">  
+              <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
+                <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
+              </form>
+            </div>
+          {% endif %}
         </a>
     
     {% if product.variants.size > 1 %}
@@ -69,6 +86,45 @@
   </div>
 </section>
 
+
+<!-- Popup Structure -->
+<div id="collection-popup" class="listing-popup hidden">
+  <span class="close-popup">&times;</span>
+  <div class="popup-content"> 
+    {%- paginate collections.all.products by 1000 -%}
+      {% for product in collections.all.products %}  
+         
+        {% if product.tags contains "pdp-tag" %} 
+          <div class="popup-products">
+                <div class="product-img"><img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}"></div>
+                <div class="pdp-title">{{ product.title }}</div>
+                <div class="pdp-price">{{ product.price | money_without_trailing_zeros }}</div>
+                <div class="button-column">  
+                  <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
+                    <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
+                    <button type="submit" class="add-to-cart" 
+                            data-product-id="{{ forloop.index }}" 
+                            data-product-price="{{ product.price }}"
+                            data-product-tags="{{ product.tags }}">Add to Cart</button>
+                  </form>
+                </div>
+               </div>
+              {% endif %}
+            {% endfor %}  
+        {% endpaginate %}
+  </div>
+</div> 
+
+<script>
+$(document).ready(function(){
+  $(".view-collection").click(function(){
+      $(".listing-popup").toggleClass("popup-visible");
+  });
+   $(".close-popup").click(function() {
+    $(".listing-popup").removeClass("popup-visible");
+  });
+});
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -216,6 +272,80 @@ document.addEventListener("DOMContentLoaded", function() {
 
   
 <style>
+.hidden {
+  display: none;
+}
+#collection-popup span.close-popup {
+    top: -6px;
+    font-size: 20px;
+    right: -6px;
+    background: #000;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: bold;
+}
+.listing-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    padding: 10px;
+    width: 800px;
+}
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+#collection-popup.popup-visible {
+    display: block !important;
+}
+#collection-popup .product-img img {
+    max-width: 100%;
+}
+#collection-popup .popup-content {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    overflow-x:hidden;
+    max-height: 500px;
+}
+#collection-popup .popup-content .popup-products {
+    max-width: 25%;
+    padding: 10px;
+}
+#collection-popup .popup-content .popup-products .pdp-title {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 600;
+    color: #000;
+}
+#collection-popup .popup-content .popup-products .pdp-price {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: green;
+    padding: 10px 0;
+}
+#collection-popup .popup-content .popup-products button.add-to-cart {
+    width: 100%;
+    background: green;
+    color: #fff;
+    border: none;
+    height: 40px;
+    text-transform: uppercase;
+}
+
+  
   /*---variants-----*/
   .product-option .variant-choices {
     display: flex;
@@ -457,6 +587,12 @@ document.addEventListener("DOMContentLoaded", function() {
         min-height: 300px;
         max-height: 300px;
       }
+      .listing-popup {
+        width: 80%;
+      }
+      #collection-popup .popup-content .popup-products {
+        max-width: 33%;
+      }
     }
 
      @media screen and (max-width:767px) {
@@ -499,7 +635,7 @@ document.addEventListener("DOMContentLoaded", function() {
         #recently-added .product p {
             top: -8px;
             position: relative;
-            left:0;
+          left:0;
         }
     }
     
@@ -520,6 +656,9 @@ document.addEventListener("DOMContentLoaded", function() {
           }
           .recently-added-products .product .column-src .prod-info p {
             left: 80px;
+          }
+          .listing-popup {
+            width: 90%;
           }
       }
 
