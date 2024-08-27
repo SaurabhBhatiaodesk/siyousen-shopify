@@ -26,7 +26,7 @@
             </form>
           </div> -->
 
-{{ product.metafields.custom.custom_collection | json }}
+{{ product.metafields.custom.custom_collection }}
           {% if product.metafields.custom.custom_collection contains "pdp-tag" %}
             <div class="button-column">  
               <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
