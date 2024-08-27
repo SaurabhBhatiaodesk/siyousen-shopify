@@ -29,13 +29,11 @@
 
           {% if product.tags contains "pdp-tag" %}
             <div class="button-column">  
-  <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
-    <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
-    <button type="submit" class="add-to-cart view-collection" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}" data-product-tags="{{ product.tags }}">View Collection</button>
-  </form>
-</div>
-
-
+              <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
+                <button type="submit" class="add-to-cart view-collection" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}" data-product-tags="{{ product.tags }}">View Collection</button>
+              </form>
+            </div>
           {% else %}
             <div class="button-column">  
               <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
@@ -78,12 +76,54 @@
 
 
 <!-- Popup Structure -->
-<div id="listing-popup" class="popup hidden">
+<div id="collection-popup" class="popup hidden">
   <div class="popup-content">
     <span class="close-popup">&times;</span>
     <div class="popup-products"></div>
   </div>
 </div> 
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const buttons = document.querySelectorAll('.view-collection');
+  const popup = document.getElementById('collection-popup');
+  const popupContent = document.querySelector('.popup-products');
+  const closeBtn = document.querySelector('.close-popup');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent form submission
+      const productTags = this.getAttribute('data-product-tags').split(',');
+
+      // Check if "pdp-tag" is present in product tags
+      if (productTags.includes('pdp-tag')) {
+        const productId = this.getAttribute('data-product-id');
+        const productPrice = this.getAttribute('data-product-price');
+
+        // Add product details to the popup
+        const productElement = document.createElement('div');
+        productElement.textContent = `Product ID: ${productId}, Price: ${productPrice}`;
+        popupContent.appendChild(productElement);
+
+        // Show the popup
+        popup.classList.remove('hidden');
+      }
+    });
+  });
+
+  // Close popup when clicking the close button
+  closeBtn.addEventListener('click', function() {
+    popup.classList.add('hidden');
+    popupContent.innerHTML = ''; // Clear popup content
+  });
+});
+
+
+</script>
+
+
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
