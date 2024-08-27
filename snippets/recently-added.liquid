@@ -80,7 +80,7 @@
   <span class="close-popup">&times;</span>
   <div class="popup-content">
     <div class="popup-products">
-
+{%- paginate collections.all.products by 100000 -%}
 {% for product in collections.all.products %}   
   {% if product.tags contains "pdp-tag" %} 
       <div class="pdp-title">{{ product.title }}</div>
@@ -96,6 +96,7 @@
                 </div>
         {% endif %}
       {% endfor %}  
+  {% endpaginate %}
     </div>
   </div>
 </div> 
