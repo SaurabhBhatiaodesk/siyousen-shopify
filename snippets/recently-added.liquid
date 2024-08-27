@@ -29,11 +29,13 @@
 
           {% if product.tags contains "pdp-tag" %}
             <div class="button-column">  
-              <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
-                <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
-                <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">View Collection</button>
-              </form>
-            </div>
+  <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
+    <button type="submit" class="add-to-cart view-collection" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}" data-product-tags="{{ product.tags }}">View Collection</button>
+  </form>
+</div>
+
+
           {% else %}
             <div class="button-column">  
               <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
@@ -74,10 +76,14 @@
   </div>
 </section>
 
-<div class="listing-popup">
-  
 
-</div>
+<!-- Popup Structure -->
+<div id="listing-popup" class="popup hidden">
+  <div class="popup-content">
+    <span class="close-popup">&times;</span>
+    <div class="popup-products"></div>
+  </div>
+</div> 
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
