@@ -26,7 +26,7 @@
             </form>
           </div> -->
 
-{% assign collection_handle = product.metafields.custom.custom_collection.handle %}
+{% assign collection_handle = product.metafields.custom.custom_collection %}
 {% if collection_handle %}
   <a href="/collections/{{ collection_handle }}">View Collection</a>
 {% else %}
