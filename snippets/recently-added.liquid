@@ -208,6 +208,11 @@ document.addEventListener("DOMContentLoaded", function() {
       
       // Get selected variant ID
       var selectedVariant = document.querySelector('input[name="variant_id"]:checked');
+      if (!selectedVariant) {
+        alert("Please select a variant.");
+        return;
+      }
+
       var variantId = selectedVariant.value;
       var variantPrice = selectedVariant.getAttribute('data-price');
       const blinkingButton = document.getElementById('blinkingButton');
@@ -249,32 +254,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   
 <style>
-.hidden {
-  display: none;
-}
 
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  border: 1px solid #ccc;
-  z-index: 1000;
-  padding: 20px;
-  width: 300px;
-}
-
-.popup-content {
-  position: relative;
-}
-
-.close-popup {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
   /*---variants-----*/
   .product-option .variant-choices {
     display: flex;
