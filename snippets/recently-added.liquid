@@ -26,15 +26,7 @@
             </form>
           </div> -->
 
-          {% assign collection_handle = product.metafields.custom.custom_collection %}
-          {% if collection_handle %}
-            {% assign collection = collections[collection_handle] %}
-            {% if collection %}
-              <a class="add-to-cart view-collection" href="{{ collection.url }}">View Collection</a>
-            {% else %}
-              <p>Collection not found.</p>
-            {% endif %}
-          {% endif %}
+         
 
             {% if product.variants.size > 1 %}
             <div class="button-column">  
@@ -43,6 +35,18 @@
                 <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
               </form>
             </div>
+
+          {% else %}
+              
+           {% assign collection_handle = product.metafields.custom.custom_collection %}
+            {% if collection_handle %}
+              {% assign collection = collections[collection_handle] %}
+              {% if collection %}
+                <a class="add-to-cart view-collection" href="{{ collection.url }}">View Collection</a>
+              {% else %}
+                <p>Collection not found.</p>
+              {% endif %}
+            {% endif %}
           {% endif %}
    
         </a>
