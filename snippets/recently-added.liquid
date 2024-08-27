@@ -80,7 +80,7 @@
   <span class="close-popup">&times;</span>
   <div class="popup-content">
     <div class="popup-products">
-      {% assign pdp_tagged_products = collection.products | where: "tags", "pdp-tag" %}
+
 {% for product in collections.all.products %}   
   {% if product.tags contains "pdp-tag" %} 
 <div class="pdp-title">{{ product.title }}</div>
@@ -97,11 +97,7 @@
   {% endif %}
 {% endfor %}
 
-      {{ pdp_tagged_products | json }}
-        {% for product in pdp_tagged_products %}
-          
-        {% endfor %}
-
+    
     </div>
   </div>
 </div> 
