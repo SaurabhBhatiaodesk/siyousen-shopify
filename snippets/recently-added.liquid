@@ -25,7 +25,7 @@
              {% if product.variants.size > 1 %}
               <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
              {% else %}
-               <button type="submit" class="collection-list" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">View Collection</button>
+              <button type="button" class="collection-list" data-product-tag="{{ product.tags | first }}" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">View Collection</button>
              {% endif %}
             </form>
           </div>
