@@ -81,10 +81,9 @@
   <div class="popup-content">
     <div class="popup-products">
       {% assign pdp_tagged_products = collection.products | where: "tags", "pdp-tag" %}
-
-      {{ pdp_tagged_products | json }}
-        {% for product in pdp_tagged_products %}
-          <div class="pdp-title">{{ product.title }}</div>
+{% for product in collections.all.products %}   
+  {% if product.tags contains "pdp-tag" %} 
+<div class="pdp-title">{{ product.title }}</div>
           <div class="pdp-price">{{ product.price | money_without_trailing_zeros }}</div>
           <div class="button-column">  
             <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
@@ -95,6 +94,12 @@
                       data-product-tags="{{ product.tags }}">Add to Cart</button>
             </form>
           </div>
+  {% endif %}
+{% endfor %}
+
+      {{ pdp_tagged_products | json }}
+        {% for product in pdp_tagged_products %}
+          
         {% endfor %}
 
     </div>
