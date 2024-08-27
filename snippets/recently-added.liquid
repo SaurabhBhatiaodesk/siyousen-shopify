@@ -84,7 +84,7 @@
          
         {% if product.tags contains "pdp-tag" %} 
           <div class="popup-products">
-                <div class="product-img"><img src="{{ product.featured_img | img_url: 'master' }}" alt="{{ product.title }}"></div>
+                <div class="product-img"><img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}"></div>
                 <div class="pdp-title">{{ product.title }}</div>
                 <div class="pdp-price">{{ product.price | money_without_trailing_zeros }}</div>
                 <div class="button-column">  
