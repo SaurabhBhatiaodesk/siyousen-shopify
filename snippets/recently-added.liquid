@@ -28,7 +28,7 @@
 
          
 
-            {% if product.variants.size > 1 %}
+   
             <div class="button-column">  
               <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
@@ -36,7 +36,7 @@
               </form>
             </div>
 
-          {% else %}
+
               
            {% assign collection_handle = product.metafields.custom.custom_collection %}
             {% if collection_handle %}
@@ -47,7 +47,7 @@
                 <p>Collection not found.</p>
               {% endif %}
             {% endif %}
-          {% endif %}
+     
    
         </a>
     
