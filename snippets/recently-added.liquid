@@ -80,10 +80,10 @@
   <span class="close-popup">&times;</span>
   <div class="popup-content">
     <div class="popup-products">
-{%- paginate collections.all.products by 100000 -%}
-{% for product in collections.all.products %}   
-  {% if product.tags contains "pdp-tag" %} 
-      <div class="pdp-title">{{ product.title }}</div>
+    {%- paginate collections.all.products by 1000 -%}
+      {% for product in collections.all.products %}   
+        {% if product.tags contains "pdp-tag" %} 
+            <div class="pdp-title">{{ product.title }}</div>
                 <div class="pdp-price">{{ product.price | money_without_trailing_zeros }}</div>
                 <div class="button-column">  
                   <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
@@ -94,9 +94,9 @@
                             data-product-tags="{{ product.tags }}">Add to Cart</button>
                   </form>
                 </div>
-        {% endif %}
-      {% endfor %}  
-  {% endpaginate %}
+              {% endif %}
+            {% endfor %}  
+        {% endpaginate %}
     </div>
   </div>
 </div> 
