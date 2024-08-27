@@ -34,7 +34,7 @@
             {% if collection_handle %}
               {% assign collection = collections[collection_handle] %}
               {% if collection %}
-                <a href="{{ collection.url }}">View Collection</a>
+                <a class="add-to-cart" href="{{ collection.url }}">View Collection</a>
               {% else %}
                 <p>Collection not found.</p>
               {% endif %}
