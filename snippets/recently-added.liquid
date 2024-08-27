@@ -81,10 +81,8 @@
     <span class="close-popup">&times;</span>
     <div class="popup-products">
       {% assign pdp_tagged_products = collection.products | where: "tags", "pdp-tag" %}
-      {% for product in pdp_tagged_products %}
         <div class="pdp-title">{{ product.title }}</div>
         <div class="pdp-price">{{ product.price | money_without_trailing_zeros }}</div>
-      {% endfor %}
 
     </div>
   </div>
