@@ -61,8 +61,22 @@
   </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.collection-list').forEach(function(button) {
+    button.addEventListener('click', function() {
+      var productTag = this.getAttribute('data-product-tag');
+      if (productTag) {
+        // Assuming your collection page URL structure is /collections/tagged/{tag}
+        var collectionUrl = '/collections/tagged/' + encodeURIComponent(productTag);
+        window.location.href = collectionUrl;
+      }
+    });
+  });
+});
 
- 
+</script>
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Attach event listener to each add-to-cart button
