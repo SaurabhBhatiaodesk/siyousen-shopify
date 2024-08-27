@@ -26,12 +26,13 @@
             </form>
           </div> -->
 
-
-          {% if product.tags contains "pdp-tag" %}
+{{ product.metafields.custom.custom_collection | json }}
+          {% if product.metafields.custom.custom_collection contains "pdp-tag" %}
             <div class="button-column">  
               <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
-                <button type="submit" class="add-to-cart view-collection" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}" data-product-tags="{{ product.tags }}">View Collection</button>
+                <button type="submit" class="add-to-cart view-collection" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}" data-product-tags="{{ product.tags }}">
+                  <a href="">View Collection</a></button>
               </form>
             </div>
           {% else %}
