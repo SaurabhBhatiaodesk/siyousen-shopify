@@ -26,7 +26,12 @@
             </form>
           </div> -->
 
-{{ product.metafields.custom.custom_collection.handle }}
+{% assign collection_handle = product.metafields.custom.custom_collection.handle %}
+{% if collection_handle %}
+  <a href="/collections/{{ collection_handle }}">View Collection</a>
+{% else %}
+  <p>No custom collection associated.</p>
+{% endif %}
           {% if product.metafields.custom.custom_collection contains "pdp-tag" %}
             <div class="button-column">  
               <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
