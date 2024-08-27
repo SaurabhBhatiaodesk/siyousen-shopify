@@ -208,11 +208,6 @@ document.addEventListener("DOMContentLoaded", function() {
       
       // Get selected variant ID
       var selectedVariant = document.querySelector('input[name="variant_id"]:checked');
-      if (!selectedVariant) {
-        alert("Please select a variant.");
-        return;
-      }
-
       var variantId = selectedVariant.value;
       var variantPrice = selectedVariant.getAttribute('data-price');
       const blinkingButton = document.getElementById('blinkingButton');
