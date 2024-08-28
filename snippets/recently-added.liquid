@@ -4,7 +4,11 @@
     {% for product in products limit: 100 %}
       <div class="product" id="product-{{ forloop.index }}">
         <a href="{{ product.url }}">
-          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+
+          <div class="my-slider">
+            <div><img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"></div>
+          </div>
+          {% comment %} <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"> {% endcomment %}
           <div class="column-src">
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
