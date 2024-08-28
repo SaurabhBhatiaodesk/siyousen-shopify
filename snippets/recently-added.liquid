@@ -8,12 +8,8 @@
       <div class="product" id="product-{{ forloop.index }}">
         <a href="{{ product.url }}">
 
-          <div class="my-slider">`
-            {% for block in section.blocks %}
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-            {% endfor %}
-          </div>
-          {% comment %} <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"> {% endcomment %}
+          
+         <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"> 
           <div class="column-src">
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
