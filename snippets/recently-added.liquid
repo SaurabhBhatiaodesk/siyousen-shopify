@@ -10,7 +10,7 @@
 
           <div class="my-slider">`
             {% for block in section.blocks %}
-            <div><img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"></div>
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
             {% endfor %}
           </div>
           {% comment %} <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"> {% endcomment %}
