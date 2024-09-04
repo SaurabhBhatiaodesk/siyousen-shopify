@@ -4,23 +4,16 @@
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
     {% for product in products limit: 100 %}
       <div class="product" id="product-{{ forloop.index }}">
-<div class="product_media swiper" id="slider-{{ forloop.index }}">
-  <!-- Swiper Wrapper for Slide Elements -->
-  <div class="swiper-wrapper">
-    {% for media in product.media %}
-      {% if media.media_type == 'image' %}
-        <div class="product_images swiper-slide">
-          <a href="{{ product.url }}">
-            <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
-          </a>
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-  <!-- Swiper Pagination and Navigation Elements -->
-  <!-- <div class="swiper-pagination"></div> -->
-  <div class="swiper-button-next">  </div>
-  <div class="swiper-button-prev"> </div>
+<div class="product_media" id="slider-{{ forloop.index }}">
+  {% for media in product.media %}
+    {% if media.media_type == 'image' %}
+      <div class="product_images">
+        <a href="{{ product.url }}">
+          <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
+        </a>
+      </div>
+    {% endif %}
+  {% endfor %}
 </div>
           <div class="product_details">
           <div class="column-src">
