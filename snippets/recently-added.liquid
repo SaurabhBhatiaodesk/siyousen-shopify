@@ -4,47 +4,15 @@
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
     {% for product in products limit: 100 %}
       <div class="product" id="product-{{ forloop.index }}">
-          <div class="product_media">
+          <div class="product_media" id="slider-{{ forloop.index }}">
             {% for media in product.media %}
-              <div class="product_images">
-            <a href="{{ product.url }}">   <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}"></a>
-              </div>
-
-              <script>
- $('.product_media').slick({
-          dots: true,
-          infinite: false,
-          speed: 300,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,  // Hide arrows
-          responsive: [
-              {
-                  breakpoint: 1024,
-                  settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                      infinite: true,
-                      dots: true
-                  }
-              },
-              {
-                  breakpoint: 600,
-                  settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1
-                  }
-              },
-              {
-                  breakpoint: 480,
-                  settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1
-                  }
-              }
-          ]
-      });
-  </script>
+              {% if media.media_type == 'image' %}
+                <div class="product_images swiper-slide">
+                  <a href="{{ product.url }}">
+                    <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
+                  </a>
+                </div>
+              {% endif %}
             {% endfor %}
           </div>
           <div class="column-src">
