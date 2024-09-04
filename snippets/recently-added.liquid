@@ -4,10 +4,11 @@
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
     {% for product in products limit: 100 %}
       <div class="product" id="product-{{ forloop.index }}">
-        <a href="{{ product.url }}">
-
-          
+        <a href="{{ product.url }}">        
          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"> 
+          <div>
+          {{ images[0] | img_tag }}
+          </div>
           <div class="column-src">
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
