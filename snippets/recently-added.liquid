@@ -6,9 +6,9 @@
       <div class="product" id="product-{{ forloop.index }}">
         <a href="{{ product.url }}">        
           {% for media in product.media %}
-          
+              <div class="product_media">
             <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
-         
+              </div>
           {% endfor %}
           <div class="column-src">
             <span class="prod-info">
