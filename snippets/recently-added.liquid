@@ -22,7 +22,7 @@
   <div class="swiper-button-next">  </div>
   <div class="swiper-button-prev"> </div>
 </div>
-
+          <div class="product_details">
           <div class="column-src">
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
@@ -53,7 +53,7 @@
          
           {% endif %}
    
-        
+        </div>
     
     {% if product.variants.size > 1 %}
                 {% for option in product.options %}
