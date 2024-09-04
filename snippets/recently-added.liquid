@@ -4,17 +4,25 @@
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
     {% for product in products limit: 100 %}
       <div class="product" id="product-{{ forloop.index }}">
-          <div class="product_media" id="slider-{{ forloop.index }}">
-            {% for media in product.media %}
-              {% if media.media_type == 'image' %}
-                <div class="product_images swiper-slide">
-                  <a href="{{ product.url }}">
-                    <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
-                  </a>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
+<div class="product_media swiper" id="slider-{{ forloop.index }}">
+  <!-- Swiper Wrapper for Slide Elements -->
+  <div class="swiper-wrapper">
+    {% for media in product.media %}
+      {% if media.media_type == 'image' %}
+        <div class="product_images swiper-slide">
+          <a href="{{ product.url }}">
+            <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <!-- Swiper Pagination and Navigation Elements -->
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+
           <div class="column-src">
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
@@ -86,17 +94,18 @@
         loop: true,
         slidesPerView: 1,
         navigation: {
-          nextEl: `.swiper-button-next`,
-          prevEl: `.swiper-button-prev`,
+          nextEl: `#${slider.id} .swiper-button-next`,
+          prevEl: `#${slider.id} .swiper-button-prev`,
         },
         pagination: {
-          el: `.swiper-pagination`,
+          el: `#${slider.id} .swiper-pagination`,
           clickable: true,
         },
       });
     });
   });
 </script>
+
 
 
 <script>
