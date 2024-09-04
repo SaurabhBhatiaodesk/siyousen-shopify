@@ -4,17 +4,24 @@
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
     {% for product in products limit: 100 %}
       <div class="product" id="product-{{ forloop.index }}">
-<div class="product_media" id="slider-{{ forloop.index }}">
-  {% for media in product.media %}
-    {% if media.media_type == 'image' %}
-      <div class="product_images">
-        <a href="{{ product.url }}">
-          <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
-        </a>
+    <div class="product_media swiper" id="slider-{{ forloop.index }}">
+      <!-- Swiper Wrapper for Slide Elements -->
+      <div class="swiper-wrapper">
+        {% for media in product.media %}
+          {% if media.media_type == 'image' %}
+            <div class="product_images swiper-slide">
+              <a href="{{ product.url }}">
+                <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
-    {% endif %}
-  {% endfor %}
-</div>
+      <!-- Swiper Pagination and Navigation Elements -->
+      <!-- <div class="swiper-pagination"></div> -->
+      <div class="swiper-button-next">  </div>
+      <div class="swiper-button-prev"> </div>
+    </div>
           <div class="product_details">
           <div class="column-src">
             <span class="prod-info">
@@ -78,7 +85,7 @@
 </section>
 
 
-<!-- <script>
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     // Initialize Swiper for each product slider
     const sliders = document.querySelectorAll(".product_media");
@@ -98,7 +105,7 @@
       });
     });
   });
-</script> -->
+</script>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -229,20 +236,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   
 <style>
-
-
-  .slick-prev, .slick-next {
-    background: none; /* Remove default button background */
-    border: none; /* Remove default button border */
-  }
-  .slick-prev img, .slick-next img {
-    width: 20px; /* Adjust the size of your arrow images */
-    height: auto;
-  }
-  .slick-dots {
-    bottom: 10px; /* Position the dots below the slider */
-  }
-
 
 
 .hidden {
