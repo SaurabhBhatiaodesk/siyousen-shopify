@@ -6,9 +6,6 @@
       <div class="product" id="product-{{ forloop.index }}">
         <a href="{{ product.url }}">        
          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"> 
-          <div>
-          {{ images[0] | img_tag }}
-          </div>
           <div class="column-src">
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
