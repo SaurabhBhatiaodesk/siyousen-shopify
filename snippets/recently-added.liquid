@@ -4,25 +4,10 @@
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
     {% for product in products limit: 100 %}
       <div class="product" id="product-{{ forloop.index }}">
-    <div class="product_media swiper" id="slider-{{ forloop.index }}">
-      <!-- Swiper Wrapper for Slide Elements -->
-      <div class="swiper-wrapper">
-        {% for media in product.media %}
-          {% if media.media_type == 'image' %}
-            <div class="product_images swiper-slide">
-              <a href="{{ product.url }}">
-                <img src="{{ media.preview_image.src | img_url: 'medium' }}" alt="{{ media.alt | escape }}">
-              </a>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-      <!-- Swiper Pagination and Navigation Elements -->
-      <!-- <div class="swiper-pagination"></div> -->
-      <div class="swiper-button-next"> <img src="https://siyousen.myshopify.com/cdn/shop/files/right-arrow.webp?v=1719562524" alt="next"> </div>
-      <div class="swiper-button-prev"> <img src="https://siyousen.myshopify.com/cdn/shop/files/left-arrow.webp?v=1719562524" alt="prev"> </div>
-    </div>
-          <div class="product_details">
+        <a href="{{ product.url }}">
+
+          
+         <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"> 
           <div class="column-src">
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
@@ -53,7 +38,7 @@
          
           {% endif %}
    
-
+        </a>
     
     {% if product.variants.size > 1 %}
                 {% for option in product.options %}
@@ -79,37 +64,25 @@
                 {% endfor %}
               {% endif %}
           </div>
-              </div>
      {% endfor %}
   </div>
 </section>
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Initialize Swiper for each product slider
-    const sliders = document.querySelectorAll(".product_media");
-
-    sliders.forEach((slider) => {
-      new Swiper(`#${slider.id}`, {
-        loop: true,
-        slidesPerView: 1,
-        navigation: {
-          nextEl: `#${slider.id} .swiper-button-next`,
-          prevEl: `#${slider.id} .swiper-button-prev`,
-        },
-        pagination: {
-          el: `#${slider.id} .swiper-pagination`,
-          clickable: true,
-        },
+$(document).ready(function(){
+      $('.my-slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+        speed: 300,
+        infinite: true,
+        autoplaySpeed: 5000,
+        autoplay: true,
       });
     });
-  });
 </script>
-
-
-
-
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -218,17 +191,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   
 <style>
-
-  .product_media .swiper-button-next img, .product_media .swiper-button-prev img {
-    width: 20px !important;
-    min-width: 32px !important;
-    min-height: 32px !important;
-}
-
-  .swiper-button-next:after, .swiper-button-prev:after{
-    display: none;
-  }
-
 .hidden {
   display: none;
 }
@@ -350,19 +312,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
     
   /*----variants----*/
-
-.product_details {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding-top: 10px;
-}
-
-  .swiper-wrapper {
-    min-width: 530px;
-}
-  
-  /* .recently-added-products .product .button-column {
+  .recently-added-products .product .button-column {
     position: relative;
   }
   .recently-added-products .product-form__buttons {
@@ -373,8 +323,7 @@ document.addEventListener("DOMContentLoaded", function() {
     position: absolute;
     right: 6px;
     bottom: -5px;
-  } */
-
+  }
   .recently-added-products .product .checkout-btns span + span {
     color: #fbae00;
     font-size: 32px !important;
@@ -386,8 +335,6 @@ document.addEventListener("DOMContentLoaded", function() {
     justify-content: space-between;
     padding:0 10px;
   }
-
-
   .recently-added-products .product .button-column .add-cart {
     width: 100%;
   }
@@ -499,8 +446,6 @@ document.addEventListener("DOMContentLoaded", function() {
       min-width: 255px;
       max-height: 440px;
     }
-
-
     #recently-added .recently-added-products .product {
       margin-bottom: 2rem;
       width: 50%;
@@ -628,13 +573,6 @@ document.addEventListener("DOMContentLoaded", function() {
             position: relative;
             left:0;
         }
-      .recently-added-products .column-src .prod-info, .recently-added-products .column-src .add-cart{
-        align-items:start;
-      }
-
-             .product_details {
-          flex-wrap: wrap;
-        }
     }
     
       @media screen and (max-width:480px) {
@@ -658,10 +596,6 @@ document.addEventListener("DOMContentLoaded", function() {
           .listing-popup {
             width: 90%;
           }
-
-               .product_details {
-          flex-wrap: wrap;
-        }
       }
 
      @media screen and (max-width:370px) {
@@ -671,10 +605,6 @@ document.addEventListener("DOMContentLoaded", function() {
         #recently-added .product img {
           min-height: inherit;
           max-height:inherit;
-        }
-
-        .product_details {
-          flex-wrap: wrap;
         }
       }
     
