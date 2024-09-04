@@ -85,7 +85,7 @@
 </section>
 
 
-<script>
+<!-- <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Initialize Swiper for each product slider
     const sliders = document.querySelectorAll(".product_media");
@@ -105,7 +105,27 @@
       });
     });
   });
+</script> -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialize Slick slider for each product
+    $('.product_media').each(function () {
+      $(this).slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        prevArrow: `<button type="button" class="slick-prev"><img src="URL_TO_PREV_ARROW_IMAGE" alt="Previous"></button>`,
+        nextArrow: `<button type="button" class="slick-next"><img src="URL_TO_NEXT_ARROW_IMAGE" alt="Next"></button>`,
+        dots: true,
+        customPaging: function(slider, i) {
+          return '<button class="dot">' + (i + 1) + '</button>';
+        }
+      });
+    });
+  });
 </script>
+
 
 
 
