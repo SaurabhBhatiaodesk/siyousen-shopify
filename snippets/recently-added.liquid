@@ -72,21 +72,41 @@
   </div>
 </section>
 
-
 <script>
-$(document).ready(function(){
-      $('.product_media11').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
-        dots: false,
-        speed: 300,
-        infinite: true,
-        autoplaySpeed: false,
-        autoplay: true,
+ $('.testimonials-slider').slick({
+          dots: true,
+          infinite: false,
+          speed: 300,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,  // Hide arrows
+          responsive: [
+              {
+                  breakpoint: 1024,
+                  settings: {
+                      slidesToShow: 1,
+                      slidesToScroll: 1,
+                      infinite: true,
+                      dots: true
+                  }
+              },
+              {
+                  breakpoint: 600,
+                  settings: {
+                      slidesToShow: 1,
+                      slidesToScroll: 1
+                  }
+              },
+              {
+                  breakpoint: 480,
+                  settings: {
+                      slidesToShow: 1,
+                      slidesToScroll: 1
+                  }
+              }
+          ]
       });
-    });
-</script>
+  </script>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
