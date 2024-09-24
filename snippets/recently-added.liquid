@@ -144,6 +144,20 @@ $(document).ready(function(){
   
   <script>
 document.addEventListener("DOMContentLoaded", function() {
+        let variantButtons = document.querySelectorAll('.var-opt');
+        variantButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+        
+          let hiddenInput = button.querySelector('input[name="variant_id"]');
+          
+          if (hiddenInput) {
+              let variantId = hiddenInput.value;
+              console.log("variant id: " + variantId);
+          } 
+
+               });
+        });
+
   // Attach event listener to each add-to-cart button
   document.querySelectorAll('.add-to-cart').forEach(function(button) {
     button.addEventListener('click', function(event) {
@@ -193,9 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
-        });
-        });
-
+   
   </script>
 
 
