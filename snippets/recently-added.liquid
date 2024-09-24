@@ -165,7 +165,12 @@ $(document).ready(function(){
 
       var variantPrice = document.querySelector('input[name="variant_id"]').getAttribute('data-price');
       const blinkingButton = document.getElementById('blinkingButton');
-      let variantId = hiddenInput.value;
+                let hiddenInput = button.querySelector('input[name="variant_id"]');
+          
+          if (hiddenInput) {
+              let variantId = hiddenInput.value;
+              console.log("variant id: " + variantId);
+          } 
       // Add item to cart
       fetch('/cart/add.js', {
         method: 'POST',
