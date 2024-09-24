@@ -153,11 +153,17 @@ document.querySelectorAll('.add-to-cart').forEach(function(button) {
 
     // Get the selected variant ID
     let selectedVariantId = null;
-    document.querySelectorAll('.var-opt').forEach(button => {
+    let variantButtons = document.querySelectorAll('.var-opt');
+    
+    // Get the default selected variant (assuming one is pre-selected)
+    variantButtons.forEach(button => {
       let hiddenInput = button.querySelector('input[name="variant_id"]');
-      if (hiddenInput && button.classList.contains('selected')) { // Assuming 'selected' class marks the selected variant
-        selectedVariantId = hiddenInput.value;
-        console.log("Selected variant ID: " + selectedVariantId);
+      if (hiddenInput) {
+        // Assuming the default variant is the first one or marked as default
+        if (button.classList.contains('selected') || button === variantButtons[0]) { // Change this logic as needed
+          selectedVariantId = hiddenInput.value;
+          console.log("Selected variant ID: " + selectedVariantId);
+        }
       }
     });
 
@@ -167,7 +173,7 @@ document.querySelectorAll('.add-to-cart').forEach(function(button) {
       return; // Exit the function if no variant is selected
     }
 
-    // Get the price of the selected variant
+    // Get the price of the selected variant (optional)
     const blinkingButton = document.getElementById('blinkingButton');
 
     // Add item to cart using the selected variant ID
@@ -218,6 +224,10 @@ document.querySelectorAll('.var-opt').forEach(button => {
     }
   });
 });
+
+// Initialize with the default selected variant
+document.querySelectorAll('.var-opt')[0]?.classList.add('selected'); // Mark the first variant as selected by default
+
 
    
   </script>
