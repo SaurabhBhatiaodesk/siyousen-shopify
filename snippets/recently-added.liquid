@@ -142,9 +142,10 @@ $(document).ready(function(){
   });
   </script>
   
+ 
 <script>  
   document.addEventListener("DOMContentLoaded", function() {
-    let variantId = null; // Declare variantId globally
+    let selectedVariantId = null; // Declare variantId globally
 
     // Attach event listener to each variant option button
     let variantButtons = document.querySelectorAll('.var-opt');
@@ -153,8 +154,8 @@ $(document).ready(function(){
         let hiddenInput = button.querySelector('input[name="variant_id"]');
         
         if (hiddenInput) {
-          variantId = hiddenInput.value;
-          console.log("Selected variant id: " + variantId);
+          selectedVariantId = hiddenInput.value; // Store the selected variant ID
+          console.log("Selected variant id: " + selectedVariantId);
         }
       });
     });
@@ -164,7 +165,7 @@ $(document).ready(function(){
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
 
-        if (variantId) {
+        if (selectedVariantId) {
           const blinkingButton = document.getElementById('blinkingButton');
           // Add item to cart
           fetch('/cart/add.js', {
@@ -172,7 +173,7 @@ $(document).ready(function(){
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: variantId, quantity: 1 })
+            body: JSON.stringify({ id: selectedVariantId, quantity: 1 }) // Pass the selected variantId
           })
           .then(response => response.json())
           .then(data => {
@@ -200,6 +201,8 @@ $(document).ready(function(){
     });
   });
 </script>
+
+
 
 
 
