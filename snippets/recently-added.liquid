@@ -206,7 +206,7 @@ $(document).ready(function(){
 
 <script>  
   document.addEventListener("DOMContentLoaded", function() {
-    let selectedVariantId = null; // Declare variantId globally
+    let selectedVariantId = null; // Declare variantId globally and initialize it as null
 
     // Attach event listener to each variant option button
     let variantButtons = document.querySelectorAll('.var-opt');
@@ -226,10 +226,12 @@ $(document).ready(function(){
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
 
-        // Check if the selected variantId exists
         if (selectedVariantId) {
+          // Ensure a variant has been selected before adding to the cart
+          console.log("Adding variant to cart: " + selectedVariantId);
+
           const blinkingButton = document.getElementById('blinkingButton');
-          // Add the selected variant to cart
+          // Add item to cart
           fetch('/cart/add.js', {
             method: 'POST',
             headers: {
@@ -257,12 +259,15 @@ $(document).ready(function(){
           })
           .catch(error => console.error('Error adding to cart:', error));
         } else {
-          console.error('No variant selected. Please select a variant first.');
+          // No variant selected
+          console.error('Please select a variant before adding to the cart.');
+          alert('Please select a variant before adding to the cart.');
         }
       });
     });
   });
 </script>
+
 
 
 
