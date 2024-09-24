@@ -95,11 +95,20 @@ $(document).ready(function(){
         // Get the product ID from the button
         var productIndex = button.getAttribute('data-product-id');
         
-        // Try to get the variant ID, if it exists
+        // Check if the product has a variant input
         var variantInput = document.querySelector('#variant-id-' + productIndex);
-        var variantId = variantInput ? variantInput.value : null;
+        var variantId = null;
 
-        // If a variant is selected, use the variant ID, otherwise use the product ID
+        if (variantInput) {
+          // Variant exists, ensure it's selected
+          variantId = variantInput.value;
+          if (!variantId) {
+            alert('Please select a variant before adding to the cart.');
+            return; // Do not proceed if no variant is selected
+          }
+        }
+
+        // If there's no variant input, use the product ID directly
         var idToAdd = variantId ? variantId : productIndex;
 
         const blinkingButton = document.getElementById('blinkingButton');
@@ -110,7 +119,7 @@ $(document).ready(function(){
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ id: idToAdd, quantity: 1 }) // Use the selected variant or product ID
+          body: JSON.stringify({ id: idToAdd, quantity: 1 }) // Use selected variant or product ID
         })
         .then(response => response.json())
         .then(data => {
@@ -139,7 +148,7 @@ $(document).ready(function(){
         .catch(error => console.error('Error adding to cart:', error));
       });
     });
-    
+
     // Attach event listener to each custom checkout button
     document.querySelectorAll('.add-checkout').forEach(function(checkoutButton) {
       checkoutButton.addEventListener('click', function(event) {
@@ -149,6 +158,7 @@ $(document).ready(function(){
     });
   });
 </script>
+
 
 
 
