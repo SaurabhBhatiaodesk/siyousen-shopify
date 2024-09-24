@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
       event.preventDefault(); // Prevent default form submission
 
       var variantId = document.querySelector('input[name="variant_id"]:checked').value;
-      var variantPrice = document.querySelector('input[name="variant_id"]:checked').getAttribute('data-price');
+      var variantPrice = document.querySelector('input[name="variant_id"]').getAttribute('data-price');
       const blinkingButton = document.getElementById('blinkingButton');
 
       // Add item to cart
