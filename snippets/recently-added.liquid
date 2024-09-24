@@ -142,90 +142,61 @@ $(document).ready(function(){
   });
   </script>
   
-  <script>
-    
-document.addEventListener("DOMContentLoaded", function() {
-      
-// Attach event listener to each add-to-cart button
-document.querySelectorAll('.add-to-cart').forEach(function(button) {
-  button.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent default form submission
+  <script>  
+      document.addEventListener("DOMContentLoaded", function() {
+        let variantButtons = document.querySelectorAll('.var-opt');
+        variantButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+        
+          let hiddenInput = button.querySelector('input[name="variant_id"]');
+          
+          if (hiddenInput) {
+              let variantId = hiddenInput.value;
+              console.log("variant id: " + variantId);
+          } 
 
-    // Get the selected variant ID from the clicked variant button
-    let selectedVariantId = null;
-    let variantButtons = document.querySelectorAll('.var-opt');
+         });
+        });
 
-    // Find the variant button that is currently selected
-    variantButtons.forEach(button => {
-      let hiddenInput = button.querySelector('input[name="variant_id"]');
-      if (hiddenInput && button.classList.contains('selected')) { // Assuming 'selected' class indicates the selected variant
-        selectedVariantId = hiddenInput.value;
-        console.log("Selected variant ID: " + selectedVariantId);
-      }
+  // Attach event listener to each add-to-cart button
+  document.querySelectorAll('.add-to-cart').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      var variantPrice = document.querySelector('input[name="variant_id"]').getAttribute('data-price');
+      const blinkingButton = document.getElementById('blinkingButton');
+
+      // Add item to cart
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      })
+      .then(response => response.json())
+      .then(data => {
+        blinkingButton.classList.add('blink');
+        blinkingButton.classList.add('active');
+        window.addEventListener('scroll', () => {
+          if (blinkingButton.classList.contains('active')) {
+            blinkingButton.classList.remove('active');
+          }
+        });
+
+        // Update the total price on the checkout button
+        var checkoutButton = document.querySelector('#custom-checkout-button');
+        checkoutButton.classList.add('add-checkout');
+        checkoutButton.querySelector('#total-price').innerText = '$' + (data.total_price / 100).toFixed(2);
+
+        // Redirect to checkout page
+        window.location.href = '/checkout';
+      })
+      .catch(error => console.error('Error adding to cart:', error));
     });
-
-    // Ensure a variant is selected
-    if (!selectedVariantId) {
-      alert("Please select a variant before adding to cart.");
-      return; // Exit the function if no variant is selected
-    }
-
-    // Get the price of the selected variant (if necessary)
-    var variantPrice = document.querySelector(`input[name="variant_id"][value="${selectedVariantId}"]`).getAttribute('data-price');
-    const blinkingButton = document.getElementById('blinkingButton');
-
-    // Add item to cart using the selected variant ID
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id: selectedVariantId, quantity: 1 })
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Trigger blinking button animation
-      blinkingButton.classList.add('blink');
-      blinkingButton.classList.add('active');
-      
-      window.addEventListener('scroll', () => {
-        if (blinkingButton.classList.contains('active')) {
-          blinkingButton.classList.remove('active');
-        }
-      });
-
-      // Update the total price on the checkout button
-      var checkoutButton = document.querySelector('#custom-checkout-button');
-      checkoutButton.classList.add('add-checkout');
-      checkoutButton.querySelector('#total-price').innerText = '$' + (data.total_price / 100).toFixed(2);
-
-      // Redirect to checkout page
-      window.location.href = '/checkout';
-    })
-    .catch(error => console.error('Error adding to cart:', error));
   });
 });
-
-// Attach event listener to each variant selection button
-document.querySelectorAll('.var-opt').forEach(button => {
-  button.addEventListener('click', function(e) {
-    // Deselect other variants
-    document.querySelectorAll('.var-opt').forEach(btn => btn.classList.remove('selected'));
-    
-    // Select the clicked variant
-    button.classList.add('selected');
-    
-    let hiddenInput = button.querySelector('input[name="variant_id"]');
-    if (hiddenInput) {
-      let variantId = hiddenInput.value;
-      console.log("Variant ID selected: " + variantId);
-    }
-  });
-});
-
-// Optionally initialize with the first variant selected
-document.querySelectorAll('.var-opt')[0]?.classList.add('selected'); // Mark the first variant as selected by default
-
+   
   </script>
 
 
