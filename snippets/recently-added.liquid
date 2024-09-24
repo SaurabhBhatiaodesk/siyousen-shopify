@@ -152,19 +152,26 @@ document.querySelectorAll('.add-to-cart').forEach(function(button) {
     event.preventDefault(); // Prevent default form submission
 
     // Get the selected variant ID from the clicked variant button
-    let variantButtons = document.querySelectorAll('.var-opt');
     let selectedVariantId = null;
+    let variantButtons = document.querySelectorAll('.var-opt');
 
+    // Find the variant button that is currently selected
     variantButtons.forEach(button => {
       let hiddenInput = button.querySelector('input[name="variant_id"]');
-      if (hiddenInput) {
+      if (hiddenInput && button.classList.contains('selected')) { // Assuming 'selected' class indicates the selected variant
         selectedVariantId = hiddenInput.value;
         console.log("Selected variant ID: " + selectedVariantId);
       }
     });
 
-    // Get the price of the selected variant
-    var variantPrice = document.querySelector('input[name="variant_id"]').getAttribute('data-price');
+    // Ensure a variant is selected
+    if (!selectedVariantId) {
+      alert("Please select a variant before adding to cart.");
+      return; // Exit the function if no variant is selected
+    }
+
+    // Get the price of the selected variant (if necessary)
+    var variantPrice = document.querySelector(`input[name="variant_id"][value="${selectedVariantId}"]`).getAttribute('data-price');
     const blinkingButton = document.getElementById('blinkingButton');
 
     // Add item to cart using the selected variant ID
@@ -202,6 +209,12 @@ document.querySelectorAll('.add-to-cart').forEach(function(button) {
 // Attach event listener to each variant selection button
 document.querySelectorAll('.var-opt').forEach(button => {
   button.addEventListener('click', function(e) {
+    // Deselect other variants
+    document.querySelectorAll('.var-opt').forEach(btn => btn.classList.remove('selected'));
+    
+    // Select the clicked variant
+    button.classList.add('selected');
+    
     let hiddenInput = button.querySelector('input[name="variant_id"]');
     if (hiddenInput) {
       let variantId = hiddenInput.value;
@@ -210,8 +223,9 @@ document.querySelectorAll('.var-opt').forEach(button => {
   });
 });
 
-});
-   
+// Optionally initialize with the first variant selected
+document.querySelectorAll('.var-opt')[0]?.classList.add('selected'); // Mark the first variant as selected by default
+
   </script>
 
 
