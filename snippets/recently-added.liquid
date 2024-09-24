@@ -90,10 +90,18 @@ $(document).ready(function(){
     document.querySelectorAll('.add-to-cart').forEach(function(button) {
       button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
-        // Get variant ID from the hidden input or selected option
+
+        // Get the variant ID based on the product
         var productIndex = button.getAttribute('data-product-id');
         var variantId = document.querySelector('#variant-id-' + productIndex).value;
-         const blinkingButton = document.getElementById('blinkingButton');
+
+        if (!variantId) {
+          console.error("Variant ID not found for product", productIndex);
+          return;
+        }
+
+        const blinkingButton = document.getElementById('blinkingButton');
+
         // Add item to cart
         fetch('/cart/add.js', {
           method: 'POST',
@@ -104,101 +112,35 @@ $(document).ready(function(){
         })
         .then(response => response.json())
         .then(data => {
-        blinkingButton.classList.add('blink');
-            blinkingButton.classList.add('active');
+          blinkingButton.classList.add('blink');
+          blinkingButton.classList.add('active');
+
+          // Remove active class on scroll
           window.addEventListener('scroll', () => {
-          if (blinkingButton.classList.contains('active')) {
-          blinkingButton.classList.remove('active');
-          }
+            if (blinkingButton.classList.contains('active')) {
+              blinkingButton.classList.remove('active');
+            }
           });
+
           // Update the total price on the checkout button
           var checkoutButton = document.querySelector('#custom-checkout-button-' + productIndex);
           checkoutButton.classList.add('add-checkout');
-        
+
           // Fetch the updated cart total price
           fetch('/cart.js')
             .then(response => response.json())
             .then(cartData => {
-              alert("aa");
-              // Update total price
-              {% comment %} checkoutButton.querySelector('#total-price-' + productIndex).innerText = cartData.total_price / 100 + ' ' + cartData.currency; {% endcomment %}
               checkoutButton.querySelector('#total-price-' + productIndex).innerText = 
               '$' + (cartData.total_price / 100).toFixed(2);
-               
             })
             .catch(error => console.error('Error updating cart:', error));
         })
         .catch(error => console.error('Error adding to cart:', error));
       });
     });
-  
-    // Attach event listener to each custom checkout button
-    document.querySelectorAll('.add-checkout').forEach(function(checkoutButton) {
-      checkoutButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevents the default behavior
-        window.location.href = '/checkout'; // Replace with your desired page URL
-      });
-    });
-  });
-  </script>
-  
-  <script>
-// document.addEventListener("DOMContentLoaded", function() {
-//         let variantButtons = document.querySelectorAll('.var-opt');
-//         variantButtons.forEach(button => {
-//         button.addEventListener('click', function(e) {
-        
-//           let hiddenInput = button.querySelector('input[name="variant_id"]');
-          
-//           if (hiddenInput) {
-//               let variantId = hiddenInput.value;
-//               console.log("variant id: " + variantId);
-//           } 
+});
 
-//                });
-//         });
-
-//   // Attach event listener to each add-to-cart button
-//   document.querySelectorAll('.add-to-cart').forEach(function(button) {
-//     button.addEventListener('click', function(event) {
-//       event.preventDefault(); // Prevent default form submission
-
-//       var variantPrice = document.querySelector('input[name="variant_id"]').getAttribute('data-price');
-//       const blinkingButton = document.getElementById('blinkingButton');
-
-//       // Add item to cart
-//       fetch('/cart/add.js', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ id: variantId, quantity: 1 })
-//       })
-//       .then(response => response.json())
-//       .then(data => {
-//         blinkingButton.classList.add('blink');
-//         blinkingButton.classList.add('active');
-//         window.addEventListener('scroll', () => {
-//           if (blinkingButton.classList.contains('active')) {
-//             blinkingButton.classList.remove('active');
-//           }
-//         });
-
-//         // Update the total price on the checkout button
-//         var checkoutButton = document.querySelector('#custom-checkout-button');
-//         checkoutButton.classList.add('add-checkout');
-//         checkoutButton.querySelector('#total-price').innerText = '$' + (data.total_price / 100).toFixed(2);
-
-//         // Redirect to checkout page
-//         window.location.href = '/checkout';
-//       })
-//       .catch(error => console.error('Error adding to cart:', error));
-//     });
-//   });
-// });
-   
-//   </script>
-
+</script>
 
 
   
