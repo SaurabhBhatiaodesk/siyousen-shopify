@@ -122,7 +122,14 @@
               >
                 {{ card_product.title | escape }}
               </a>
-            </h3>
+            </h3>           
+          </div>
+          <div class="custom-button">
+          <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+          <input min="1" type="number" id="quantity" name="quantity" value="1"/>
+          <input type="submit" value="Add to cart" class="btn" />
+          </form>
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
@@ -562,7 +569,6 @@
           {%- endif -%}
         </div>
       </div>
-      pppppp
     </div>
   </div>
 {%- else -%}
