@@ -176,10 +176,25 @@
                     section_id: section.id
                   %}
                   <form method="post" action="/cart/add">
-  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-  <input min="1" type="number" id="quantity" name="quantity" value="1"/>
-  <input type="submit" value="Add to cart" class="btn" />
-</form>
+                  {% if product.has_only_default_variant %}
+                  <!-- No variants, add default variant -->
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                  {% else %}
+                  <!-- Product has variants, display variant checkboxes -->
+                  <div class="variant-options">
+                  {% for variant in product.variants %}
+                  <label>
+                  <input type="radio" name="id" value="{{ variant.id }}" required>
+                  {{ variant.title }}
+                  </label>
+                  {% endfor %}
+                  </div>
+                  {% endif %}
+                  <input min="1" type="number" id="quantity" name="quantity" value="1"/>
+                  <input type="submit" value="Add to cart" class="btn" />
+                  </form>
+
+                 
                 </li>
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
