@@ -438,3 +438,16 @@
   ]
 }
 {% endschema %}
+
+<script>
+    document.querySelectorAll('.variant-label').forEach(function(label) {
+    label.addEventListener('click', function() {
+      var variantId = this.getAttribute('data-variant-id');
+      document.getElementById('selected-variant-id').value = variantId;
+      document.querySelectorAll('.variant-label').forEach(function(lbl) {
+        lbl.classList.remove('selected');
+      });
+      this.classList.add('selected');
+    });
+  });
+</script>
