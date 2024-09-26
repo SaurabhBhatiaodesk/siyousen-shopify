@@ -183,13 +183,14 @@
                   <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
                   {% else %}
                   <!-- Product has variants, display variant checkboxes -->
-      <div class="variant-options">
-        {% for variant in product.variants %}
-          <label class="variant-label" data-variant-id="{{ variant.id }}">
-            {{ variant.title }}
-          </label>
-        {% endfor %}
-      </div>
+                  <div class="variant-options">
+                  {% for variant in product.variants %}
+                        <label>
+                          <input type="radio" name="id" value="{{ variant.id }}" required>
+                          {{ variant.title }}
+                        </label>
+                  {% endfor %}
+                  </div>
                   {% endif %}
                   <button type="submit" value="Add to cart" class="btn" >
                     Add to cart
