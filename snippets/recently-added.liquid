@@ -45,8 +45,7 @@
                   <div class="product-option">
                     <div class="variant-choices">
                       {% assign option_index = forloop.index | minus: 1 %}
-                      {% assign option_values = product.variants | map: "option" | uniq %}
-              
+                      {% assign option_values = product.variants | map: "option" | uniq %}              
                       {% for variant in product.variants %}
                         {% assign variant_value = variant.options[option_index] %}
                         <span class="var-opt">
