@@ -3597,7 +3597,9 @@ details-disclosure > details {
     line-height: 26px;
     cursor: pointer;
 }
-
+.variant-options .label label {
+  cursor: pointer;
+}
 
 .price__regular span {
     color: green;
