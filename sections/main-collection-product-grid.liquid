@@ -176,27 +176,28 @@
                     quick_add: section.settings.quick_add,
                     section_id: section.id
                   %}
-                  <div class="add-to-cart-hr">
-                  <form method="post" action="/cart/add">
-                  {% if product.has_only_default_variant %}
-                  <!-- No variants, add default variant -->
-                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-                  {% else %}
-                  <!-- Product has variants, display variant checkboxes -->
-                  <div class="variant-options">
-                  {% for variant in product.variants %}
-                        <label>
-                          <input type="radio" name="id" value="{{ variant.id }}" required>
-                          {{ variant.title }}
-                        </label>
-                  {% endfor %}
-                  </div>
-                  {% endif %}
-                  <button type="submit" value="Add to cart" class="btn" >
-                    Add to cart
-                  </button>
-                  </form>
-                  </div>                 
+<div class="add-to-cart-hr">
+  <form method="post" action="/cart/add" id="add-to-cart-form">
+    {% if product.has_only_default_variant %}
+      <!-- No variants, add default variant -->
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+    {% else %}
+      <!-- Product has variants, display clickable variant labels -->
+      <div class="variant-options">
+        {% for variant in product.variants %}
+          <label class="variant-label" data-variant-id="{{ variant.id }}">
+            {{ variant.title }}
+          </label>
+        {% endfor %}
+      </div>
+      <!-- Hidden input to store the selected variant ID -->
+      <input type="hidden" name="id" id="selected-variant-id" required>
+    {% endif %}
+    <button type="submit" value="Add to cart" class="btn">
+      Add to cart
+    </button>
+  </form>
+</div>               
                 </li>
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
