@@ -176,6 +176,7 @@
                     quick_add: section.settings.quick_add,
                     section_id: section.id
                   %}
+                  <div class="add-to-cart-hr">
                   <form method="post" action="/cart/add">
                   {% if product.has_only_default_variant %}
                   <!-- No variants, add default variant -->
@@ -193,8 +194,7 @@
                   {% endif %}
                   <input type="submit" value="Add to cart" class="btn" />
                   </form>
-
-                 
+                  </div>                 
                 </li>
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
