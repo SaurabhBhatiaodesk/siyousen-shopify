@@ -3581,7 +3581,7 @@ details-disclosure > details {
     color: green;
     font-weight: 600;
 }
-.add-to-cart-hr input {
+.add-to-cart-hr button {
     background: green;
     border-radius: 5px;
     border: 2px solid #4b914b;
