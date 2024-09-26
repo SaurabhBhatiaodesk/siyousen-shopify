@@ -3598,9 +3598,6 @@ details-disclosure > details {
     cursor: pointer;
 }
 
-.variant-options .label{
-  width: 20px;
-}
 
 .price__regular span {
     color: green;
