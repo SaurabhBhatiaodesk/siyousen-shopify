@@ -3585,6 +3585,9 @@ details-disclosure > details {
     display: flex;
     /* justify-content: space-between; */
 }
+.variant-options label{
+  width: 20px;
+}
 
 .price__regular span {
     color: green;
