@@ -3576,4 +3576,8 @@ details-disclosure > details {
 .card__information h3 {
     color: #fff;
 }
+
+.price__regular span {
+    color: #fff;
+}
 /* collection page css end */
