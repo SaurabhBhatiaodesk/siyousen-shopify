@@ -185,9 +185,11 @@
       <!-- Product has variants, display clickable variant labels -->
       <div class="variant-options">
         {% for variant in product.variants %}
-          <label class="variant-label" data-variant-id="{{ variant.id }}">
+        <div class="label">
+           <label class="variant-label" data-variant-id="{{ variant.id }}">
             {{ variant.title }}
           </label>
+        </div>
         {% endfor %}
       </div>
       <!-- Hidden input to store the selected variant ID -->
