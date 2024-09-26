@@ -3583,7 +3583,8 @@ details-disclosure > details {
 
 .variant-options {
     display: flex;
-    /* justify-content: space-between; */
+    column-gap: 5px;
+    padding-bottom: 10px;
 }
 
 .variant-options .label {
