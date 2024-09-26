@@ -3581,6 +3581,11 @@ details-disclosure > details {
     color: #fff;
 } */
 
+.variant-options {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
 .price__regular span {
     color: green;
     font-weight: 600;
