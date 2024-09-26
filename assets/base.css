@@ -3579,5 +3579,6 @@ details-disclosure > details {
 
 .price__regular span {
     color: green;
+    font-weight: 600;
 }
 /* collection page css end */
