@@ -3581,4 +3581,17 @@ details-disclosure > details {
     color: green;
     font-weight: 600;
 }
+.add-to-cart-hr input {
+    background: green;
+    border-radius: 5px;
+    border: 2px solid #4b914b;
+    min-height: 50px;
+    width: 100%;
+    color: #fff;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    max-width: 70%;
+}
 /* collection page css end */
