@@ -3573,4 +3573,7 @@ details-disclosure > details {
     background: #121212;
 }
 
+.card__information h3 {
+    color: #fff;
+}
 /* collection page css end */
