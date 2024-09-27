@@ -17,25 +17,25 @@
         "slide_EWBUmp": {
           "type": "slide",
           "settings": {
-            "footer-link": "shopify:\/\/pages\/size-guide",
-            "footer-ico-img": "shopify:\/\/shop_images\/size.svg",
-            "ico-txt": "<p>SIZING<\/p>"
+            "footer-link": "shopify://pages/size-guide",
+            "footer-ico-img": "shopify://shop_images/size.svg",
+            "ico-txt": "<p>SIZING</p>"
           }
         },
         "slide_FGARcW": {
           "type": "slide",
           "settings": {
-            "footer-link": "shopify:\/\/pages\/about-us",
-            "footer-ico-img": "shopify:\/\/shop_images\/about.svg",
-            "ico-txt": "<p>ABOUT<\/p>"
+            "footer-link": "shopify://pages/about-us",
+            "footer-ico-img": "shopify://shop_images/about.svg",
+            "ico-txt": "<p>ABOUT</p>"
           }
         },
         "slide_jpwbJ9": {
           "type": "slide",
           "settings": {
-            "footer-link": "shopify:\/\/pages\/custom-orders",
-            "footer-ico-img": "shopify:\/\/shop_images\/contact.svg",
-            "ico-txt": "<p>CONTACT<\/p>"
+            "footer-link": "shopify://pages/custom-orders",
+            "footer-ico-img": "shopify://shop_images/contact.svg",
+            "ico-txt": "<p>CONTACT</p>"
           }
         }
       },
@@ -46,8 +46,8 @@
       ],
       "settings": {
         "title": "Slideshow",
-        "footer-ico-img": "shopify:\/\/shop_images\/cart.svg",
-        "ico-txt": "<p>SHOP<\/p>"
+        "footer-ico-img": "shopify://shop_images/cart.svg",
+        "ico-txt": "<p>SHOP</p>"
       }
     },
     "footer": {

@@ -1,1 +1,116 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"padding_top":28,"padding_bottom":28}},"rich_text_BQVqDV":{"type":"rich-text","blocks":{"heading_DH8zjR":{"type":"heading","settings":{"heading":"Sizing","heading_size":"h1"}},"text_qcaWGh":{"type":"text","settings":{"text":"<p>Because Siyousen garments are upcycled from existing materials.there will be slight variation within size categories (S, M, L, XL).the size range for each type of garment is listed below.measured in inches.<\/p>"}}},"block_order":["heading_DH8zjR","text_qcaWGh"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-4","full_width":true,"padding_top":40,"padding_bottom":52}},"sizing_Lb4myC":{"type":"sizing","blocks":{"slide_6WGXTY":{"type":"slide","settings":{"product-img":"shopify:\/\/shop_images\/small.jpg","thumb-img":"shopify:\/\/shop_images\/small.jpg","product-size":"<p>w:\"18-20\"<\/p>","product-img2":"shopify:\/\/shop_images\/89Z-88009-RED_1.webp","thumb-img2":"shopify:\/\/shop_images\/89Z-88009-RED_1.webp","product-size2":"<p>w:\"18-20\"<\/p>"}},"slide_MGVC9w":{"type":"slide","settings":{"product-img":"shopify:\/\/shop_images\/large.jpg","thumb-img":"shopify:\/\/shop_images\/large.jpg","product-size":"<p>w:\"20-21.5\"<\/p>","product-img2":"shopify:\/\/shop_images\/small.jpg","thumb-img2":"shopify:\/\/shop_images\/small.jpg","product-size2":"<p>w:\"20-21.5\"<\/p>"}},"slide_RPjiwt":{"type":"slide","settings":{"product-img":"shopify:\/\/shop_images\/medium.jpg","thumb-img":"shopify:\/\/shop_images\/medium.jpg","product-size":"<p>w:\"21.5-23.5\"<\/p>","product-img2":"shopify:\/\/shop_images\/large.jpg","thumb-img2":"shopify:\/\/shop_images\/large.jpg","product-size2":"<p>w:\"21.5-23.5\"<\/p>"}},"slide_H9Rpw6":{"type":"slide","settings":{"product-img":"shopify:\/\/shop_images\/89Z-88009-RED_1.webp","thumb-img":"shopify:\/\/shop_images\/89Z-88009-RED_1.webp","product-size":"<p>w:\"23.5 +\"<\/p>","product-img2":"shopify:\/\/shop_images\/XL.jpg","thumb-img2":"shopify:\/\/shop_images\/XL.jpg","product-size2":"<p>w:\"23.5 +\"<\/p>"}}},"block_order":["slide_6WGXTY","slide_MGVC9w","slide_RPjiwt","slide_H9Rpw6"],"settings":{"title":"Slideshow","product-title":"<p>T-Shirt<\/p>","product-title2":"<p>Outwear<\/p>"}}},"order":["main","rich_text_BQVqDV","sizing_Lb4myC"]}
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "rich_text_BQVqDV": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_DH8zjR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sizing",
+            "heading_size": "h1"
+          }
+        },
+        "text_qcaWGh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Because Siyousen garments are upcycled from existing materials.there will be slight variation within size categories (S, M, L, XL).the size range for each type of garment is listed below.measured in inches.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_DH8zjR",
+        "text_qcaWGh"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "sizing_Lb4myC": {
+      "type": "sizing",
+      "blocks": {
+        "slide_6WGXTY": {
+          "type": "slide",
+          "settings": {
+            "product-img": "shopify://shop_images/small.jpg",
+            "thumb-img": "shopify://shop_images/small.jpg",
+            "product-size": "<p>w:\"18-20\"</p>",
+            "product-img2": "shopify://shop_images/89Z-88009-RED_1.webp",
+            "thumb-img2": "shopify://shop_images/89Z-88009-RED_1.webp",
+            "product-size2": "<p>w:\"18-20\"</p>"
+          }
+        },
+        "slide_MGVC9w": {
+          "type": "slide",
+          "settings": {
+            "product-img": "shopify://shop_images/large.jpg",
+            "thumb-img": "shopify://shop_images/large.jpg",
+            "product-size": "<p>w:\"20-21.5\"</p>",
+            "product-img2": "shopify://shop_images/small.jpg",
+            "thumb-img2": "shopify://shop_images/small.jpg",
+            "product-size2": "<p>w:\"20-21.5\"</p>"
+          }
+        },
+        "slide_RPjiwt": {
+          "type": "slide",
+          "settings": {
+            "product-img": "shopify://shop_images/medium.jpg",
+            "thumb-img": "shopify://shop_images/medium.jpg",
+            "product-size": "<p>w:\"21.5-23.5\"</p>",
+            "product-img2": "shopify://shop_images/large.jpg",
+            "thumb-img2": "shopify://shop_images/large.jpg",
+            "product-size2": "<p>w:\"21.5-23.5\"</p>"
+          }
+        },
+        "slide_H9Rpw6": {
+          "type": "slide",
+          "settings": {
+            "product-img": "shopify://shop_images/89Z-88009-RED_1.webp",
+            "thumb-img": "shopify://shop_images/89Z-88009-RED_1.webp",
+            "product-size": "<p>w:\"23.5 +\"</p>",
+            "product-img2": "shopify://shop_images/XL.jpg",
+            "thumb-img2": "shopify://shop_images/XL.jpg",
+            "product-size2": "<p>w:\"23.5 +\"</p>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_6WGXTY",
+        "slide_MGVC9w",
+        "slide_RPjiwt",
+        "slide_H9Rpw6"
+      ],
+      "settings": {
+        "title": "Slideshow",
+        "product-title": "<p>T-Shirt</p>",
+        "product-title2": "<p>Outwear</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_BQVqDV",
+    "sizing_Lb4myC"
+  ]
+}

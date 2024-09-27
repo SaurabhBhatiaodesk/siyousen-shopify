@@ -23,7 +23,7 @@
         "text_dcNtGr": {
           "type": "text",
           "settings": {
-            "text": "<p>founded in 2020, siyousen is a clothing branddedicated to providing use value through its garments.whether that be through unique artwork, breathableorganic materials, or cargo-based designs, siyousenfinds the highest value secondhand garmentsand reimagines them into new pieces.<\/p>"
+            "text": "<p>founded in 2020, siyousen is a clothing branddedicated to providing use value through its garments.whether that be through unique artwork, breathableorganic materials, or cargo-based designs, siyousenfinds the highest value secondhand garmentsand reimagines them into new pieces.</p>"
           }
         }
       },
@@ -45,31 +45,31 @@
         "column_3hnTxd": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/2227.webp",
+            "image": "shopify://shop_images/2227.webp",
             "title": "",
             "text": "",
             "link_label": "@siyousen",
-            "link": "https:\/\/www.instagram.com\/siyousen\/"
+            "link": "https://www.instagram.com/siyousen/"
           }
         },
         "column_JDLRTQ": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/youtube.webp",
+            "image": "shopify://shop_images/youtube.webp",
             "title": "",
             "text": "",
             "link_label": "@siyousen.tv",
-            "link": "https:\/\/www.youtube.com\/channel\/UCXIEQ7U_w__l_L8kjlHAwdQ"
+            "link": "https://www.youtube.com/channel/UCXIEQ7U_w__l_L8kjlHAwdQ"
           }
         },
         "column_gUA9dB": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/tik-tok.webp",
+            "image": "shopify://shop_images/tik-tok.webp",
             "title": "",
             "text": "",
             "link_label": "@siyousen",
-            "link": "https:\/\/www.tiktok.com\/notfound"
+            "link": "https://www.tiktok.com/notfound"
           }
         }
       },
@@ -101,28 +101,28 @@
         "external_video_y7eVUm": {
           "type": "external-video",
           "settings": {
-            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
             "description": ""
           }
         },
         "external_video_yAJbVK": {
           "type": "external-video",
           "settings": {
-            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
             "description": ""
           }
         },
         "external_video_KWacPm": {
           "type": "external-video",
           "settings": {
-            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
             "description": ""
           }
         },
         "external_video_XhU889": {
           "type": "external-video",
           "settings": {
-            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
             "description": ""
           }
         }
