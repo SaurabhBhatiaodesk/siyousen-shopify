@@ -3618,4 +3618,11 @@ details-disclosure > details {
     text-transform: uppercase;
     max-width: 70%;
 }
+
+@media (max-width:567px){
+  .grid_column_one {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
 /* collection page css end */
