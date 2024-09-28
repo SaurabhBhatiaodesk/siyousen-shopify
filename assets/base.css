@@ -3592,7 +3592,13 @@ details-disclosure > details {
 }
 
 #product-grid {
-  row-gap: 70px;
+    row-gap: 40px;
+}
+
+ul.pagination__list.list-unstyled li a {
+    color: #fff;
+    border: 1px solid #fff;
+    margin-bottom: 10px;
 }
 
 /* .card__content {
