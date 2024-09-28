@@ -21,9 +21,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "custom_css": [
-        ".card__inner {min-height: 250px; max-height: 250px;}",
-        "#product-grid {row-gap: 70px;}",
-        ".card__content {min-height: 50px; max-height: 60px;}"
+
       ],
       "settings": {
         "products_per_page": 16,
