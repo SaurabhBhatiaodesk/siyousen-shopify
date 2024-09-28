@@ -180,20 +180,23 @@
                       {% if product.has_only_default_variant %}
                         <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                       {% else %}
-                        <div class="variant-options">
-                          {% for option in product.options %}
-                            {% if option.name == 'Size' %}
-                              {% comment %} {% assign option_index = forloop.index | minus: 1 %} {% endcomment %}
+                      <div class="variant-options">
+                        {% for option in product.options_with_values %}
+                          {% if option.name == 'Size' %}
+                            {% for value in option.values %}
                               {% for variant in product.variants %}
-                                <div class="label">
-                                  <label class="variant-label" data-variant-id="{{ variant.id }}">
-                                    {{ variant.options }}
-                                  </label>
-                                </div>
+                                {% if variant.options contains value %}
+                                  <div class="label">
+                                    <label class="variant-label" data-variant-id="{{ variant.id }}">
+                                      {{ value }}
+                                    </label>
+                                  </div>
+                                {% endif %}
                               {% endfor %}
-                            {% endif %}
-                          {% endfor %}
-                        </div>
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </div>                      
                         <input type="hidden" name="id" id="selected-variant-id" required>
                       {% endif %}
                       <button type="submit" value="Add to cart" class="btn">Add to cart</button>
