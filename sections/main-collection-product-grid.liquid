@@ -183,11 +183,11 @@
                         <div class="variant-options">
                           {% for option in product.options %}
                             {% if option.name == 'Size' %}
-                              {% assign option_index = forloop.index | minus: 1 %}
+                              {% comment %} {% assign option_index = forloop.index | minus: 1 %} {% endcomment %}
                               {% for variant in product.variants %}
                                 <div class="label">
                                   <label class="variant-label" data-variant-id="{{ variant.id }}">
-                                    {{ variant.options[option_index] }}
+                                    {{ variant.options }}
                                   </label>
                                 </div>
                               {% endfor %}
