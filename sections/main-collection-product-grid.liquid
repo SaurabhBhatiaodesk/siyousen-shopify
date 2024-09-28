@@ -182,7 +182,7 @@
                       {% else %}
                       <div class="variant-options">
                         {% for option in product.options_with_values %}
-                          
+                          {% if option.name == 'Size' %}
                             {% for value in option.values %}
                               {% for variant in product.variants %}
                                 {% if variant.options contains value %}
@@ -194,7 +194,7 @@
                                 {% endif %}
                               {% endfor %}
                             {% endfor %}
-                          
+                          {% endif %}
                         {% endfor %}
                       </div>                      
                         <input type="hidden" name="id" id="selected-variant-id" required>
