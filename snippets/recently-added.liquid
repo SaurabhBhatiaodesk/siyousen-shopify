@@ -92,19 +92,23 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     let selectedVariantId = null;
-  variantButtons.forEach((btn) => btn.classList.remove('active'));
-    let variantButtons = document.querySelectorAll('.var-opt');
-    variantButtons.forEach((button) => {
-      button.addEventListener('click', function (e) {
-        let hiddenInput = button.querySelector('input[name="variant_id"]');
+let variantButtons = document.querySelectorAll('.var-opt');
 
-        if (hiddenInput) {
-          selectedVariantId = hiddenInput.value;
-           button.classList.toggle('active');
-          console.log('Selected variant id: ' + selectedVariantId);
-        }
-      });
-    });
+variantButtons.forEach((button) => {
+  button.addEventListener('click', function (e) {
+    // Remove 'active' class from all buttons first
+    variantButtons.forEach((btn) => btn.classList.remove('active'));
+
+    // Add 'active' class to the clicked button
+    let hiddenInput = button.querySelector('input[name="variant_id"]');
+
+    if (hiddenInput) {
+      selectedVariantId = hiddenInput.value;
+      button.classList.add('active'); // Only the clicked button will be active
+      console.log('Selected variant id: ' + selectedVariantId);
+    }
+  });
+});
 
     document.querySelectorAll('.add-to-cart').forEach(function (button) {
       button.addEventListener('click', function (event) {
