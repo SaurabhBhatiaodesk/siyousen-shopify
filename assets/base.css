@@ -3569,7 +3569,7 @@ details-disclosure > details {
 
 /* collection page css hr */
 
-/* .harsh {
+.harsh {
     background: #121212;
 }
 
@@ -3579,7 +3579,7 @@ details-disclosure > details {
 
 .variant-options label {
     color: #fff;
-} */
+}
 
 .variant-options {
     display: flex;
