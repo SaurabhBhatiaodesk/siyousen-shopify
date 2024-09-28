@@ -92,10 +92,11 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     let selectedVariantId = null;
+    
     let variantButtons = document.querySelectorAll('.var-opt');
     variantButtons.forEach((button) => {
-      variantButtons.forEach((btn) => btn.classList.remove('active'));
       button.addEventListener('click', function (e) {
+         variantButtons.forEach((btn) => btn.classList.remove('active'));
         let hiddenInput = button.querySelector('input[name="variant_id"]');
 
         if (hiddenInput) {
@@ -105,6 +106,22 @@
         }
       });
     });
+
+
+// let variantButtons = document.querySelectorAll('.var-opt');
+// variantButtons.forEach((button) => {
+//   button.addEventListener('click', function (e) {
+//     variantButtons.forEach((btn) => btn.classList.remove('active'));
+//     let hiddenInput = button.querySelector('input[name="variant_id"]');
+
+//     if (hiddenInput) {
+//       selectedVariantId = hiddenInput.value;
+//       button.classList.add('active'); 
+//       console.log('Selected variant id: ' + selectedVariantId);
+//     }
+//   });
+// });
+
 
     document.querySelectorAll('.add-to-cart').forEach(function (button) {
       button.addEventListener('click', function (event) {
