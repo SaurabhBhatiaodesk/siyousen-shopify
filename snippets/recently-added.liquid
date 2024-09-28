@@ -92,7 +92,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     let selectedVariantId = null;
-
+  variantButtons.forEach((btn) => btn.classList.remove('active'));
     let variantButtons = document.querySelectorAll('.var-opt');
     variantButtons.forEach((button) => {
       button.addEventListener('click', function (e) {
