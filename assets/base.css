@@ -3601,6 +3601,11 @@ ul.pagination__list.list-unstyled li a {
     margin-bottom: 10px;
 }
 
+ul.pagination__list.list-unstyled li span {
+    color: #fff;
+    border: 1px solid #fff;
+}
+
 /* .card__content {
   min-height: 50px;
   max-height: 60px;
