@@ -1,7 +1,7 @@
 
 <section id="recently-added">
   <div class="recently-added-products">
-    {% assign products = collections.all.products | sort: 'created_at' | reverse %}
+    {% assign products = collections.all.products | sort: 'created_at' | reverse | limit: 100 %}
     {% for product in products  %}
       <div class="product" id="product-{{ forloop.index }}">
         <a href="{{ product.url }}">
