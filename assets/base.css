@@ -3587,6 +3587,10 @@ details-disclosure > details {
     padding-bottom: 10px;
 }
 
+span.mobile-facets__open {
+    color: #fff;
+}
+
 .variant-options .label {
     width: 30px;
     border: 1px solid #000;
