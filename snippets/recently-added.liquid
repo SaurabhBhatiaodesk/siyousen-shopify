@@ -1,110 +1,113 @@
-
 <section id="recently-added">
   <div class="recently-added-products">
     {% assign products = collections.all.products | sort: 'created_at' | reverse %}
-    {% for product in products  limit: 111 %}
+    {% for product in products limit: 111 %}
       <div class="product" id="product-{{ forloop.index }}">
         <a href="{{ product.url }}">
-
-          
-         <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}"> 
+          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
           <div class="column-src">
             <span class="prod-info">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
             </span>
           </div>
-    
-          {% if product.metafields.custom.custom_collection == blank %}
 
-              <div class="button-column">  
+          {% if product.metafields.custom.custom_collection == blank %}
+            <div class="button-column">
               <form method="post" class="add-cart" id="add-cart-form-{{ forloop.index }}">
-                <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variant-id-{{ forloop.index }}">
-                <button type="submit" class="add-to-cart" data-product-id="{{ forloop.index }}" data-product-price="{{ product.price }}">Add to Cart</button>
+                <input
+                  type="hidden"
+                  name="id"
+                  value="{{ product.variants.first.id }}"
+                  id="variant-id-{{ forloop.index }}"
+                >
+                <button
+                  type="submit"
+                  class="add-to-cart"
+                  data-product-id="{{ forloop.index }}"
+                  data-product-price="{{ product.price }}"
+                >
+                  Add to Cart
+                </button>
               </form>
             </div>
-            
+
           {% else %}
-   
-           {% assign collection_handle = product.metafields.custom.custom_collection %}
+            {% assign collection_handle = product.metafields.custom.custom_collection %}
             {% if collection_handle %}
               {% assign collection = collections[collection_handle] %}
               {% if collection %}
-                 <a class="view-collect-btn" href="{{ collection.url }}">View Collection</a></button>
+                <a class="view-collect-btn" href="{{ collection.url }}">View Collection</a></button>
               {% else %}
                 <p>Collection not found.</p>
               {% endif %}
             {% endif %}
-         
           {% endif %}
-   
         </a>
-    
-    {% if product.variants.size > 1 %}
-                {% for option in product.options %}
-                  <div class="product-option">
-                    <div class="variant-choices">
-                      {% assign option_index = forloop.index | minus: 1 %}
-                      {% assign option_values = product.variants | map: "option" | uniq %}              
-                      {% for variant in product.variants %}
-                        {% assign variant_value = variant.options[option_index] %}
-                        <span class="var-opt">
-                        <input type="hidden" 
-                               id="{{ variant.id }}" 
-                               name="variant_id" 
-                               value="{{ variant.id }}" 
-                               class="single-option-selector"
-                               data-option="{{ option }}">
-                        <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
-                        </span>
-                        {% endfor %}
-                    </div>
-                  </div>
+
+        {% if product.variants.size > 1 %}
+          {% for option in product.options %}
+            <div class="product-option">
+              <div class="variant-choices">
+                {% assign option_index = forloop.index | minus: 1 %}
+                {% assign option_values = product.variants | map: 'option' | uniq %}
+                {% for variant in product.variants %}
+                  {% assign variant_value = variant.options[option_index] %}
+                  <span class="var-opt">
+                    <input
+                      type="hidden"
+                      id="{{ variant.id }}"
+                      name="variant_id"
+                      value="{{ variant.id }}"
+                      class="single-option-selector"
+                      data-option="{{ option }}"
+                    >
+                    <label for="variant-{{ variant.id }}">{{ variant_value }}</label>
+                  </span>
                 {% endfor %}
-              {% endif %}
-          </div>
-     {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endfor %}
   </div>
 </section>
 
-
 <script>
-$(document).ready(function(){
-      $('.my-slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
-        dots: false,
-        speed: 300,
-        infinite: true,
-        autoplaySpeed: 5000,
-        autoplay: true,
-      });
+  $(document).ready(function () {
+    $('.my-slider').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      dots: false,
+      speed: 300,
+      infinite: true,
+      autoplaySpeed: 5000,
+      autoplay: true,
     });
+  });
 </script>
 
-
-
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    let selectedVariantId = null; 
+  document.addEventListener('DOMContentLoaded', function () {
+    let selectedVariantId = null;
 
     let variantButtons = document.querySelectorAll('.var-opt');
-    variantButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
+    variantButtons.forEach((button) => {
+      button.addEventListener('click', function (e) {
         let hiddenInput = button.querySelector('input[name="variant_id"]');
-        
+
         if (hiddenInput) {
-          selectedVariantId = hiddenInput.value; 
-          console.log("Selected variant id: " + selectedVariantId);
+          selectedVariantId = hiddenInput.value;
+          console.log('Selected variant id: ' + selectedVariantId);
         }
       });
     });
 
-    
-    document.querySelectorAll('.add-to-cart').forEach(function(button) {
-      button.addEventListener('click', function(event) {
-        event.preventDefault(); 
+    document.querySelectorAll('.add-to-cart').forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
 
         const productId = button.getAttribute('data-product-id');
         const variantInput = document.querySelector(`#variant-id-${productId}`);
@@ -114,46 +117,40 @@ $(document).ready(function(){
         const idToAdd = selectedVariantId || (variantInput ? variantInput.value : null);
 
         if (idToAdd) {
-          
-          console.log("Adding product/variant to cart: " + idToAdd);
+          console.log('Adding product/variant to cart: ' + idToAdd);
 
           fetch('/cart/add.js', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id: idToAdd, quantity: 1 }) 
+            body: JSON.stringify({ id: idToAdd, quantity: 1 }),
           })
-          .then(response => response.json())
-          .then(data => {
-            // console.log("Product added to cart successfully", data);
-           blinkingButton.classList.add('blink');
-            blinkingButton.classList.add('active');
-          window.addEventListener('scroll', () => {
-          if (blinkingButton.classList.contains('active')) {
-          blinkingButton.classList.remove('active');
-          }
-          });
-          })
-          .catch(error => console.error('Error adding to cart:', error));
+            .then((response) => response.json())
+            .then((data) => {
+              // console.log("Product added to cart successfully", data);
+              blinkingButton.classList.add('blink');
+              blinkingButton.classList.add('active');
+              window.addEventListener('scroll', () => {
+                if (blinkingButton.classList.contains('active')) {
+                  blinkingButton.classList.remove('active');
+                }
+              });
+            })
+            .catch((error) => console.error('Error adding to cart:', error));
         } else {
           console.error('Please select a variant before adding to the cart.');
         }
       });
     });
   });
-
 </script>
 
-
-
-
-  
 <style>
-.hidden {
-  display: none;
-}
-#recently-added .recently-added-products .product .view-collect-btn {
+  .hidden {
+    display: none;
+  }
+  #recently-added .recently-added-products .product .view-collect-btn {
     background: green;
     color: #fff;
     width: auto;
@@ -167,8 +164,8 @@ $(document).ready(function(){
     position: absolute;
     bottom: -7px;
     right: 10px;
-}
-#collection-popup span.close-popup {
+  }
+  #collection-popup span.close-popup {
     top: -6px;
     font-size: 20px;
     right: -6px;
@@ -180,8 +177,8 @@ $(document).ready(function(){
     text-align: center;
     border-radius: 50%;
     font-weight: bold;
-}
-.listing-popup {
+  }
+  .listing-popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -191,62 +188,61 @@ $(document).ready(function(){
     z-index: 1000;
     padding: 10px;
     width: 800px;
-}
-.close-popup {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-#collection-popup.popup-visible {
+  }
+  .close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  #collection-popup.popup-visible {
     display: block !important;
-}
-#collection-popup .product-img img {
+  }
+  #collection-popup .product-img img {
     max-width: 100%;
-}
-#collection-popup .popup-content {
+  }
+  #collection-popup .popup-content {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
-    overflow-x:hidden;
+    overflow-x: hidden;
     max-height: 500px;
-}
-#collection-popup .popup-content .popup-products {
+  }
+  #collection-popup .popup-content .popup-products {
     max-width: 25%;
     padding: 10px;
-}
-#collection-popup .popup-content .popup-products .pdp-title {
+  }
+  #collection-popup .popup-content .popup-products .pdp-title {
     font-size: 14px;
     line-height: 22px;
     font-weight: 600;
     color: #000;
-}
-#collection-popup .popup-content .popup-products .pdp-price {
+  }
+  #collection-popup .popup-content .popup-products .pdp-price {
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;
     color: green;
     padding: 10px 0;
-}
-#collection-popup .popup-content .popup-products button.add-to-cart {
+  }
+  #collection-popup .popup-content .popup-products button.add-to-cart {
     width: 100%;
     background: green;
     color: #fff;
     border: none;
     height: 40px;
     text-transform: uppercase;
-}
+  }
 
-  
   /*---variants-----*/
   .product-option .variant-choices {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
   }
-  
-.product-option span.var-opt {
+
+  .product-option span.var-opt {
     position: relative;
     display: flex;
     align-items: center;
@@ -257,8 +253,8 @@ $(document).ready(function(){
     padding: 0;
     justify-content: center;
     cursor: pointer;
-}
-  
+  }
+
   .product-option .variant-choices label {
     color: #fff;
     font-size: 18px;
@@ -267,24 +263,24 @@ $(document).ready(function(){
     cursor: pointer;
   }
   .product-option .variant-choices input {
-      width: 22px;
-      height: 22px;
-      line-height:22px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
   }
   .product-option {
-      margin: 1rem 0 0 0;
+    margin: 1rem 0 0 0;
   }
-   .product-option .variant-choices .var-opt input[type="radio"]:checked + label {
+  .product-option .variant-choices .var-opt input[type='radio']:checked + label {
     color: #fff;
   }
-    
+
   /*----variants----*/
   .recently-added-products .product .button-column {
     position: relative;
   }
   .recently-added-products .product-form__buttons {
     bottom: -15px;
-    top:unset;
+    top: unset;
   }
   .recently-added-products .product .button-column {
     position: absolute;
@@ -300,279 +296,282 @@ $(document).ready(function(){
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding:0 10px;
+    padding: 0 10px;
   }
   .recently-added-products .product .button-column .add-cart {
     width: 100%;
   }
-    .column-src {
-      width: 50%;
-      float: left;
-    }
-    .recently-added-products .product .column-src {
-      position: relative;
-    }
-    .column-src + form.add-cart #custom-checkout-button {
-      position: absolute;
-      content: "";
-      top: 0;
-      z-index:222;
-    }
-    .recently-added-products .product .checkout-btns .checkout-icon {
-      max-width: 40px !important;
-      min-height: 40px !important;
-    }
-    .product .button-column {
-      width: 50%;
-    }
-    .product .checkout-btns {
-      background: #fd7d00;
-      border: 5px solid #fca700;
-      min-height: 90px;
-      border-radius: 5px;
-      visibility: hidden;
-      flex-wrap: wrap;
-      align-items: center;
-      cursor: pointer;
-      right: 0%;
-      position: absolute;
-      top: 0;
-      transition:all 0.4s linear;
-      -webkit-transition:all 0.4s linear;
-      -moz-transition:all 0.4s linear;
-      -ms-transition:all 0.4s linear;
-    }
-    .product .checkout-btns .checkout-icon {
-      width: 40px;
-      margin: 0;
-      padding: 0;
-    }
+  .column-src {
+    width: 50%;
+    float: left;
+  }
+  .recently-added-products .product .column-src {
+    position: relative;
+  }
+  .column-src + form.add-cart #custom-checkout-button {
+    position: absolute;
+    content: '';
+    top: 0;
+    z-index: 222;
+  }
+  .recently-added-products .product .checkout-btns .checkout-icon {
+    max-width: 40px !important;
+    min-height: 40px !important;
+  }
+  .product .button-column {
+    width: 50%;
+  }
+  .product .checkout-btns {
+    background: #fd7d00;
+    border: 5px solid #fca700;
+    min-height: 90px;
+    border-radius: 5px;
+    visibility: hidden;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+    right: 0%;
+    position: absolute;
+    top: 0;
+    transition: all 0.4s linear;
+    -webkit-transition: all 0.4s linear;
+    -moz-transition: all 0.4s linear;
+    -ms-transition: all 0.4s linear;
+  }
+  .product .checkout-btns .checkout-icon {
+    width: 40px;
+    margin: 0;
+    padding: 0;
+  }
+  .product .checkout-btns #total-price {
+    color: #fbae00;
+    font-size: 42px !important;
+    line-height: 52px;
+    font-weight: 600;
+  }
+  .product .checkout-btns span {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    padding: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    color: #000;
+    justify-content: center;
+    align-content: center;
+  }
+  .product .add-checkout {
+    visibility: visible !important;
+    right: 0 !important;
+    z-index: 11;
+  }
+  #cart-notification {
+    display: none;
+  }
+
+  @media screen and (max-width: 767px) {
     .product .checkout-btns #total-price {
-      color: #fbae00;
-      font-size: 42px !important;
-      line-height: 52px;
-      font-weight: 600;
+      font-size: 26px !important;
+      line-height: 36px;
     }
-    .product .checkout-btns span {
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 600;
-      padding: 0 10px;
-      display: flex;
-      flex-wrap: wrap;
-      color:#000;
-      justify-content:center;
-      align-content: center;
-    }
-    .product .add-checkout{
-      visibility: visible !important;
-      right:0 !important;
-      z-index:11;
-    }
-    #cart-notification {
-      display: none; 
-    }
+  }
+</style>
 
-    @media screen and (max-width:767px) {
-      .product .checkout-btns #total-price {
-        font-size: 26px !important;
-        line-height: 36px;
-      }
-    }
-  </style>
+<style>
+  #recently-added {
+    padding: 20px 0;
+  }
+  .recently-added {
+    background: #121212;
+  }
+  #recently-added .recently-added-products {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #recently-added .product h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  #recently-added .product p {
+    font-size: 1em;
+    color: #fff;
+    margin: 0;
+    padding: 5px 0;
+  }
+  #recently-added .product img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    min-height: 440px;
+    object-fit: cover;
+    min-width: 255px;
+    max-height: 440px;
+  }
+  #recently-added .recently-added-products .product {
+    margin-bottom: 2rem;
+    width: 50%;
+    position: relative;
+  }
+  #recently-added .recently-added-products .product a {
+    text-decoration: none;
+    width: 100%;
+  }
+  .recently-added-products {
+    padding-bottom: 10rem;
+  }
+  .recently-added-products .add-cart button,
+  .recently-added-products .view-collection {
+    background: green;
+    border-radius: 5px;
+    border: 2px solid #4b914b;
+    min-height: 50px;
+    width: 100%;
+    color: #fff;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    max-width: 70%;
+    float: right;
+  }
+  .recently-added-products .product .column-src .prod-info p {
+    color: green !important;
+    font-weight: 600;
+  }
+  .recently-added-products .product a {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    row-gap: 1.5rem;
+  }
+  .recently-added-products .column-src .prod-info,
+  .recently-added-products .column-src .add-cart {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .recently-added-products .add-cart button:hover,
+  .product-form__buttons button.product-form__submit:hover {
+    background: #0e6f0bbf;
+    border-color: #4b914b;
+  }
 
-  <style>
-    #recently-added {
-      padding: 20px 0; 
-    }
-    .recently-added{
-      background: #121212;
-    }
-    #recently-added .recently-added-products {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    #recently-added .product h3 {
-        font-size: 1.5rem;
-        color: #fff;
-        margin: 0;
-        padding: 0;
-    }
-    #recently-added .product p {
-        font-size: 1em;
-        color: #fff;
-        margin: 0;
-        padding: 5px 0;
-    }
+  @media screen and (max-width: 1600px) {
     #recently-added .product img {
-      max-width: 100%;
-      width: 100%;
-      height: auto;
-      min-height: 440px;
-      object-fit: cover;
-      min-width: 255px;
-      max-height: 440px;
+      min-width: inherit;
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+    #recently-added .product img {
+      min-height: 180px;
     }
     #recently-added .recently-added-products .product {
-      margin-bottom: 2rem;
-      width: 50%;
-      position:relative;
+      width: 48%;
     }
-    #recently-added .recently-added-products .product a {
-      text-decoration: none;
-      width: 100%;
+  }
+
+  @media screen and (max-width: 991px) {
+    #recently-added .recently-added-products .product {
+      max-width: 50%;
+      padding: 0 10px;
     }
-    .recently-added-products {
-      padding-bottom: 10rem;
+    .recently-added .page-width {
+      padding: 0 3rem;
     }
-    .recently-added-products .add-cart button,.recently-added-products .view-collection {
-      background: green;
-      border-radius: 5px;
-      border: 2px solid #4b914b;
+    #recently-added .product img {
+      min-height: 300px;
+      max-height: 300px;
+    }
+    .listing-popup {
+      width: 80%;
+    }
+    #collection-popup .popup-content .popup-products {
+      max-width: 33%;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .recently-added .page-width {
+      padding: 0 1rem;
+    }
+    .recently-added-products .add-cart button,
+    #recently-added .recently-added-products .product .view-collect-btn {
       min-height: 50px;
+      max-width: 120px;
+      font-size: 12px;
+      padding: 0 10px;
+      text-align: center;
+    }
+    #recently-added .recently-added-products .product {
+      max-width: 100%;
       width: 100%;
-      color: #fff;
-      font-size: 16px;
-      line-height: 20px;
-      cursor: pointer;
-      text-transform: uppercase;
-      max-width: 70%;
-      float: right;
+      padding: 0 7px;
+    }
+    #collection-popup .popup-content .popup-products {
+      max-width: 50%;
+    }
+    #collection-popup .listing-popup {
+      padding: 5px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    #recently-added .product img {
+      min-height: 220px;
+      max-height: 220px;
+    }
+    .recently-added-products .product .button-column {
+      max-width: 130px;
     }
     .recently-added-products .product .column-src .prod-info p {
-      color: green !important;
-      font-weight: 600;
+      width: auto;
     }
-    .recently-added-products .product a {
-      display: flex;
-      flex-wrap: wrap;
-      align-content: center;
-      justify-content: space-between;
-      row-gap: 1.5rem;
+    .recently-added-products .product .column-src .prod-info h3 {
+      float: left;
+      width: 140px;
     }
-    .recently-added-products .column-src .prod-info,.recently-added-products .column-src .add-cart {
+    #recently-added .product p {
+      top: -8px;
+      position: relative;
+      left: 0;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #recently-added .recently-added-products .product {
+      max-width: 100%;
       width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
     }
-    .recently-added-products .add-cart button:hover, .product-form__buttons button.product-form__submit:hover {
-      background: #0e6f0bbf;
-      border-color: #4b914b;
+    #recently-added .product img {
+      min-height: inherit;
+      width: 100%;
     }
-    
-    @media screen and (max-width:1600px) {
-      #recently-added .product img {
-        min-width: inherit;
-      }
+    .recently-added-products .product .column-src .prod-info h3 {
+      width: 65%;
     }
-    
-    @media screen and (max-width:1100px) {
-      #recently-added .product img {
-        min-height: 180px;
-      }
-      #recently-added .recently-added-products .product {
-        width: 48%;
-      }
+    .recently-added-products .product .column-src {
+      width: 62%;
     }
+    .recently-added-products .product .column-src .prod-info p {
+      left: 80px;
+    }
+    .listing-popup {
+      width: 90%;
+    }
+  }
 
-    @media screen and (max-width:991px) {
-      #recently-added .recently-added-products .product {
-        max-width: 50%;
-        padding: 0 10px;
-      }
-      .recently-added .page-width {
-          padding: 0 3rem;
-      }
-      #recently-added .product img {
-        min-height: 300px;
-        max-height: 300px;
-      }
-      .listing-popup {
-        width: 80%;
-      }
-      #collection-popup .popup-content .popup-products {
-        max-width: 33%;
-      }
+  @media screen and (max-width: 370px) {
+    #recently-added .recently-added-products .product {
+      max-width: 100%;
     }
-
-     @media screen and (max-width:767px) {
-       .recently-added .page-width {
-        padding: 0 1rem;
-      }
-      .recently-added-products .add-cart button, #recently-added .recently-added-products .product .view-collect-btn {
-        min-height: 50px;
-        max-width: 120px;
-        font-size: 12px;
-        padding: 0 10px;
-        text-align: center;
-      }
-      #recently-added .recently-added-products .product {
-        max-width: 100%;
-        width: 100%;
-        padding: 0 7px;
-      } 
-       #collection-popup .popup-content .popup-products {
-        max-width: 50%;
-      }
-       #collection-popup .listing-popup {
-          padding: 5px;
-      }
+    #recently-added .product img {
+      min-height: inherit;
+      max-height: inherit;
     }
-
-    @media screen and (max-width:600px) {
-       #recently-added .product img {
-          min-height: 220px;
-          max-height:220px;
-        }
-        .recently-added-products .product .button-column {
-          max-width: 130px;
-        }
-        .recently-added-products .product .column-src .prod-info p {
-          width:auto;
-        }
-        .recently-added-products .product .column-src .prod-info h3 {
-          float: left;
-          width: 140px;
-        }
-        #recently-added .product p {
-            top: -8px;
-            position: relative;
-            left:0;
-        }
-    }
-    
-      @media screen and (max-width:480px) {
-        #recently-added .recently-added-products .product {
-          max-width: 100%;
-          width: 100%;
-        }
-         #recently-added .product img {
-            min-height: inherit;
-            width:100%;
-          }
-          .recently-added-products .product .column-src .prod-info h3 {
-            width: 65%;
-          }
-          .recently-added-products .product .column-src {
-            width: 62%;
-          }
-          .recently-added-products .product .column-src .prod-info p {
-            left: 80px;
-          }
-          .listing-popup {
-            width: 90%;
-          }
-      }
-
-     @media screen and (max-width:370px) {
-         #recently-added .recently-added-products .product {
-          max-width: 100%;
-        }
-        #recently-added .product img {
-          min-height: inherit;
-          max-height:inherit;
-        }
-      }
-    
-  </style>
+  }
+</style>

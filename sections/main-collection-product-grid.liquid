@@ -1,4 +1,3 @@
-
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
@@ -176,28 +175,30 @@
                     quick_add: section.settings.quick_add,
                     section_id: section.id
                   %}
-            <div class="add-to-cart-hr">
-              <form method="post" action="/cart/add" id="add-to-cart-form">
-                {% if product.has_only_default_variant %}
-                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-                {% else %}
-                  <div class="variant-options">
-                    {% for variant in product.variants %}
-                    <div class="label">
-                       <label class="variant-label" data-variant-id="{{ variant.id }}">
-                        {{ variant.title }}
-                      </label>
-                    </div>
-                    {% endfor %}
+                  <div class="add-to-cart-hr">
+                    <form method="post" action="/cart/add" id="add-to-cart-form">
+                      {% if product.has_only_default_variant %}
+                        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      {% else %}
+                        <div class="variant-options">
+                          {% for option in product.options %}
+                            {% if option.name == 'Size' %}
+                              {% assign option_index = forloop.index | minus: 1 %}
+                              {% for variant in product.variants %}
+                                <div class="label">
+                                  <label class="variant-label" data-variant-id="{{ variant.id }}">
+                                    {{ variant.options[option_index] }}
+                                  </label>
+                                </div>
+                              {% endfor %}
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        <input type="hidden" name="id" id="selected-variant-id" required>
+                      {% endif %}
+                      <button type="submit" value="Add to cart" class="btn">Add to cart</button>
+                    </form>                    
                   </div>
-                  <!-- Hidden input to store the selected variant ID -->
-                  <input type="hidden" name="id" id="selected-variant-id" required>
-                {% endif %}
-                <button type="submit" value="Add to cart" class="btn">
-                  Add to cart
-                </button>
-              </form>
-            </div>               
                 </li>
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
@@ -438,11 +439,11 @@
 {% endschema %}
 
 <script>
-    document.querySelectorAll('.variant-label').forEach(function(label) {
-    label.addEventListener('click', function() {
+  document.querySelectorAll('.variant-label').forEach(function (label) {
+    label.addEventListener('click', function () {
       var variantId = this.getAttribute('data-variant-id');
       document.getElementById('selected-variant-id').value = variantId;
-      document.querySelectorAll('.variant-label').forEach(function(lbl) {
+      document.querySelectorAll('.variant-label').forEach(function (lbl) {
         lbl.classList.remove('selected');
       });
       this.classList.add('selected');
