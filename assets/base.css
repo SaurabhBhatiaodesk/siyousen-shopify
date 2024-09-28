@@ -3586,10 +3586,10 @@ details-disclosure > details {
     max-height: 320px;
 }
 
-/* .card__inner {
+.card__inner {
   min-height: 250px;
   max-height: 250px;
-} */
+}
 
 #product-grid {
   row-gap: 70px;
