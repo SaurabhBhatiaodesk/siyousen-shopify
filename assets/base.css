@@ -3581,6 +3581,11 @@ details-disclosure > details {
     color: #fff;
 }
 
+.card-wrapper.product-card-wrapper.underline-links-hover {
+    min-height: 300px;
+    max-height: 320px;
+}
+
 .variant-options {
     display: flex;
     column-gap: 5px;
