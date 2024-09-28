@@ -3591,6 +3591,10 @@ span.mobile-facets__open {
     color: #fff;
 }
 
+span#ProductCount {
+    color: #fff;
+}
+
 .variant-options .label {
     width: 30px;
     border: 1px solid #000;
