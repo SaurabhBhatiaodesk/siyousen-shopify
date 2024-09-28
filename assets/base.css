@@ -3654,7 +3654,7 @@ span#ProductCount {
     line-height: 20px;
     cursor: pointer;
     text-transform: uppercase;
-    max-width: 70%;
+    max-width: 100%;
 }
 
 @media (max-width:567px){
